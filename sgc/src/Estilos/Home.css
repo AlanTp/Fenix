@@ -1,0 +1,42 @@
+*{margin: 0; padding: 0;}
+.titulo{
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 50px;
+    font-weight:bold;
+    margin-top: 120px;
+}
+
+
+.imagem_central{
+    display: flex;
+    justify-content: center;
+    
+    
+}
+.rodape{
+    background-color: black;
+    bottom: 0;
+    position: absolute;
+    height: 100px;
+    width: 100%;
+}
+li{
+    list-style: none;
+    color: azure;
+}
+.linha_rodape{
+    margin-top: 10px;
+}
+.coluna_rodape{
+    display: flex;
+    justify-content: center;
+}
+.botoes_alinhamento{
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+.Botao{
+    width: 200px;
+}

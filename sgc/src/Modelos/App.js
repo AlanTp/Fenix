@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Navbar } from 'react-bootstrap';
+import { Button, Navbar } from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import './App.css';
-import Calculo from './Calculo';
-import CalculoM from './CalculoM';
-import Linhas from './Linhas';
-import Linhas1500a10000 from './Linhas1500a10000';
-import Quantidade100a1000 from './Quantidade100a1000';
-import Quantidade1500a10000 from './Quantidade1500a10000';
-import logo from './logo.png';
+import { Link } from 'react-router-dom';
+import Calculo from '../Calculos/Calculo.jsx';
+import CalculoM from '../Calculos/CalculoM.jsx';
+import '../Estilos/App.css';
+import Linhas from '../Modelos/Linhas.jsx';
+import Linhas1500a10000 from '../Modelos/Linhas1500a10000.jsx';
+import Quantidade100a1000 from '../Modelos/Quantidade100a1000.jsx';
+import Quantidade1500a10000 from '../Modelos/Quantidade1500a10000.jsx';
+import logo from '../imagens/logo.png';
 
 function App() {
   let linhas1 = Linhas();
@@ -37,22 +38,13 @@ function App() {
       
       <Row>
         <Col className='custoM'>
-          <label> Preco de embalagens por cor ate 1000 unidades</label>
+          <label> Preço de embalagens por cor ate 1.000 unidades</label>
         </Col>
-        <Col className='custoM1'>
-        <label className='labelM'>Preco Embalagem</label>
-        <input type='text' className='entradaDados'
-        name='valorMilheiro'
-        value={valorMilheiro}
-        onChange={(e) => setValorMilheiro(e.target.value)}
-        width={20}
-        height={20}
-        ></input>
-        </Col>
+        
       </Row>
       <Row>
-        <Col className='valvula'>
-        <label className='radio' >Valvula</label>
+        <Col className='opcoes'>
+        <label className='label' >Valvula</label>
         <input type='radio'
         name='val'
         value={0.46}
@@ -65,8 +57,19 @@ function App() {
         onChange={(e)=>setValvula(e.target.value)}/>
         <span className='span'>Não</span>
         </Col>
-        <Col className='margem'>
-        <label className='radio'>Margem</label>
+
+        <Col className='opcoes_input'>
+        <label className='preco_emb'>Preço Embalagem</label>
+        <input type='text' className='entradaDados'
+        name='valorMilheiro'
+        value={valorMilheiro}
+        onChange={(e) => setValorMilheiro(e.target.value)}
+        
+        />
+        </Col>
+
+        <Col className='opcoes'>
+        <label className='label'>Margem</label>
         <input type='radio'
         name='margem'
         value={0.60}
@@ -87,7 +90,7 @@ function App() {
       
       <Row className='cabecalho'>
         <Col> Produto</Col>
-        <Col>Quandidade</Col>
+        <Col>Quantidade</Col>
         <Col>1 Cor</Col>
         <Col>2 Cores</Col>
         <Col>3 Cores</Col>
@@ -108,11 +111,11 @@ function App() {
           </Row>
       ))}
       <Row className='custoM'>
-      <label> Preco de embalagens por cor de 1500 ate 10000 unidades</label>
+      <label> Preço de embalagens por cor de 1.500 ate 10.000 unidades</label>
       </Row>
       <Row className='cabecalho'>
         <Col> Produto</Col>
-        <Col>Quandidade</Col>
+        <Col>Quantidade</Col>
         <Col>1 Cor</Col>
         <Col>2 Cores</Col>
         <Col>3 Cores</Col>
@@ -133,6 +136,10 @@ function App() {
           </Row>
       ))}
     </Container>
+      <div className='Botao_Voltar'>
+        <Button variant="outline-primary"><Link to ='/' className='link_voltar'>Home</Link></Button>
+      </div>
+
     </div>
   )
 }

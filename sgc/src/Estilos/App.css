@@ -37,13 +37,6 @@
   color: rgb(255, 255, 255);
   font-size: 25px;
 }
-.custoM1{
-  margin: 15px;
-  font-family: 'sans-serif';
-  color: rgb(255, 255, 255);
-  font-size: 25px;
-  text-align: right;
-}
 
 .entradaDados{
   border-radius: 10%;
@@ -51,28 +44,61 @@
   background-color: rgb(5, 90, 213);
   color: aliceblue;
 }
-.valvula{
+
+.span{
+  padding-left: 5px;
+  padding-right: 10px;
+}
+.Botao_Voltar{
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+  
+}
+.link_voltar{
+  color: azure;
+  margin: 20px;
+}
+.opcoes{
   color: rgb(255, 255, 255);
   font-family: 'sans-serif';
   font-size: 25px;
-  margin-left: 25px;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
 }
-.radio{
-  padding: 10px;
+.label{
+  margin-right: 10px;
+}
+.opcoes_input{
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+.preco_emb{
+  margin-right: 10px;
+  color: rgb(255, 255, 255);
+  font-family: 'sans-serif';
+  font-size: 25px;
+}
+a:link {
+  color: rgb(255, 255, 255);
 }
 
-.labelM{
-  padding: 10px;
-}
-.margem{
+/* visited link */
+a:visited {
   color: rgb(255, 255, 255);
-  font-family: 'sans-serif';
-  font-size: 25px;
-  text-align: right;
-  margin-right: 25px;
 }
-.span{
-  padding: 5px;
+
+/* mouse over link */
+a:hover {
+  color: rgb(255, 255, 255);
 }
+
+/* selected link */
+a:active {
+  color: rgb(255, 255, 255);
+}
+
 
 
