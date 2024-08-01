@@ -26,9 +26,9 @@ function Home (){
             <Container className="botoes_alinhamento">
                 <Row>
                     <Col><Button variant="outline-primary" className="Botao">
-                    <Link to ='/Vendas'>Vendas direta</Link></Button></Col>
+                    <Link to ='/Vendas'>Prestacao Servico</Link></Button></Col>
                     <Col><Button variant="outline-primary" className="Botao">
-                    <Link to ='/Prestacao_servico'>Prestacao Servico</Link></Button></Col>
+                    <Link to ='/Prestacao_servico'>Vendas direta</Link></Button></Col>
                 </Row>
                 
             </Container>

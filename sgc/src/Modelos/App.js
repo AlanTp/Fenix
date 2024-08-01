@@ -20,7 +20,9 @@ function App() {
   let qtd2 = Quantidade1500a10000();
   const [valorMilheiro, setValorMilheiro] = useState(0);
   const [valvula, setValvula] = useState(0);
-  const [margem, setMargem] = useState(0.6);
+  const [margem, setMargem] = useState(1);
+  const [arte, setArte] = useState(0);
+  const [margemSilk, setMargemSilk] = useState(0.6)
   
   useEffect(()=> {
 
@@ -37,17 +39,11 @@ function App() {
     <Container>
       
       <Row>
-        <Col className='custoM'>
-          <label> Preço de embalagens por cor ate 1.000 unidades</label>
-        </Col>
-        
-      </Row>
-      <Row>
         <Col className='opcoes'>
         <label className='label' >Valvula</label>
         <input type='radio'
         name='val'
-        value={0.46}
+        value={0.465}
         onChange={(e)=>setValvula(e.target.value)}
         />
         <span className='span'>Sim</span>
@@ -72,6 +68,11 @@ function App() {
         <label className='label'>Margem</label>
         <input type='radio'
         name='margem'
+        value={1}
+        onChange={(e)=>setMargem(e.target.value)}/>
+        <span className='span'>0</span>
+        <input type='radio'
+        name='margem'
         value={0.60}
         onChange={(e)=>setMargem(e.target.value)}/>
         <span className='span'>1</span>
@@ -84,6 +85,40 @@ function App() {
         name='margem'
         value={0.85}
         onChange={(e)=>setMargem(e.target.value)}/>
+        <span className='span'>3</span>
+        </Col>
+      </Row>
+      <Row>
+      <Col className='opcoes'>
+        <label className='label' >Arte</label>
+        <input type='radio'
+        name='arte'
+        value={20}
+        onChange={(e)=>setArte(e.target.value)}
+        />
+        <span className='span'>Sim</span>
+        <input type='radio'
+        name='arte'
+        value={0}
+        onChange={(e)=>setArte(e.target.value)}/>
+        <span className='span'>Não</span>
+        </Col>
+        <Col className='opcoes'>
+        <label className='label'>Margem Silk</label>
+        <input type='radio'
+        name='margemS'
+        value={0.60}
+        onChange={(e)=>setMargemSilk(e.target.value)}/>
+        <span className='span'>1</span>
+        <input type='radio'
+        name='margemS'
+        value={0.70}
+        onChange={(e)=>setMargemSilk(e.target.value)}/>
+        <span className='span'>2</span>
+        <input type='radio'
+        name='margemS'
+        value={0.85}
+        onChange={(e)=>setMargemSilk(e.target.value)}/>
         <span className='span'>3</span>
         </Col>
       </Row>
@@ -102,12 +137,12 @@ function App() {
         <Row key={linha} className='linhas'>
           <Col>Emb Personalizado</Col>
           <Col>{qtd[linha]}</Col>
-          <Col>R$ {Calculo(1,qtd[linha],CalculoM(qtd[linha],parseInt(valorMilheiro)),margem,valvula)}</Col>
-          <Col>R$ {Calculo(2,qtd[linha],CalculoM(qtd[linha],parseInt(valorMilheiro)),margem,valvula)}</Col>
-          <Col>R$ {Calculo(3,qtd[linha],CalculoM(qtd[linha],parseInt(valorMilheiro)),margem,valvula)}</Col>
-          <Col>R$ {Calculo(4,qtd[linha],CalculoM(qtd[linha],parseInt(valorMilheiro)),margem,valvula)}</Col>
-          <Col>R$ {Calculo(5,qtd[linha],CalculoM(qtd[linha],parseInt(valorMilheiro)),margem,valvula)}</Col>
-          <Col>R$ {Calculo(6,qtd[linha],CalculoM(qtd[linha],parseInt(valorMilheiro)),margem,valvula)}</Col>
+          <Col>R$ {Calculo(1,qtd[linha],CalculoM(1,qtd[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(2,qtd[linha],CalculoM(2,qtd[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(3,qtd[linha],CalculoM(3,qtd[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(4,qtd[linha],CalculoM(4,qtd[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(5,qtd[linha],CalculoM(5,qtd[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(6,qtd[linha],CalculoM(6,qtd[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
           </Row>
       ))}
       <Row className='custoM'>
@@ -127,12 +162,12 @@ function App() {
         <Row key={linha} className='linhas'>
           <Col>Emb Personalizado</Col>
           <Col>{qtd2[linha]}</Col>
-          <Col>R$ {Calculo(1,qtd2[linha],CalculoM(qtd2[linha],valorMilheiro),margem,valvula)}</Col>
-          <Col>R$ {Calculo(2,qtd2[linha],CalculoM(qtd2[linha],valorMilheiro),margem,valvula)}</Col>
-          <Col>R$ {Calculo(3,qtd2[linha],CalculoM(qtd2[linha],valorMilheiro),margem,valvula)}</Col>
-          <Col>R$ {Calculo(4,qtd2[linha],CalculoM(qtd2[linha],valorMilheiro),margem,valvula)}</Col>
-          <Col>R$ {Calculo(5,qtd2[linha],CalculoM(qtd2[linha],valorMilheiro),margem,valvula)}</Col>
-          <Col>R$ {Calculo(6,qtd2[linha],CalculoM(qtd2[linha],valorMilheiro),margem,valvula)}</Col>
+          <Col>R$ {Calculo(1,qtd2[linha],CalculoM(1,qtd2[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(2,qtd2[linha],CalculoM(2,qtd2[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(3,qtd2[linha],CalculoM(3,qtd2[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(4,qtd2[linha],CalculoM(4,qtd2[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(5,qtd2[linha],CalculoM(5,qtd2[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
+          <Col>R$ {Calculo(6,qtd2[linha],CalculoM(6,qtd2[linha]),margem,valvula,valorMilheiro,arte,margemSilk)}</Col>
           </Row>
       ))}
     </Container>

@@ -1,4 +1,3 @@
-
 const Quantidade1500a10000 = () =>{
     let lista = [1500];
     let valorInicial = 1500;
