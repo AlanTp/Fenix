@@ -1,8 +1,8 @@
 import React from "react";
 import { createBrowserRouter } from 'react-router-dom';
-import App from '../Modelos/App.js';
+import VendaComPromotor from '../Modelos/VendaComPromotor.jsx';
 import Home from '../Modelos/Home.jsx';
-import Vendas from '../Modelos/Vendas.jsx';
+import VendaSemPromotor from '../Modelos/VendaSemPromotor.jsx';
 
 const Rotas = createBrowserRouter([
     {
@@ -10,13 +10,14 @@ const Rotas = createBrowserRouter([
         element: <Home />,
     },
     {
-        path:'/Prestacao_servico',
-        element: <App />,
+        path:'/VendaComPromotor',
+        element: <VendaComPromotor />,
     },
     {
-        path:'/Vendas',
-        element: <Vendas />,
+        path:'/VendaSemPromotor',
+        element: <VendaSemPromotor />,
     },
+
 ]);
 
 export default Rotas;

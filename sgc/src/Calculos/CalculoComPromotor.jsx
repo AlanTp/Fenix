@@ -1,4 +1,4 @@
-const CalculoM = (qCor,qEmb) => {
+const CalculoComPromotor = (qCor, qEmb) => {
     var silk = 0;
     var silkFormatado = 0;
     switch (qCor) {
@@ -32,4 +32,4 @@ const CalculoM = (qCor,qEmb) => {
     return silkFormatado;
 }
 
-export default CalculoM;
+export default CalculoComPromotor;

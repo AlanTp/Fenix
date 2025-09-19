@@ -25,40 +25,20 @@ function Home (){
         </Container>
             <Container className="botoes_alinhamento">
                 <Row>
-                    <Col><Button variant="outline-primary" className="Botao">
-                    <Link to ='/Vendas'>Prestacao Servico</Link></Button></Col>
-                    <Col><Button variant="outline-primary" className="Botao">
-                    <Link to ='/Prestacao_servico'>Vendas direta</Link></Button></Col>
+                    <Col><Button variant="outline-primary"
+                     className="Botao"
+                     as={Link}
+                     to ='/VendaComPromotor'>Venda Com Promotor</Button>
+                    </Col>
+                    <Col><Button variant="outline-primary"
+                     className="Botao"
+                     as={Link}
+                     to ='/VendaSemPromotor'>Venda Sem Promotor</Button>
+                    </Col>
                 </Row>
                 
             </Container>
-            <div className="rodape">
-                <Container>
-                    <Row className="linha_rodape">
-                    <Col className="coluna_rodape">
-                        <ul>
-                            <li>Localizada</li>
-                            <li>Avenida Barão da Boa Esperanca nº 1.795</li>
-                            <li>Bairro: Antonio de brito</li>
-                        </ul>
-                    </Col>
-                    <Col className="coluna_rodape">
-                        <ul>
-                            <li>Contato:</li>
-                            <li>(035) 999661991</li>
-                            <li>Felipe Brito</li>
-                        </ul>
-                    </Col>
-                    <Col className="coluna_rodape">
-                        <ul>
-                            <li>Rede Socias</li>
-                            <li>@Fenix_Embalagens_</li>
-                            <li>Siga nos!</li>
-                        </ul>
-                    </Col>
-                    </Row>
-                </Container>
-            </div>
+
         </div>
         
     )

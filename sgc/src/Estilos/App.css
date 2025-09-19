@@ -1,104 +1,83 @@
-.titulo{
-  color:  rgb(5, 90, 213);
-  font-family: 'sans-serif';
-  font-size: 50px;
-  font-weight:bold;
-  margin-top: 120px;
-}
-.titulo_cont{
-  background-image: rgb(0, 0, 64);
-  text-align: center;
+/* Título */
+.titulo {
+    color: rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 50px;
+    font-weight: bold;
+    margin-top: 120px;
 }
 
-.cabecalho{
-  margin: 8px;
-  border: rgb(255, 255, 255) 2px;
-  font-family:  'sans-serif';
-  font-size: 20px;
-  text-align: center;
-  color: rgb(255, 255, 255);
-  font-weight: bold;
-}
-.linhas{
-  margin: 8px;
-  border-bottom: rgb(5, 90, 213) solid 2px;
-  border-left:rgb(5, 90, 213) solid 2px ;
-  border-right:rgb(5, 90, 213) solid 2px ;
-  font-family: 'sans-serif';
-  font-size: 15px;
-  text-align: center;
-  font-weight: bold;
-  color: white;
-  background-color: rgb(5, 90, 213);
-}
-.custoM{
-  margin: 15px;
-  font-family: 'sans-serif';
-  color: rgb(255, 255, 255);
-  font-size: 25px;
+/* Navbar / Container */
+.titulo_cont {
+    text-align: center;
 }
 
-.entradaDados{
-  border-radius: 10%;
-  width: 50px;
-  background-color: rgb(5, 90, 213);
-  color: aliceblue;
+/* Cabeçalho da tabela */
+.cabecalho {
+    margin: 8px;
+    font-family: 'sans-serif';
+    font-size: 20px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
 }
 
-.span{
-  padding-left: 5px;
-  padding-right: 10px;
-}
-.Botao_Voltar{
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-  
-}
-.link_voltar{
-  color: azure;
-  margin: 20px;
-}
-.opcoes{
-  color: rgb(255, 255, 255);
-  font-family: 'sans-serif';
-  font-size: 25px;
-  display: flex;
-  justify-content: center;
-  margin: 10px;
-}
-.label{
-  margin-right: 10px;
-}
-.opcoes_input{
-  display: flex;
-  justify-content: center;
-  margin: 10px;
-}
-.preco_emb{
-  margin-right: 10px;
-  color: rgb(255, 255, 255);
-  font-family: 'sans-serif';
-  font-size: 25px;
-}
-a:link {
-  color: rgb(255, 255, 255);
+/* Linhas da tabela */
+.linhas {
+    margin: 8px;
+    border: 2px solid rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 15px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(5, 90, 213);
 }
 
-/* visited link */
-a:visited {
-  color: rgb(255, 255, 255);
+/* Preço médio */
+.custoM {
+    margin: 15px;
+    font-family: 'sans-serif';
+    color: white;
+    font-size: 25px;
 }
 
-/* mouse over link */
-a:hover {
-  color: rgb(255, 255, 255);
+/* Inputs e selects padrão */
+.entradaDados, .opcoes_input, select {
+    border-radius: 10%;
+    padding: 5px 10px;
+    width: 100%;
+    max-width: 100px; /* limita o tamanho */
+    background-color: rgb(5, 90, 213);
+    color: aliceblue;
+    border: 1px solid white;
+    font-size: 16px;
 }
 
-/* selected link */
-a:active {
-  color: rgb(255, 255, 255);
+/* Container de cada opção (label + input/select) */
+.input_group {
+    display: flex;
+    flex-direction: column; /* coloca label em cima do input */
+    align-items: flex-start; /* alinha à esquerda dentro do Col */
+    margin-bottom: 10px;
 }
 
+/* Label */
+.input_group label {
+    color: white;
+    font-family: 'sans-serif';
+    font-size: 18px;
+    margin-bottom: 5px;
+}
 
+/* Botão voltar */
+.Botao_Voltar {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
 
+.link_voltar {
+    color: azure;
+    margin: 20px;
+}

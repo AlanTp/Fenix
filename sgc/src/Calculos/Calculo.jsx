@@ -1,46 +1,17 @@
+const Calculo = ( qEmb,silk, margem,val,PrcEmb,arte,margemSilk,valorMilheiro) => {
+    // Garantir que todos são números válidos
+    silk = Number(silk) || 0;
+    val = Number(val) || 0;
+    margem = Number(margem) || 1; // evita divisão por 0
+    PrcEmb = Number(PrcEmb) || 0;
+    arte = Number(arte) || 0;
+    margemSilk = Number(margemSilk) || 0;
+    valorMilheiro = Number(valorMilheiro) || 0;
 
 
-const Calculo =(qCor, qEmb, silk, margem,val,PrcEmb,arte,margemSilk) => {
-    qCor = Number(qCor);
-    qEmb = Number(qEmb);
-    silk = Number(silk);
-    margem = Number(margem);
-    val = Number(val);
-    PrcEmb = Number(PrcEmb);
-    arte = Number(arte);
-    margemSilk = Number(margemSilk);
-    var total = 0;
-    var totalFormatado = 0;
-    switch (qCor) {
-        case 1:
-            total =  (((PrcEmb /1000) * qEmb)/margem)+(val * qEmb) + (silk / margemSilk) + arte;
-            totalFormatado = total.toFixed(2)
-            break;
-        case 2:
-            total = (((PrcEmb /1000) * qEmb)/margem)+(val * qEmb) + (silk / margemSilk) + arte;
-            totalFormatado = total.toFixed(2)
-            break;
-        case 3:
-            total = (((PrcEmb /1000) * qEmb)/margem)+(val * qEmb) + (silk / margemSilk)+ arte;
-            totalFormatado = total.toFixed(2)
-            break;
-        case 4:
-            total = (((PrcEmb /1000) * qEmb)/margem)+(val * qEmb) + (silk / margemSilk)+ arte;
-            totalFormatado = total.toFixed(2)
-            break;
-        case 5:
-            total = (((PrcEmb /1000) * qEmb)/margem)+(val * qEmb) + (silk / margemSilk)+ arte;
-            totalFormatado = total.toFixed(2)
-            break;
-        case 6:
-            total = (((PrcEmb /1000) * qEmb)/margem)+(val * qEmb) + (silk / margemSilk)+ arte;
-            totalFormatado = total.toFixed(2)
-            break;
-        default:
-            break;
-    }
-    
-    return totalFormatado;
+    const total = (silk /margemSilk) + ((PrcEmb / 1000 * qEmb) / margem) + (val * qEmb) + arte ;
 
-}
+    return total.toFixed(2); // retorna string formatada
+};
+
 export default Calculo;
