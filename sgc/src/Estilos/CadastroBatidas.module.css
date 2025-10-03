@@ -1,0 +1,65 @@
+
+.titulo{
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 50px;
+    font-weight:bold;
+    margin-top: 120px;
+}
+
+.subtitulo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin:20px;
+
+}
+.subtitulo h3{
+    font-size: 30px;
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-weight:bold;
+}
+
+.labelText{
+    font-size: 20px;
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-weight:bold;
+}
+.rowForm{
+    margin: 30px;
+    justify-items: center;
+
+
+}
+.botaoSalvar{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+    padding: 20px;
+}
+.formInput{
+    width: 200px;
+    font-family: 'sans-serif';
+    font-size: 20px;
+    text-align: center;
+}
+
+.colForm{
+
+    display: flex;              /* ativa flexbox */
+    flex-direction: column;     /* deixa label em cima e input embaixo */
+    align-items: center;        /* centraliza horizontal */
+    justify-content: center;    /* centraliza vertical */
+    text-align: center;
+}
+.buttonForm{
+    width: 200px;
+    padding: 10px;
+    margin: 10px;
+}
+.rowButton{
+    align-items: center;
+    justify-content: center;
+}

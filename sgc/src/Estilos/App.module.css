@@ -43,7 +43,7 @@
 }
 
 /* Inputs e selects padrão */
-.entradaDados, .opcoes_input, select {
+.entradaDados {
     border-radius: 10%;
     padding: 5px 10px;
     width: 100%;
@@ -54,11 +54,11 @@
     font-size: 16px;
 }
 
-/* Container de cada opção (label + input/select) */
+
 .input_group {
     display: flex;
-    flex-direction: column; /* coloca label em cima do input */
-    align-items: flex-start; /* alinha à esquerda dentro do Col */
+    flex-direction: column;
+    align-items: flex-start;
     margin-bottom: 10px;
 }
 

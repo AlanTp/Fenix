@@ -5,36 +5,46 @@ import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
-import '../Estilos/Home.css';
-import '../Modelos/Home.jsx';
+import styles from '../Estilos/Home.module.css';
 import logo from '../imagens/logo.png';
 
 function Home (){
 
     return(
-        <div className="divisao_geral">
+        <div >
             <Navbar className='justify-content-center' >
             <Navbar.Brand><img src={logo} alt='logotipo fenix' height={100} width={100}/></Navbar.Brand>
-            <Navbar.Brand><b className='titulo'>Fênix Soluções em Embalagens</b></Navbar.Brand>
+            <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
             </Navbar>
 
         <Container>
-            <div className="imagem_central">
+            <div className={styles.imagem_central}>
             <img src={logo} alt='Imagem inicial' height={300} width={300}/>
             </div>
         </Container>
-            <Container className="botoes_alinhamento">
+            <Container className={styles.botoes_alinhamento}>
                 <Row>
                     <Col><Button variant="outline-primary"
-                     className="Botao"
+                     className={styles.Botao}
                      as={Link}
                      to ='/VendaComPromotor'>Venda Com Promotor</Button>
                     </Col>
                     <Col><Button variant="outline-primary"
-                     className="Botao"
+                     className={styles.Botao}
                      as={Link}
                      to ='/VendaSemPromotor'>Venda Sem Promotor</Button>
                     </Col>
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/Batidas'>Batidas</Button>
+                    </Col>
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/CadastroBatidas'>Cadastrar Batidas</Button>
+                    </Col>
+
                 </Row>
                 
             </Container>

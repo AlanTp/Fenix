@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import '../src/Estilos/index.css';
+import './Estilos/index.module.css';
 import reportWebVitals from './reportWebVitals.js';
 import Rotas from '../src/Routers/Rotas.jsx';
 import { RouterProvider } from 'react-router-dom';
