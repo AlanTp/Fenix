@@ -51,7 +51,7 @@ function Batidas() {
                     inicio: inicio ? inicio.toISOString() : undefined,
                     fim: fim ? fim.toISOString() : undefined
                 };
-                const res = await axios.get("http://localhost:4000/Batidas", { params });
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", { params });
                 setBatidas(res.data);
                 setLoading(false);
             } catch (err) {

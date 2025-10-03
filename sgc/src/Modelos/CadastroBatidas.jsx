@@ -40,7 +40,7 @@ function CadastroBatidas () {
         };
 
         try {
-            const response = await axios.post("http://localhost:4000/Batidas", dados);
+            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Batidas", dados);
             console.log("Salvo com sucesso!", response.data);
             alert("Batida salva com sucesso!");
             setColaborador("");
