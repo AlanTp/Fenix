@@ -140,7 +140,7 @@ function Batidas() {
                         {batidas.map((b, index) => (
                             <tr key={b.batidas_id ?? index}>
                                 <td>{b.colaborador}</td>
-                                <td>{b.batida_normal}</td>
+                                <td>{b.batida_normal }</td>
                                 <td>{b.batida_extra}</td>
                                 <td>{b.meta}</td>
                                 <td>{b.amostra}</td>
@@ -169,10 +169,12 @@ function Batidas() {
                             <th>Colaborador</th>
                             <th>Total B. Normais</th>
                             <th>Total B. Extras</th>
-                            <th>Valor Total Normais</th>
-                            <th>Valor Total extras</th>
                             <th>Total Perdas</th>
                             <th>Total Amostras</th>
+                            <th>Valor Total Normais</th>
+                            <th>Valor Total extras</th>
+                            <th>Total a Pagar</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -181,10 +183,18 @@ function Batidas() {
                                 <td>{t.colaborador}</td>
                                 <td>{t.batida_normal}</td>
                                 <td>{t.batida_extra}</td>
-                                <td> R$  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal))}</td>
-                                <td> R$ {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidasExtras(t.batida_extra))}</td>
                                 <td>{t.perdas}</td>
                                 <td>{t.amostra}</td>
+                                <td> R$  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal,t.perdas))}</td>
+                                <td> R$ {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidasExtras(t.batida_extra))}</td>
+                                <td>
+                                    {
+                                        new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+                                            .format(
+                                                ValorBatidas(t.batida_normal, t.perdas) + ValorBatidasExtras(t.batida_extra)
+                                            )
+                                    }
+                                </td>
                             </tr>
                         ))}
                         </tbody>

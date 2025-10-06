@@ -53,7 +53,7 @@ function CadastroBatidas () {
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar batida, verifique o console.");
+            alert("Erro ao salvar batida, Contate o administrador.");
         }
     };
 
