@@ -51,10 +51,11 @@ function Batidas() {
     useEffect(() => {
         const fetchBatidas = async () => {
             try {
+                const formatarData = (date) => date.toISOString().split("T")[0];
                 const params = {
                     colaborador,
-                    inicio: inicio ? inicio.toISOString() : undefined,
-                    fim: fim ? fim.toISOString() : undefined
+                    inicio: inicio ? formatarData(inicio) : undefined,
+                    fim: fim ? formatarData(fim) : undefined
                 };
                 const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", { params });
                 setBatidas(res.data);
