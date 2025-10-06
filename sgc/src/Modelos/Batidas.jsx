@@ -19,6 +19,11 @@ function Batidas() {
     const [inicio, setInicio] = useState(hoje);
     const [fim, setFim] = useState(hoje);
     const [loading, setLoading] = useState(true);
+    const opcoes = {
+        a: 'Aquiles',
+        b: 'Rodrigo',
+        c: 'Tunico'
+    };
 
     /*totais por colaborador*/
     const totaisPorColaborador = batidas.reduce((acc, b) => {
@@ -92,14 +97,24 @@ function Batidas() {
 
 
                     <Row>
-                        <Col md={3}  xl={3}>
-                            <label className={styles.labelFiltro}>Colaborador</label>
-                            <input
-                            type='text'
-                            onChange={(e) => setColaborador(e.target.value)}
-                            className={styles.entradaDados}
-                            />
+                        <Col md={3} xl={3}>
+                            <div className="d-flex align-items-center">
+                                <label className={`${styles.labelFiltro} me-2`}>Colaborador</label>
+                                <select
+                                    className={styles.entradaDados}
+                                    value={colaborador}
+                                    onChange={(e) => setColaborador(e.target.value)}
+                                >
+                                    <option value="">Selecione...</option>
+                                    {Object.entries(opcoes).map(([valor, texto]) => (
+                                        <option key={valor} value={texto}>
+                                            {texto}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </Col>
+
                         <Col md={3}  xl={3} >
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
@@ -140,11 +155,11 @@ function Batidas() {
                         {batidas.map((b, index) => (
                             <tr key={b.batidas_id ?? index}>
                                 <td>{b.colaborador}</td>
-                                <td>{b.batida_normal }</td>
-                                <td>{b.batida_extra}</td>
-                                <td>{b.meta}</td>
-                                <td>{b.amostra}</td>
-                                <td>{b.perdas}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(b.batida_normal)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(b.batida_extra)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(b.meta)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(b.amostra)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(b.perdas)}</td>
                                 <td>{b.data ? new Date(b.data).toLocaleDateString() : ""}</td>
                             </tr>
                         ))}
@@ -169,6 +184,7 @@ function Batidas() {
                             <th>Colaborador</th>
                             <th>Total B. Normais</th>
                             <th>Total B. Extras</th>
+                            <th>Total Batidas</th>
                             <th>Total Perdas</th>
                             <th>Total Amostras</th>
                             <th>Valor Total Normais</th>
@@ -181,12 +197,13 @@ function Batidas() {
                         {totaisArray.map((t, i) => (
                             <tr key={i} className={styles.rowRodape}>
                                 <td>{t.colaborador}</td>
-                                <td>{t.batida_normal}</td>
-                                <td>{t.batida_extra}</td>
-                                <td>{t.perdas}</td>
-                                <td>{t.amostra}</td>
-                                <td> R$  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal,t.perdas))}</td>
-                                <td> R$ {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidasExtras(t.batida_extra))}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(t.batida_normal)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(t.batida_extra)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(t.batida_normal + t.batida_extra)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(t.perdas)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(t.amostra)}</td>
+                                <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal,t.perdas))}</td>
+                                <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidasExtras(t.batida_extra))}</td>
                                 <td>
                                     {
                                         new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })

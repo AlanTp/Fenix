@@ -45,6 +45,12 @@ function Home (){
                                  to ='/CadastroBatidas'>Cadastrar Batidas</Button>
                     </Col>
 
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/Valvulas'>Valvulas</Button>
+                    </Col>
+
                 </Row>
                 
             </Container>
