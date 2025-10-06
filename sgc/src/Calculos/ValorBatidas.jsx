@@ -19,5 +19,5 @@ export function ValorBatidas(normais, perdas) {
 
 // Calcula valor das batidas extras
 export function ValorBatidasExtras(extras) {
-    return extras * 0.01;
+    return extras * 0.10;
 }
