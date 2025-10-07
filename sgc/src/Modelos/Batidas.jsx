@@ -170,7 +170,7 @@ function Batidas() {
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.meta)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.amostra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.perdas)}</td>
-                                <td>{b.data}</td>
+                                <td>{b.data ? b.data.split('-').reverse().join('/') : ""}</td>
                             </tr>
                         ))}
                         </tbody>
