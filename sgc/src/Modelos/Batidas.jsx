@@ -51,19 +51,28 @@ function Batidas() {
     useEffect(() => {
         const fetchBatidas = async () => {
             try {
-                const formatarData = (date) => date.toISOString().split("T")[0];
                 const params = {
                     colaborador,
-                    inicio: inicio ? formatarData(inicio) : undefined,
-                    fim: fim ? formatarData(fim) : undefined
+                    inicio: inicio ? inicio : undefined,
+                    fim: fim ? fim : undefined
                 };
+
                 const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", { params });
-                setBatidas(res.data);
+
+                // Formata cada data antes de salvar no estado
+                const batidasFormatadas = res.data.map(b => ({
+                    ...b,
+                    // Converte "2025-09-30" -> "30/09/2025"
+                    data: b.data ? b.data.split('-').reverse().join('/') : ''
+                }));
+
+                setBatidas(batidasFormatadas);
                 setLoading(false);
             } catch (err) {
                 console.error("Erro ao buscar batidas:", err);
             }
         };
+
         fetchBatidas();
     }, [colaborador, inicio, fim]);
 
@@ -161,7 +170,7 @@ function Batidas() {
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.meta)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.amostra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.perdas)}</td>
-                                <td>{b.data ? new Date(b.data).toLocaleDateString() : ""}</td>
+                                <td>{b.data}</td>
                             </tr>
                         ))}
                         </tbody>
