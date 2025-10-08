@@ -19,10 +19,16 @@ function CadastroBatidas () {
     const [colaborador, setColaborador] = useState("");
     const [batida_normal, setBatidasNormais] = useState("");
     const [batida_extra, setBatidasExtras] = useState("");
-    const [meta, setMeta] = useState(4000);
+    const [meta, setMeta] = useState(40000);
     const [amostras, setAmostras] = useState("");
     const [perdas, setPercas] = useState("");
     const [user_name, setUserName] = useState("Alan");
+
+    const opcoes = {
+        a: 'Aquiles',
+        b: 'Rodrigo',
+        c: 'Tunico'
+    };
 
 
     const handleSubmit = async (e) => {
@@ -88,12 +94,18 @@ function CadastroBatidas () {
                             <Col md={3}></Col>
                            <Col md={2} className={styles.colForm}>
                                <label className={styles.labelText}>Colaborador</label>
-                               <input
-                               type={"text"}
-                               value={colaborador}
-                               className= {`form-control ${styles.formInput}`}
-                               onChange={(e) => setColaborador(e.target.value)}
-                               />
+                               <select
+                                   className={``}
+                                   value={colaborador}
+                                   onChange={(e) => setColaborador(e.target.value)}
+                               >
+                                   <option value="">Selecione...</option>
+                                   {Object.entries(opcoes).map(([valor, texto]) => (
+                                       <option key={valor} value={texto}>
+                                           {texto}
+                                       </option>
+                                   ))}
+                               </select>
                            </Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Batidas Normais</label>
@@ -152,6 +164,7 @@ function CadastroBatidas () {
                         </Row>
                         <Row className={styles.rowForm}>
                             <Col md={3}></Col>
+                            <Col md={2}></Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Data</label>
                                 <div>

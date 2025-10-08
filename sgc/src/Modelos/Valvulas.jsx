@@ -22,6 +22,11 @@ function Valvulas () {
     const [fim, setFim] = useState(hoje);
     const [loading, setLoading] = useState(false);
 
+    const opcoes = {
+        a: 'Geisiane',
+        b: 'Mailon'
+    };
+
 
 
     return (
@@ -52,11 +57,18 @@ function Valvulas () {
                     <Row>
                         <Col md={3}  xl={3}>
                             <label className={styles.labelFiltro}>Colaborador</label>
-                            <input
-                                type='text'
-                                onChange={(e) => setColaborador(e.target.value)}
+                            <select
                                 className={styles.entradaDados}
-                            />
+                                value={colaborador}
+                                onChange={(e) => setColaborador(e.target.value)}
+                            >
+                                <option value="">Selecione...</option>
+                                {Object.entries(opcoes).map(([valor, texto]) => (
+                                    <option key={valor} value={texto}>
+                                        {texto}
+                                    </option>
+                                ))}
+                            </select>
                         </Col>
                         <Col md={3}  xl={3} >
                             <label className={styles.labelFiltro}>Data Inicial</label>

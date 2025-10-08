@@ -63,3 +63,11 @@
     align-items: center;
     justify-content: center;
 }
+
+select{
+    width: 200px;
+    font-family: 'sans-serif';
+    font-size: 20px;
+    text-align: center;
+    height: 40px;
+}
