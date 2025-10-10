@@ -20,7 +20,7 @@ function CadastroBatidas () {
     const [batida_normal, setBatidasNormais] = useState("");
     const [batida_extra, setBatidasExtras] = useState("");
     const [meta, setMeta] = useState(40000);
-    const [amostras, setAmostras] = useState("");
+    const [amostra, setamostra] = useState("");
     const [perdas, setPercas] = useState("");
     const [user_name, setUserName] = useState("Alan");
 
@@ -40,7 +40,7 @@ function CadastroBatidas () {
             batida_normal: Number(batida_normal) || 0,
             batida_extra: Number(batida_extra) || 0,
             meta: Number(meta) || 0,
-            amostras: Number(amostras) || 0,
+            amostra: Number(amostra) || 0,
             perdas: Number(perdas) || 0,
             user_name
         };
@@ -53,7 +53,7 @@ function CadastroBatidas () {
             setBatidasNormais("");
             setBatidasExtras("");
             setMeta("");
-            setAmostras("");
+            setamostra("");
             setPercas("");
             setData(new Date());
 
@@ -68,7 +68,7 @@ function CadastroBatidas () {
         setBatidasNormais("");
         setBatidasExtras("");
         setMeta("");
-        setAmostras("");
+        setamostra("");
         setPercas("");
         setData(new Date());
     };
@@ -131,12 +131,12 @@ function CadastroBatidas () {
                         <Row className={styles.rowForm}>
                             <Col md={3}></Col>
                             <Col md={2} className={styles.colForm}>
-                                <label className={styles.labelText}>Amostras</label>
+                                <label className={styles.labelText}>amostra</label>
                                 <input
                                     type={"text"}
-                                    value={amostras}
+                                    value={amostra}
                                     className= {`form-control ${styles.formInput}`}
-                                    onChange={(e) => setAmostras(e.target.value)}
+                                    onChange={(e) => setamostra(e.target.value)}
                                 />
                             </Col>
 
