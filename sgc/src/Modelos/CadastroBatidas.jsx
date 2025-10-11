@@ -52,8 +52,8 @@ function CadastroBatidas () {
             setColaborador("");
             setBatidasNormais("");
             setBatidasExtras("");
-            setMeta("");
-            setamostra("");
+            setMeta(40000);
+            setamostra('');
             setPercas("");
             setData(new Date());
 
@@ -95,6 +95,7 @@ function CadastroBatidas () {
                            <Col md={2} className={styles.colForm}>
                                <label className={styles.labelText}>Colaborador</label>
                                <select
+                                   required
                                    className={``}
                                    value={colaborador}
                                    onChange={(e) => setColaborador(e.target.value)}
@@ -110,6 +111,7 @@ function CadastroBatidas () {
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Batidas Normais</label>
                                 <input
+                                    required
                                     type={"text"}
                                     className= {`form-control ${styles.formInput}`}
                                     value={batida_normal}
@@ -119,6 +121,7 @@ function CadastroBatidas () {
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Batidas Extras</label>
                                 <input
+                                    required
                                     type={"text"}
                                     value={batida_extra}
                                     className= {`form-control ${styles.formInput}`}
@@ -133,6 +136,7 @@ function CadastroBatidas () {
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>amostra</label>
                                 <input
+                                    required
                                     type={"text"}
                                     value={amostra}
                                     className= {`form-control ${styles.formInput}`}
@@ -143,6 +147,7 @@ function CadastroBatidas () {
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Percas</label>
                                 <input
+                                    required
                                     type={"text"}
                                     value={perdas}
                                     className= {`form-control ${styles.formInput}`}
