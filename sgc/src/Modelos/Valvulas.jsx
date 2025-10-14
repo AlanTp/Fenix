@@ -20,7 +20,7 @@ function Valvulas () {
     const [colaborador, setColaborador] = useState("");
     const [inicio, setInicio] = useState(hoje);
     const [fim, setFim] = useState(hoje);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const opcoes = {
         a: 'Geisiane',
@@ -48,7 +48,7 @@ function Valvulas () {
                 setValvulas(valvulasFormatadas);
                 setLoading(false);
             } catch (err) {
-                console.error("Erro ao buscar batidas:", err);
+                console.error("Erro ao buscar Valvulas:", err);
             }
         };
 
