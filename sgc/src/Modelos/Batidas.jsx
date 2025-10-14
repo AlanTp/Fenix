@@ -212,13 +212,13 @@ function Batidas() {
                                 <td>{new Intl.NumberFormat("pt-BR").format(t.batida_normal + t.batida_extra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(t.perdas)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(t.amostra)}</td>
-                                <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal,t.perdas))}</td>
+                                <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal))}</td>
                                 <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidasExtras(t.batida_extra))}</td>
                                 <td>
                                     {
                                         new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
                                             .format(
-                                                ValorBatidas(t.batida_normal, t.perdas) + ValorBatidasExtras(t.batida_extra)
+                                                ValorBatidas(t.batida_normal) + ValorBatidasExtras(t.batida_extra)
                                             )
                                     }
                                 </td>

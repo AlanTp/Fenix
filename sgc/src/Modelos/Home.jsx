@@ -51,8 +51,19 @@ function Home (){
                                  to ='/Valvulas'>Valvulas</Button>
                     </Col>
 
+
                 </Row>
+
                 
+            </Container>
+            <Container className={styles.botoes_alinhamento}>
+                <Row>
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/CadastroValvulas'>Cadastro de Valvulas</Button>
+                    </Col>
+                </Row>
             </Container>
 
         </div>

@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Estilos/Batidas.module.css";
-import {ValorBatidas, ValorBatidasExtras} from "../Calculos/ValorBatidas";
+import ValorValvulas from "../Calculos/ValorValvulas";
 
 
 function Valvulas () {
@@ -27,7 +27,51 @@ function Valvulas () {
         b: 'Mailon'
     };
 
+    useEffect(() => {
+        const fetchValvulas = async () => {
+            try {
+                const params = {
+                    colaborador,
+                    inicio: inicio ? inicio : undefined,
+                    fim: fim ? fim : undefined
+                };
 
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", { params });
+
+                // Formata cada data antes de salvar no estado
+                const valvulasFormatadas = res.data.map(b => ({
+                    ...b,
+                    // Converte "2025-09-30" -> "30/09/2025"
+                    data: b.data ? b.data.split('-').reverse().join('/') : ''
+                }));
+
+                setValvulas(valvulasFormatadas);
+                setLoading(false);
+            } catch (err) {
+                console.error("Erro ao buscar batidas:", err);
+            }
+        };
+
+        fetchValvulas();
+    }, [colaborador, inicio, fim]);
+
+    const totaisPorColaborador = valvulas.reduce((acc, b) => {
+        if (!acc[b.colaborador]) {
+            acc[b.colaborador] = {
+                colaborador: b.colaborador,
+                valvula_normal: 0,
+                valvula_extra: 0
+            };
+        }
+        acc[b.colaborador].valvula_normal += b.valvula_normal || 0;
+        acc[b.colaborador].valvula_extra += b.valvula_extra || 0;
+
+        return acc;
+    }, {});
+
+    const totaisArray = Object.values(totaisPorColaborador);
+
+    if (loading) return <h2>Carregando...</h2>;
 
     return (
         <div>
@@ -50,9 +94,7 @@ function Valvulas () {
                     <Col className="d-flex justify-content-between align-items-center">
                         <label className={styles.filtro}>Filtros</label>
 
-
                     </Col>
-
 
                     <Row>
                         <Col md={3}  xl={3}>
@@ -104,13 +146,15 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
+                        {valvulas.map((v, index) =>(
+                            <tr key={v.valvulas_id ?? index} >
 
-                            <tr >
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
+                                    <td>{v.colaborador}</td>
+                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
+                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
+                                    <td>{v.data}</td>
                             </tr>
+                            ))}
 
                         </tbody>
 
@@ -133,23 +177,26 @@ function Valvulas () {
                             <th>Colaborador</th>
                             <th>Total V. Normais</th>
                             <th>Total V. Extras</th>
-                            <th>Valor Total Normais</th>
+                            <th>Total Valvulas</th>
                             <th>Valor Total extras</th>
                             <th>Total a Pagar</th>
 
                         </tr>
                         </thead>
                         <tbody>
+                        {totaisArray.map((v, i)=>(
+                            <tr key={i}>
+                                <td>{v.colaborador}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal + v.valvula_extra)}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorValvulas(v.valvula_extra))}</td>
 
-                            <tr>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
-                                <td>--</td>
 
                             </tr>
+
+                        ))}
 
                         </tbody>
                     </table>

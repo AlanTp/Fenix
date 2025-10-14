@@ -1,20 +1,20 @@
-export function ValorBatidas(normais, perdas) {
-    let totaltotal = 0;
-    let total = normais - perdas;
-    if (total <= 20000) {
-        totaltotal = total * 0.01;
+export function ValorBatidas(normais) {
+    let total = 0;
+
+    if (normais <= 20000) {
+        total = normais * 0.01;
     }
-    else if (total > 20000 && total < 25000) {
-        totaltotal = total * 0.015;
+    else if (normais > 20000 && normais < 25000) {
+        total = normais * 0.015;
     }
-    else if (total >= 25000 && total < 30000) {
-        totaltotal = total * 0.018;
+    else if (normais >= 25000 && normais < 30000) {
+        total = normais * 0.018;
     }
-    else if (total >= 30000) {
-        totaltotal = total * 0.020;
+    else if (normais >= 30000) {
+        total = normais * 0.020;
     }
 
-    return totaltotal;
+    return total;
 }
 
 // Calcula valor das batidas extras
