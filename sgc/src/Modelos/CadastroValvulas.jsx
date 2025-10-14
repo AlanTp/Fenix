@@ -40,7 +40,7 @@ function CadastroValvulas (){
         try {
             const response = await axios.post("https://fenix-api-gkyb.onrender.com/Valvulas", dados);
             console.log("Salvo com sucesso!", response.data);
-            alert("Batida salva com sucesso!");
+            alert("Valvula salva com sucesso!");
             setColaborador("");
             setValvulasNormais("");
             setValvulasExtras("");
@@ -48,7 +48,7 @@ function CadastroValvulas (){
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar batida, Contate o administrador.");
+            alert("Erro ao salvar valvulas, Contate o administrador.");
         }
     };
 
