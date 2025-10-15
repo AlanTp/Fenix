@@ -9,7 +9,7 @@ import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Estilos/Batidas.module.css";
-import ValorValvulas from "../Calculos/ValorValvulas";
+import valorValvulas from "../Calculos/ValorValvulas";
 
 
 function Valvulas () {
@@ -190,8 +190,8 @@ function Valvulas () {
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal + v.valvula_extra)}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorValvulas(v.valvula_extra))}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
 
 
                             </tr>

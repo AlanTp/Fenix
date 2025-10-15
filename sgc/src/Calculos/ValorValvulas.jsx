@@ -1,9 +1,9 @@
-function ValorValvulas(valvulas) {
+function valorValvulas(valvulas) {
     let total = 0;
 
-    total = total * 0.05;
+    total = valvulas * 0.05;
 
     return total;
 
 }
-export default ValorValvulas;
+export default valorValvulas;
