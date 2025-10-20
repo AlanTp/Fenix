@@ -22,6 +22,20 @@
     font-weight: bold;
 }
 
+.subtitulo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin:20px;
+
+}
+.subtitulo h3{
+    font-size: 30px;
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-weight:bold;
+}
+
 /* Linhas da tabela */
 .linhas {
     margin: 8px;
@@ -80,4 +94,15 @@
 .link_voltar {
     color: azure;
     margin: 20px;
+}
+.opcoes_input {
+    height: 40px;
+}
+
+.colForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }

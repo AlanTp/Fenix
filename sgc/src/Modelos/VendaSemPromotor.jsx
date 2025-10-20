@@ -37,10 +37,12 @@ function VendaSemPromotor() {
             </Navbar>
 
             <Container>
-
+                <div className={styles.subtitulo}>
+                    <h3>Vendas Com Promotor</h3>
+                </div>
                 <Row>
                     {/* Valvula */}
-                    <Col>
+                    <Col className={styles.colForm}>
                         <div className={styles.input_group}>
                             <label>Valvula</label>
                             <select
@@ -55,7 +57,7 @@ function VendaSemPromotor() {
                     </Col>
 
                     {/* Arte */}
-                    <Col>
+                    <Col className={styles.colForm}>
                         <div className={styles.input_group}>
                             <label>Arte</label>
                             <select
@@ -70,7 +72,7 @@ function VendaSemPromotor() {
                     </Col>
 
                     {/* Preço Embalagem */}
-                    <Col>
+                    <Col className={styles.colForm}>
                         <div className={styles.input_group}>
                             <label>Preço Emb.</label>
                             <input
@@ -83,7 +85,7 @@ function VendaSemPromotor() {
                     </Col>
 
                     {/* Margem Embalagem */}
-                    <Col>
+                    <Col className={styles.colForm}>
                         <div className={styles.input_group}>
                             <label>Margem Emb.</label>
                             <select
@@ -100,7 +102,7 @@ function VendaSemPromotor() {
                     </Col>
 
                     {/* Margem Silk */}
-                    <Col>
+                    <Col className={styles.colForm}>
                         <div className={styles.input_group}>
                             <label>Margem Silk</label>
                             <select
