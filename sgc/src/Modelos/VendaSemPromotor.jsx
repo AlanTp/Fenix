@@ -38,7 +38,7 @@ function VendaSemPromotor() {
 
             <Container>
                 <div className={styles.subtitulo}>
-                    <h3>Vendas Com Promotor</h3>
+                    <h3>Vendas sem Promotor</h3>
                 </div>
                 <Row>
                     {/* Valvula */}
