@@ -7,6 +7,8 @@ import Batidas from '../Modelos/Batidas.jsx';
 import CadastroBatidas from "../Modelos/CadastroBatidas";
 import Valvulas from "../Modelos/Valvulas.jsx";
 import CadastroValvulas from "../Modelos/CadastroValvulas";
+import Promotor from "../Modelos/Promotor.jsx";
+import CadastroPromotor from "../Modelos/CadastroPromotor";
 
 const Rotas = createBrowserRouter([
     {
@@ -36,6 +38,14 @@ const Rotas = createBrowserRouter([
     {
         path:'/CadastroValvulas',
         element: <CadastroValvulas/>,
+    },
+    {
+        path:'/Promotor',
+        element: <Promotor/>,
+    },
+    {
+        path:'/CadastroPromotor',
+        element: <CadastroPromotor/>,
     },
 
 

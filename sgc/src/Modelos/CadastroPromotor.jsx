@@ -1,6 +1,6 @@
 import {Navbar} from "react-bootstrap";
 import logo from "../imagens/logo.png";
-import styles from "../Estilos/CadastroValvulas.module.css";
+import styles from "../Estilos/CadastroPromotor.module.css";
 import {Form} from "reactstrap";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
@@ -11,51 +11,50 @@ import {Link} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 
-function CadastroValvulas (){
+function CadastroPromotor (){
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
     const [data, setData] = useState(hoje);
     const [colaborador, setColaborador] = useState("");
-    const [valvula_normal, setValvulasNormais] = useState("");
-    const [valvula_extra, setValvulasExtras] = useState("");
+    const [promotor_normal, setPromotorNormais] = useState("");
+    const [promotor_extra, setPromotorExtras] = useState("");
     const [user_name, setUserName] = useState("Alan");
 
     const opcoes = {
-        a: 'Geisiane',
-        b: 'Mailon'
+        a: 'Gabriela'
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // evita reload da página
 
         const dados = {
-            data,                // cuidado: no banco pode esperar YYYY-MM-DD, talvez precise formatar
+            data,
             colaborador,
-            valvula_normal: Number(valvula_normal) || 0,
-            valvula_extra: Number(valvula_extra) || 0,
+            promotor_normal: Number(promotor_normal) || 0,
+            promotor_extra: Number(promotor_extra) || 0,
             user_name
         };
 
         try {
-            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Valvulas", dados);
+            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Promotor", dados);
             console.log("Salvo com sucesso!", response.data);
-            alert("Valvula salva com sucesso!");
+            alert("Batida Promotor salva com sucesso!");
             setColaborador("");
-            setValvulasNormais("");
-            setValvulasExtras("");
+            setPromotorNormais("");
+            setPromotorExtras("");
             setData(new Date());
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar valvulas, Contate o administrador.");
+            alert("Erro ao salvar batidas do Promotor, Contate o administrador.");
         }
     };
 
     const handleClear = () => {
         setColaborador("");
-        setValvulasNormais("");
-        setValvulasExtras("");
+        setPromotorNormais("");
+        setPromotorExtras("");
         setData(new Date());
     };
 
@@ -71,7 +70,7 @@ function CadastroValvulas (){
             </Navbar>
 
             <div className={styles.subtitulo}>
-                <h3>Cadastro de Valvulas</h3>
+                <h3>Cadastro de Batidas do Promotor</h3>
             </div>
             <div>
                 <Form onSubmit={handleSubmit}>
@@ -95,13 +94,13 @@ function CadastroValvulas (){
                                 </select>
                             </Col>
                             <Col md={2} className={styles.colForm}>
-                                <label className={styles.labelText}>Valvulas Normais</label>
+                                <label className={styles.labelText}>Promotor B. Normais</label>
                                 <input
                                     required
                                     type={"text"}
                                     className= {`form-control ${styles.formInput}`}
-                                    value={valvula_normal}
-                                    onChange={(e) => setValvulasNormais(e.target.value)}
+                                    value={promotor_normal}
+                                    onChange={(e) => setPromotorNormais(e.target.value)}
                                 />
                             </Col>
                             <Col md={2} className={styles.colForm}>
@@ -109,9 +108,9 @@ function CadastroValvulas (){
                                 <input
                                     required
                                     type={"text"}
-                                    value={valvula_extra}
+                                    value={promotor_extra}
                                     className= {`form-control ${styles.formInput}`}
-                                    onChange={(e) => setValvulasExtras(e.target.value)}
+                                    onChange={(e) => setPromotorExtras(e.target.value)}
                                 />
                             </Col>
                             <Col md={3}></Col>
@@ -148,4 +147,4 @@ function CadastroValvulas (){
     )
 }
 
-export default CadastroValvulas;
+export default CadastroPromotor;

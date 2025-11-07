@@ -38,7 +38,7 @@ function CadastroBatidas () {
         const dados = {
             data,                // cuidado: no banco pode esperar YYYY-MM-DD, talvez precise formatar
             colaborador,
-            batida_normal: Number(batida_normal) || 0,
+            batida_normal: Number(batida_normal) - Number(perdas) || 0,
             batida_extra: Number(batida_extra) || 0,
             meta: Number(meta) || 0,
             amostra: Number(amostra) || 0,

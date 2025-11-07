@@ -63,6 +63,17 @@ function Home (){
                                  as={Link}
                                  to ='/CadastroValvulas'>Cadastro de Valvulas</Button>
                     </Col>
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/Promotor'>Batidas Promotor</Button>
+                    </Col>
+
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/CadastroPromotor'>Cadastro B. Promotor</Button>
+                    </Col>
                 </Row>
             </Container>
 
