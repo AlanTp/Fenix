@@ -7,9 +7,18 @@ import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 import styles from '../Estilos/Home.module.css';
 import logo from '../imagens/logo.png';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Home (){
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            navigate("/Login");
+        }
+    }, [navigate]);
     return(
         <div >
             <Navbar className='justify-content-center' >

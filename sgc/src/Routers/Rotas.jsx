@@ -9,43 +9,85 @@ import Valvulas from "../Modelos/Valvulas.jsx";
 import CadastroValvulas from "../Modelos/CadastroValvulas";
 import Promotor from "../Modelos/Promotor.jsx";
 import CadastroPromotor from "../Modelos/CadastroPromotor";
+import Login from "../Modelos/Login.jsx";
+import RotaProtegida from "./RotasProtegidas";
 
 const Rotas = createBrowserRouter([
     {
-        path:'/',
-        element: <Home />,
+        path: '/',
+        element: <Login />,
     },
     {
-        path:'/VendaComPromotor',
-        element: <VendaComPromotor />,
+        path: '/Home',
+        element: (
+            <RotaProtegida>
+                <Home />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/VendaSemPromotor',
-        element: <VendaSemPromotor />,
+        path: '/VendaComPromotor',
+        element: (
+            <RotaProtegida>
+                <VendaComPromotor />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/Batidas',
-        element: <Batidas />,
+        path: '/VendaSemPromotor',
+        element: (
+            <RotaProtegida>
+                <VendaSemPromotor />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/CadastroBatidas',
-        element: <CadastroBatidas/>,
+        path: '/Batidas',
+        element: (
+            <RotaProtegida>
+                <Batidas />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/Valvulas',
-        element: <Valvulas/>,
+        path: '/CadastroBatidas',
+        element: (
+            <RotaProtegida>
+                <CadastroBatidas />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/CadastroValvulas',
-        element: <CadastroValvulas/>,
+        path: '/Valvulas',
+        element: (
+            <RotaProtegida>
+                <Valvulas />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/Promotor',
-        element: <Promotor/>,
+        path: '/CadastroValvulas',
+        element: (
+            <RotaProtegida>
+                <CadastroValvulas />
+            </RotaProtegida>
+        ),
     },
     {
-        path:'/CadastroPromotor',
-        element: <CadastroPromotor/>,
+        path: '/Promotor',
+        element: (
+            <RotaProtegida>
+                <Promotor />
+            </RotaProtegida>
+        ),
+    },
+    {
+        path: '/CadastroPromotor',
+        element: (
+            <RotaProtegida>
+                <CadastroPromotor />
+            </RotaProtegida>
+        ),
     },
 
 

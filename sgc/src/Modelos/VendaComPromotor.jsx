@@ -172,7 +172,7 @@ function VendaComPromotor() {
         <Button variant="outline-primary"
             className={styles.link_voltar}
             as={Link}
-            to ='/'>
+            to ='/Home'>
             Home
         </Button>
       </div>

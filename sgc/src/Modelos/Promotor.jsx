@@ -156,7 +156,7 @@ function Promotor () {
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>

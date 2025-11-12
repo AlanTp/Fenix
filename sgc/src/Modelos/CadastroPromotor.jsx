@@ -136,7 +136,7 @@ function CadastroPromotor (){
                             <Container className={styles.containerBotoes}>
                                 <Button variant="outline-primary" className={styles.buttonForm} onClick={handleClear}> Limpar </Button>
                                 <Button variant="outline-primary" type="submit" className={styles.buttonForm}> Salvar </Button>
-                                <Button variant="outline-primary"  className={styles.buttonForm} as={Link} to='/'> Voltar </Button>
+                                <Button variant="outline-primary"  className={styles.buttonForm} as={Link} to='/Home'> Voltar </Button>
                             </Container>
 
                         </Row>
