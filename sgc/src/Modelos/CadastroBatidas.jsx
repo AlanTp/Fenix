@@ -23,7 +23,7 @@ function CadastroBatidas () {
     const [meta, setMeta] = useState(40000);
     const [amostra, setamostra] = useState("");
     const [perdas, setPercas] = useState("");
-    const [user_name, setUserName] = useState("Alan");
+    const [user_name] = useState("Alan");
 
     const opcoes = {
         a: 'Aquiles',

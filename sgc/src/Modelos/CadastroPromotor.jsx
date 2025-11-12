@@ -19,7 +19,7 @@ function CadastroPromotor (){
     const [colaborador, setColaborador] = useState("");
     const [promotor_normal, setPromotorNormais] = useState("");
     const [promotor_extra, setPromotorExtras] = useState("");
-    const [user_name, setUserName] = useState("Alan");
+    const [user_name] = useState("Alan");
 
     const opcoes = {
         a: 'Gabriela'

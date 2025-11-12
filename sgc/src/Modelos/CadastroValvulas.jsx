@@ -19,7 +19,7 @@ function CadastroValvulas (){
     const [colaborador, setColaborador] = useState("");
     const [valvula_normal, setValvulasNormais] = useState("");
     const [valvula_extra, setValvulasExtras] = useState("");
-    const [user_name, setUserName] = useState("Alan");
+    const [user_name] = useState("Alan");
 
     const opcoes = {
         a: 'Geisiane',
