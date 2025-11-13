@@ -41,7 +41,7 @@ function CadastroValvulas (){
         };
 
         try {
-            const response = await axios.post("http://localhost:4000/Valvulas", dados,
+            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Valvulas", dados,
                 {
                 headers: {
                 Authorization: `Bearer ${token}`,
