@@ -3,7 +3,7 @@ import { Button, Navbar } from 'react-bootstrap';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import logo from '../imagens/logo.png';
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
@@ -21,6 +21,7 @@ function Valvulas () {
     const [inicio, setInicio] = useState(hoje);
     const [fim, setFim] = useState(hoje);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const opcoes = {
         a: 'Geisiane',
@@ -30,13 +31,23 @@ function Valvulas () {
     useEffect(() => {
         const fetchValvulas = async () => {
             try {
+                const token = localStorage.getItem("token");
+
+                if(!token){
+                    navigate("/Login");
+                }
+
                 const params = {
                     colaborador,
                     inicio: inicio ? inicio : undefined,
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", { params });
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", { params,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
                 // Formata cada data antes de salvar no estado
                 const valvulasFormatadas = res.data.map(b => ({
@@ -49,11 +60,16 @@ function Valvulas () {
                 setLoading(false);
             } catch (err) {
                 console.error("Erro ao buscar Valvulas:", err);
+                if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                    alert("Sessão expirada! Faça login novamente.");
+                    localStorage.removeItem("token");
+                    navigate("/Login");
+                }
             }
         };
 
         fetchValvulas();
-    }, [colaborador, inicio, fim]);
+    }, [colaborador, inicio, fim, navigate]);
 
     const totaisPorColaborador = valvulas.reduce((acc, b) => {
         if (!acc[b.colaborador]) {

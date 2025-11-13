@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import {useState} from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 
@@ -20,6 +20,7 @@ function CadastroPromotor (){
     const [promotor_normal, setPromotorNormais] = useState("");
     const [promotor_extra, setPromotorExtras] = useState("");
     const [user_name] = useState("Alan");
+    const navigate = useNavigate();
 
     const opcoes = {
         a: 'Gabriela'
@@ -27,6 +28,8 @@ function CadastroPromotor (){
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // evita reload da página
+
+        const token = localStorage.getItem("token");
 
         const dados = {
             data,
@@ -37,7 +40,13 @@ function CadastroPromotor (){
         };
 
         try {
-            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Promotor", dados);
+            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Promotor", dados,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+
             console.log("Salvo com sucesso!", response.data);
             alert("Batida Promotor salva com sucesso!");
             setColaborador("");
@@ -47,7 +56,14 @@ function CadastroPromotor (){
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar batidas do Promotor, Contate o administrador.");
+
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                alert("Sessão expirada. Faça login novamente.");
+                localStorage.removeItem("token");
+                navigate("/Login");
+            } else {
+                alert("Erro ao salvar batida. Contate o administrador.");
+            }
         }
     };
 

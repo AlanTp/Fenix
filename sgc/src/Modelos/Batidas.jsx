@@ -10,6 +10,7 @@ import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ValorBatidas, ValorBatidasExtras } from '../Calculos/ValorBatidas.jsx';
+import { useNavigate } from "react-router-dom";
 
 function Batidas() {
     const hoje = new Date();
@@ -19,6 +20,7 @@ function Batidas() {
     const [inicio, setInicio] = useState(hoje);
     const [fim, setFim] = useState(hoje);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
     const opcoes = {
         a: 'Aquiles',
         b: 'Rodrigo',
@@ -51,13 +53,23 @@ function Batidas() {
     useEffect(() => {
         const fetchBatidas = async () => {
             try {
+                const token = localStorage.getItem("token");
+
+                if(!token){
+                    navigate("/Login");
+                }
+
                 const params = {
                     colaborador,
                     inicio: inicio ? inicio : undefined,
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", { params });
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", { params,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
                 // Formata cada data antes de salvar no estado
                 const batidasFormatadas = res.data.map(b => ({
@@ -69,12 +81,18 @@ function Batidas() {
                 setBatidas(batidasFormatadas);
                 setLoading(false);
             } catch (err) {
-                console.error("Erro ao buscar batidas:", err);
+                console.error("Erro ao buscar batidas:", err)
+
+                if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                    alert("Sessão expirada! Faça login novamente.");
+                    localStorage.removeItem("token");
+                    navigate("/Login");
+                }
             }
         };
 
         fetchBatidas();
-    }, [colaborador, inicio, fim]);
+    }, [colaborador, inicio, fim, navigate]);
 
 
 

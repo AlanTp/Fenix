@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
 
@@ -24,6 +24,7 @@ function CadastroBatidas () {
     const [amostra, setamostra] = useState("");
     const [perdas, setPercas] = useState("");
     const [user_name] = useState("Alan");
+    const navigate = useNavigate();
 
     const opcoes = {
         a: 'Aquiles',
@@ -34,6 +35,8 @@ function CadastroBatidas () {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // evita reload da página
+
+        const token = localStorage.getItem("token");
 
         const dados = {
             data,                // cuidado: no banco pode esperar YYYY-MM-DD, talvez precise formatar
@@ -47,7 +50,11 @@ function CadastroBatidas () {
         };
 
         try {
-            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Batidas", dados);
+            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Batidas", dados, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
             console.log("Salvo com sucesso!", response.data);
             alert("Batida salva com sucesso!");
             setColaborador("");
@@ -60,7 +67,14 @@ function CadastroBatidas () {
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar batida, Contate o administrador.");
+
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                alert("Sessão expirada. Faça login novamente.");
+                localStorage.removeItem("token");
+                navigate("/Login");
+            } else {
+                alert("Erro ao salvar batida. Contate o administrador.");
+            }
         }
     };
 

@@ -7,7 +7,7 @@ import Row from "react-bootstrap/Row";
 import {useState} from "react";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 
@@ -20,6 +20,7 @@ function CadastroValvulas (){
     const [valvula_normal, setValvulasNormais] = useState("");
     const [valvula_extra, setValvulasExtras] = useState("");
     const [user_name] = useState("Alan");
+    const navigate = useNavigate();
 
     const opcoes = {
         a: 'Geisiane',
@@ -28,6 +29,8 @@ function CadastroValvulas (){
 
     const handleSubmit = async (e) => {
         e.preventDefault(); // evita reload da página
+
+        const token = localStorage.getItem("token");
 
         const dados = {
             data,                // cuidado: no banco pode esperar YYYY-MM-DD, talvez precise formatar
@@ -38,7 +41,13 @@ function CadastroValvulas (){
         };
 
         try {
-            const response = await axios.post("https://fenix-api-gkyb.onrender.com/Valvulas", dados);
+            const response = await axios.post("http://localhost:4000/Valvulas", dados,
+                {
+                headers: {
+                Authorization: `Bearer ${token}`,
+                },
+            });
+
             console.log("Salvo com sucesso!", response.data);
             alert("Valvula salva com sucesso!");
             setColaborador("");
@@ -48,7 +57,14 @@ function CadastroValvulas (){
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
-            alert("Erro ao salvar valvulas, Contate o administrador.");
+
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
+                alert("Sessão expirada. Faça login novamente.");
+                localStorage.removeItem("token");
+                navigate("/Login");
+            } else {
+                alert("Erro ao salvar batida. Contate o administrador.");
+            }
         }
     };
 

@@ -7,7 +7,7 @@ import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DatePicker from "react-datepicker";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function Promotor () {
 
@@ -18,6 +18,7 @@ function Promotor () {
     const [inicio, setInicio] = useState(hoje);
     const [fim, setFim] = useState(hoje);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     const opcoes = {
         a: 'Gabriela'
@@ -26,13 +27,23 @@ function Promotor () {
     useEffect(() => {
         const fetchPromotor = async () => {
             try {
+                const token = localStorage.getItem("token");
+
+                if(!token){
+                    navigate("/Login");
+                }
+
                 const params = {
                     colaborador,
                     inicio: inicio ? inicio : undefined,
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Promotor", { params });
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Promotor", { params,
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
                 // Formata cada data antes de salvar no estado
                 const promotorFormatado = res.data.map(b => ({
@@ -45,11 +56,16 @@ function Promotor () {
                 setLoading(false);
             } catch (err) {
                 console.error("Erro ao buscar Promotor:", err);
+                if (err.response && (err.response.status === 401 || err.response.status === 403)) {
+                    alert("Sessão expirada! Faça login novamente.");
+                    localStorage.removeItem("token");
+                    navigate("/Login");
+                }
             }
         };
 
         fetchPromotor();
-    }, [colaborador, inicio, fim]);
+    }, [colaborador, inicio, fim, navigate]);
 
     const totaisPorColaborador = promotor.reduce((acc, b) => {
         if (!acc[b.colaborador]) {
