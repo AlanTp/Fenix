@@ -19,7 +19,7 @@ function Login() {
             setErro("");
 
             try {
-                const response = await fetch("http://localhost:4000/Login", {
+                const response = await fetch("https://fenix-api-gkyb.onrender.com/Login", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
