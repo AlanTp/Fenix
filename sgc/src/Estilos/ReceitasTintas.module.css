@@ -1,0 +1,42 @@
+.titulo{
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 50px;
+    font-weight:bold;
+    margin-top: 120px;
+}
+
+.subtitulo{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin:20px;
+
+}
+.subtitulo h3{
+    font-size: 30px;
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-weight:bold;
+}
+.Labels{
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 30px;
+}
+.labelCalcular{
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 25px;
+}
+.entradaDados{
+    width: 200px;
+    color:  rgb(5, 90, 213);
+    font-family: 'sans-serif';
+    font-size: 20px;
+}
+.listItens{
+    color:  black;
+    font-family: 'sans-serif';
+    font-size: 20px;
+}

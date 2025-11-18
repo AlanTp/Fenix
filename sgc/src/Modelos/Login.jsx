@@ -7,18 +7,22 @@ import Col from 'react-bootstrap/Col';
 import Row from "react-bootstrap/Row";
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
+import {Spinner} from "reactstrap";
 
 function Login() {
         const [login, setLogin] = useState("");
         const [senha, setSenha] = useState("");
         const [erro, setErro] = useState("");
         const navigate = useNavigate();
+        const [loading, setLoading] = useState(false);
 
         const handleLogin = async (e) => {
             e.preventDefault();
             setErro("");
 
             try {
+                setLoading(true);
+
                 const response = await fetch("https://fenix-api-gkyb.onrender.com/Login", {
                     method: "POST",
                     headers: {
@@ -43,6 +47,8 @@ function Login() {
             } catch (error) {
                 console.error("Erro na requisição:", error);
                 setErro("Erro de conexão com o servidor");
+            }finally {
+                setLoading(false);
             }
         }
 
@@ -83,7 +89,13 @@ function Login() {
                         <Row >
                             <Col md={12} className={styles.buttonSalva}>
                                 <button type="submit" className="btn btn-primary"
-                                >Entrar</button>
+                                        disabled={loading}>
+                                    {loading ? (
+                                        <Spinner animation="border" size="sm" />
+                                    ) : (
+                                        "Entrar"
+                                    )}
+                                </button>
                             </Col>
                         </Row>
                         {erro && (

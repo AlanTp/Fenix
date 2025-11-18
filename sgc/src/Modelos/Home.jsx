@@ -85,6 +85,16 @@ function Home (){
                     </Col>
                 </Row>
             </Container>
+            <Container className={styles.botoes_alinhamento}>
+                <Row>
+                    <Col><Button variant="outline-primary"
+                                 className={styles.Botao}
+                                 as={Link}
+                                 to ='/ReceitasTintas'>Receitas Tintas</Button>
+                    </Col>
+                </Row>
+
+            </Container>
 
         </div>
         
