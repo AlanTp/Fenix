@@ -34,7 +34,7 @@ function ReceitasTintas () {
                 }
                 const params = {nome};
 
-                const res = await axios.get("http://localhost:4000/Tons", {
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Tons", {
                     params,
                     headers: {
                         Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ function ReceitasTintas () {
 
                 const params = {codigo};
 
-                const res = await axios.get("http://localhost:4000/Receitas", {
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Receitas", {
                     params,
                     headers: {
                         Authorization: `Bearer ${token}`,
