@@ -6,7 +6,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {Form, Input, Label, Spinner} from "reactstrap";
 import React, { useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import CalculaReceitaTintas from "../Calculos/CalculoReceitaTintas";
 import Button from "react-bootstrap/Button";
@@ -189,11 +189,18 @@ function ReceitasTintas () {
                         </div>
 
                         <div className="d-flex justify-content-center mt-3">
-                            <Button onClick={() => setProduzir(Number(quantidadeInput))}>
+                            <Button onClick={() => setProduzir(Number(quantidadeInput))} className={styles.botoes}>
                                 {loading ? (
                                     <Spinner animation="border" size="sm" />
                                 ) : (
                                     "Calcular"
+                                )}
+                            </Button>
+                            <Button className={styles.botoes} as={Link} to='/Home'>
+                                {loading ? (
+                                    <Spinner animation="border" size="sm" />
+                                ) : (
+                                    "Voltar"
                                 )}
                             </Button>
                         </div>
