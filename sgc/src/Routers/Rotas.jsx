@@ -12,6 +12,8 @@ import CadastroPromotor from "../Modelos/CadastroPromotor";
 import Login from "../Modelos/Login.jsx";
 import RotaProtegida from "./RotasProtegidas";
 import ReceitasTintas from "../Modelos/ReceitasTintas.jsx";
+import CadastroReceitas from "../Modelos/CadastroReceitas.jsx";
+
 const Rotas = createBrowserRouter([
     {
         path: '/',
@@ -94,6 +96,14 @@ const Rotas = createBrowserRouter([
         element: (
             <RotaProtegida>
                 <ReceitasTintas />
+            </RotaProtegida>
+        ),
+    },
+    {
+        path: '/CadastroReceitas',
+        element: (
+            <RotaProtegida>
+                <CadastroReceitas />
             </RotaProtegida>
         ),
     },

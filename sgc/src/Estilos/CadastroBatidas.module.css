@@ -1,10 +1,15 @@
 
 .titulo{
-    color:  rgb(5, 90, 213);
+    color:  black;
     font-family: 'sans-serif';
-    font-size: 50px;
+    font-size: 25px;
     font-weight:bold;
     margin-top: 120px;
+    margin-right: 150px;
+    margin-left: 50px;
+}
+.navbar{
+    background-color: rgb(5, 90, 213);
 }
 
 .subtitulo{

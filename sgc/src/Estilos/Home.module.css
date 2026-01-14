@@ -1,42 +1,31 @@
 *{margin: 0; padding: 0;}
 .titulo{
-    color:  rgb(5, 90, 213);
+    color:  black;
     font-family: 'sans-serif';
-    font-size: 50px;
+    font-size: 25px;
     font-weight:bold;
     margin-top: 120px;
+    margin-right: 150px;
+    margin-left: 50px;
 }
 
+body{
+    background-color: #060a5e;
+}
+.navbar{
+    background-color: rgb(5, 90, 213);
+}
 
-.imagem_central{
+.page {
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    
-    
+    flex-direction: column;
 }
-.rodape{
-    background-color: black;
-    bottom: 0;
-    position: absolute;
-    height: 100px;
-    width: 100%;
-}
-li{
-    list-style: none;
-    color: azure;
-}
-.linha_rodape{
-    margin-top: 10px;
-}
-.coluna_rodape{
-    display: flex;
-    justify-content: center;
-}
-.botoes_alinhamento{
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-.Botao{
-    width: 200px;
+
+.content {
+    flex: 1;
+    background-image: url('../imagens/LogoFenix.png');
+    background-size: cover;   /* não corta */
+    background-repeat: no-repeat;
+    background-position: center;
 }

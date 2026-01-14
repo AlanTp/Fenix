@@ -1,0 +1,21 @@
+/* LINKS DA NAVBAR */
+.navbar .nav-link,
+.navbar .nav-link:visited {
+    color: black !important;
+    font-weight:bold;
+}
+
+/* TÍTULO DO DROPDOWN */
+.navbar .dropdown-toggle {
+    color: black !important;
+    font-weight:bold;
+}
+.dropdown-menu .dropdown-item {
+    color: black !important;
+
+}
+.dropdown-menu .dropdown-item:hover,
+.dropdown-menu .dropdown-item:focus {
+    background-color: #a3e1f7;
+
+}
