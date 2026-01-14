@@ -24,7 +24,8 @@ function CadastroValvulas (){
 
     const opcoes = {
         a: 'Geisiane',
-        b: 'Mailon'
+        b: 'Mailon',
+        c: 'Aquiles'
     };
 
     const handleSubmit = async (e) => {
