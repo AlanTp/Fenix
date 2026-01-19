@@ -25,7 +25,8 @@ function Valvulas () {
 
     const opcoes = {
         a: 'Geisiane',
-        b: 'Mailon'
+        b: 'Mailon',
+        C: 'Aquiles'
     };
 
     useEffect(() => {
