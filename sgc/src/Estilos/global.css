@@ -12,6 +12,8 @@
 }
 .dropdown-menu .dropdown-item {
     color: black !important;
+    background-color: transparent;
+    border: none;
 
 }
 .dropdown-menu .dropdown-item:hover,

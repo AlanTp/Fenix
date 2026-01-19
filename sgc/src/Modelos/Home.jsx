@@ -4,7 +4,6 @@ import { LinkContainer } from 'react-router-bootstrap';
 import styles from '../Estilos/Home.module.css';
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import logo from "../imagens/LogoFenix.png";
 
 function Home (){
     const navigate = useNavigate();
@@ -57,6 +56,12 @@ function Home (){
                             </LinkContainer>
                             <LinkContainer to='/Valvulas'>
                                 <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/EmissaoPedidos'>
+                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
                             </LinkContainer>
 
                         </NavDropdown>

@@ -73,6 +73,13 @@ function VendaSemPromotor() {
                             </LinkContainer>
 
                         </NavDropdown>
+
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/EmissaoPedidos'>
+                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

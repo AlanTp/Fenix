@@ -132,6 +132,12 @@ function CadastroBatidas () {
                             </LinkContainer>
 
                         </NavDropdown>
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/PedidosEmissao'>
+                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>

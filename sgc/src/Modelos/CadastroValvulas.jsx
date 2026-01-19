@@ -78,6 +78,7 @@ function CadastroValvulas (){
     return(
         <div>
             <Navbar className={`${styles.navbar} justify-content-left`}>
+
                 <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
                 <Navbar.Toggle aria-controls="menu-principal" />
 
@@ -119,8 +120,15 @@ function CadastroValvulas (){
                             </LinkContainer>
 
                         </NavDropdown>
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/PedidosEmissao'>
+                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
+
             </Navbar>
 
             <div className={styles.subtitulo}>

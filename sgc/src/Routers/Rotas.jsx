@@ -13,6 +13,7 @@ import Login from "../Modelos/Login.jsx";
 import RotaProtegida from "./RotasProtegidas";
 import ReceitasTintas from "../Modelos/ReceitasTintas.jsx";
 import CadastroReceitas from "../Modelos/CadastroReceitas.jsx";
+import EmissaoPedidos from "../Modelos/EmissaoPedidos.jsx";
 
 const Rotas = createBrowserRouter([
     {
@@ -107,6 +108,15 @@ const Rotas = createBrowserRouter([
             </RotaProtegida>
         ),
     },
+    {
+        path: '/EmissaoPedidos',
+        element: (
+            <RotaProtegida>
+                <EmissaoPedidos />
+            </RotaProtegida>
+        ),
+    },
+
 
 
 ]);
