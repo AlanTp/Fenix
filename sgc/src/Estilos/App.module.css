@@ -1,4 +1,4 @@
-/* Título */
+*{margin: 0; padding: 0;}
 .titulo{
     color:  black;
     font-family: 'sans-serif';
@@ -8,8 +8,14 @@
     margin-right: 150px;
     margin-left: 50px;
 }
+body{
+    background-color: #060a5e;
+}
 .navbar{
     background-color: rgb(5, 90, 213);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
 }
 
 /* Navbar / Container */
