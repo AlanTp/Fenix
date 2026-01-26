@@ -11,7 +11,7 @@ import {Link, useNavigate} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
 
-function CadastroPromotor (){
+function CadastroPromotor() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -23,7 +23,8 @@ function CadastroPromotor (){
     const navigate = useNavigate();
 
     const opcoes = {
-        a: 'Gabriela'
+        a: 'Gabriela',
+        b: "Dyogo"
     };
 
     const handleSubmit = async (e) => {
@@ -74,11 +75,11 @@ function CadastroPromotor (){
         setData(new Date());
     };
 
-    return(
+    return (
         <div>
             <Navbar className='justify-content-center'>
                 <Navbar.Brand>
-                    <img src={logo} alt='logotipo fenix' height={100} width={100} />
+                    <img src={logo} alt='logotipo fenix' height={100} width={100}/>
                 </Navbar.Brand>
                 <Navbar.Brand>
                     <b className={styles.titulo}>Fênix Soluções em Embalagens</b>
@@ -91,7 +92,7 @@ function CadastroPromotor (){
             <div>
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Colaborador</label>
@@ -114,7 +115,7 @@ function CadastroPromotor (){
                                 <input
                                     required
                                     type={"text"}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     value={promotor_normal}
                                     onChange={(e) => setPromotorNormais(e.target.value)}
                                 />
@@ -125,14 +126,14 @@ function CadastroPromotor (){
                                     required
                                     type={"text"}
                                     value={promotor_extra}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     onChange={(e) => setPromotorExtras(e.target.value)}
                                 />
                             </Col>
                             <Col md={3}></Col>
 
                         </Row>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2}></Col>
                             <Col md={2} className={styles.colForm}>
@@ -148,11 +149,14 @@ function CadastroPromotor (){
                             </Col>
 
                         </Row>
-                        <Row  style={{ margin: 0 }}>
+                        <Row style={{margin: 0}}>
                             <Container className={styles.containerBotoes}>
-                                <Button variant="outline-primary" className={styles.buttonForm} onClick={handleClear}> Limpar </Button>
-                                <Button variant="outline-primary" type="submit" className={styles.buttonForm}> Salvar </Button>
-                                <Button variant="outline-primary"  className={styles.buttonForm} as={Link} to='/Home'> Voltar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm}
+                                        onClick={handleClear}> Limpar </Button>
+                                <Button variant="outline-primary" type="submit"
+                                        className={styles.buttonForm}> Salvar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm} as={Link}
+                                        to='/Home'> Voltar </Button>
                             </Container>
 
                         </Row>
