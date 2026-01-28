@@ -1,36 +1,29 @@
 import React from "react";
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 import styles from '../Estilos/Home.module.css';
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-function Home (){
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            navigate("/Login");
-        }
-    }, [navigate]);
-    return(
+function Home() {
+
+
+    return (
         <div className={styles.page}>
             <Navbar className={`${styles.navbar} justify-content-left`}>
 
-            <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
-                <Navbar.Toggle aria-controls="menu-principal" />
+                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
+                <Navbar.Toggle aria-controls="menu-principal"/>
 
                 <Navbar.Collapse id="menu-principal">
-                    <Nav >
-                        <LinkContainer  to="/Home" className="me-3">
+                    <Nav>
+                        <LinkContainer to="/Home" className="me-3">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
 
 
-                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
+                        <NavDropdown title='Vendas' id='vendas' className="me-3">
                             <LinkContainer to='/VendaComPromotor'>
-                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
+                                <NavDropdown.Item>Vendas com promotor</NavDropdown.Item>
                             </LinkContainer>
 
                             <LinkContainer to='/VendaSemPromotor'>
@@ -38,30 +31,29 @@ function Home (){
                             </LinkContainer>
 
 
-
                         </NavDropdown>
                         <NavDropdown title='Batidas' id='batidas' className="me-3">
                             <LinkContainer to='/CadastroBatidas'>
-                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
+                                <NavDropdown.Item>Cadastrar Batidas</NavDropdown.Item>
                             </LinkContainer>
                             <LinkContainer to='/Batidas'>
-                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
+                                <NavDropdown.Item>Relatorio Batidas</NavDropdown.Item>
                             </LinkContainer>
 
 
                         </NavDropdown>
                         <NavDropdown title='Valvulas' id='valvulas' className="me-3">
                             <LinkContainer to='/CadastroValvulas'>
-                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
+                                <NavDropdown.Item>Cadastro Batidas Valvulas</NavDropdown.Item>
                             </LinkContainer>
                             <LinkContainer to='/Valvulas'>
-                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
+                                <NavDropdown.Item>Relatorio Batidas Valvulas</NavDropdown.Item>
                             </LinkContainer>
 
                         </NavDropdown>
                         <NavDropdown title='Pedidos' id='pedidos' className="me-3">
                             <LinkContainer to='/EmissaoPedidos'>
-                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
+                                <NavDropdown.Item>Pedidos</NavDropdown.Item>
                             </LinkContainer>
 
                         </NavDropdown>
@@ -71,10 +63,10 @@ function Home (){
             </Navbar>
 
 
-            <div className={styles.content} />
+            <div className={styles.content}/>
 
         </div>
-        
+
     )
 
 }

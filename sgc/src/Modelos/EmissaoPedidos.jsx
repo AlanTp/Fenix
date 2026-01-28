@@ -45,6 +45,8 @@ function EmissaoPedidos() {
     const [erros, setErros] = useState({});
     const [tentouEnviar, setTentouEnviar] = useState(false);
     const [indiceEditando, setIndiceEditando] = useState(null);
+    const [tipoPagamento, setTipoPagamento] = useState("");
+    const [tipoFrete, setTipoFrete] = useState("");
 
 
     const handleAdicionar = () => {
@@ -128,6 +130,8 @@ function EmissaoPedidos() {
         if (!descricao || !preco || !quantidade || !tipoUnidade) {
             alert("Pedido sem Itens");
         }
+        if (!tipoPagamento) erros.tipoPagamento = "Insira um tipo de Pagamento.";
+        if (!tipoFrete) erros.tipoFrete = "Insira o Frete!";
 
         setErros(erros);
 
@@ -562,6 +566,40 @@ function EmissaoPedidos() {
 
                     </Col>
 
+                </Row>
+                <Row>
+                    <Col md={2}>
+                        <FormGroup>
+                            <FormLabel className={styles.formControl}>
+                                Tipo Pagamento:
+                            </FormLabel>
+                            <FormControl
+                                type={"text"}
+                                value={tipoPagamento}
+                                onChange={(e) => setTipoPagamento(e.target.value)}
+                                isInvalid={tentouEnviar && !!erros.tipoPagamento}
+                            />
+                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                {erros.tipoPagamento}
+                            </Form.Control.Feedback>
+                        </FormGroup>
+                    </Col>
+                    <Col md={2}>
+                        <FormGroup>
+                            <FormLabel className={styles.formControl}>
+                                Tipo Frete:
+                            </FormLabel>
+                            <FormControl
+                                type={"text"}
+                                value={tipoFrete}
+                                onChange={(e) => setTipoFrete(e.target.value)}
+                                isInvalid={tentouEnviar && !!erros.tipoFrete}
+                            />
+                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                {erros.tipoPagamento}
+                            </Form.Control.Feedback>
+                        </FormGroup>
+                    </Col>
                 </Row>
 
                 <div className={styles.divSub}>
