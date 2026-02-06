@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Button, Navbar } from 'react-bootstrap';
+import {useEffect, useState} from 'react';
+import {Button, Navbar} from 'react-bootstrap';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import logo from '../imagens/logo.png';
@@ -12,7 +12,7 @@ import styles from "../Estilos/Batidas.module.css";
 import valorValvulas from "../Calculos/ValorValvulas";
 
 
-function Valvulas () {
+function Valvulas() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -26,7 +26,8 @@ function Valvulas () {
     const opcoes = {
         a: 'Geisiane',
         b: 'Mailon',
-        C: 'Aquiles'
+        C: 'Aquiles',
+        D: 'Gabriela'
     };
 
     useEffect(() => {
@@ -34,7 +35,7 @@ function Valvulas () {
             try {
                 const token = localStorage.getItem("token");
 
-                if(!token){
+                if (!token) {
                     navigate("/Login");
                 }
 
@@ -44,7 +45,8 @@ function Valvulas () {
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", { params,
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", {
+                    params,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -94,7 +96,7 @@ function Valvulas () {
         <div>
             <Navbar className='justify-content-center'>
                 <Navbar.Brand>
-                    <img src={logo} alt='logotipo fenix' height={100} width={100} />
+                    <img src={logo} alt='logotipo fenix' height={100} width={100}/>
                 </Navbar.Brand>
                 <Navbar.Brand>
                     <b className={styles.titulo}>Fênix Soluções em Embalagens</b>
@@ -114,7 +116,7 @@ function Valvulas () {
                     </Col>
 
                     <Row>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Colaborador</label>
                             <select
                                 className={styles.entradaDados}
@@ -129,7 +131,7 @@ function Valvulas () {
                                 ))}
                             </select>
                         </Col>
-                        <Col md={3}  xl={3} >
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
                                 selected={inicio}
@@ -139,7 +141,7 @@ function Valvulas () {
                                 maxDate={fim}
                             />
                         </Col>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Final</label>
                             <DatePicker
                                 selected={fim}
@@ -163,22 +165,23 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
-                        {valvulas.map((v, index) =>(
-                            <tr key={v.valvulas_id ?? index} >
+                        {valvulas.map((v, index) => (
+                            <tr key={v.valvulas_id ?? index}>
 
-                                    <td>{v.colaborador}</td>
-                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
-                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
-                                    <td>{v.data}</td>
+                                <td>{v.colaborador}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
+                                <td>{v.data}</td>
                             </tr>
-                            ))}
+                        ))}
 
                         </tbody>
 
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link}
+                            to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>
@@ -201,14 +204,20 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
-                        {totaisArray.map((v, i)=>(
+                        {totaisArray.map((v, i) => (
                             <tr key={i}>
                                 <td>{v.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal + v.valvula_extra)}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(valorValvulas(v.valvula_extra))}</td>
 
 
                             </tr>
