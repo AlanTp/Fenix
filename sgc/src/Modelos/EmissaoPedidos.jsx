@@ -18,8 +18,10 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Vendedores from "../Enum/Vendedores";
+import vendedores from "../Enum/Vendedores";
 import StatusPedido from "../Enum/StatusPedido";
 import TipoUnidade from "../Enum/TipoUnidade";
+import axios from "axios";
 
 function EmissaoPedidos() {
     const hoje = new Date().toISOString().split("T")[0];
@@ -27,7 +29,7 @@ function EmissaoPedidos() {
     const [dataEntrega, setDataEntrega] = useState(hoje);
     const [qtd, setQtd] = useState(0);
     const [qtdComissao, setQtdComissao] = useState(0);
-    const [tipoPedido, setTipoPedido] = useState("sim");
+    const [tipoPedido, setTipoPedido] = useState("novo");
     const [valvula, setValula] = useState("sim");
     const [promotor, setPromotor] = useState("nao");
     const [frente, setFrente] = useState("");
@@ -47,6 +49,9 @@ function EmissaoPedidos() {
     const [indiceEditando, setIndiceEditando] = useState(null);
     const [tipoPagamento, setTipoPagamento] = useState("");
     const [tipoFrete, setTipoFrete] = useState("");
+    const [cidade, setCidade] = useState("");
+    const [cep, setCep] = useState("");
+    const [loading, setLoading] = useState(true);
 
 
     const handleAdicionar = () => {
@@ -84,7 +89,7 @@ function EmissaoPedidos() {
             return item.quantidade * item.preco;
         }
         if (item.tipoUnidade === "2") {
-            return item.quantidade * 1000 * item.preco;
+            return (item.quantidade / 1000) * item.preco;
         }
         return 0;
     };
@@ -109,7 +114,7 @@ function EmissaoPedidos() {
 
         // 2 = Milheiro
         if (tipoUnidade === "2") {
-            return q * 1000 * p;
+            return(q / 1000) * p;
         }
 
         return 0;
@@ -127,11 +132,11 @@ function EmissaoPedidos() {
         if (!vendedor) erros.vendedor = "Selecione um Vendedor!";
         if (!status) erros.status = "Selecione um status!";
         if (!qtdComissao) erros.qtdComissao = "Inserir Comissão";
-        if (!descricao || !preco || !quantidade || !tipoUnidade) {
-            alert("Pedido sem Itens");
-        }
+        if (itens.length === 0) erros.itens = "Insira um iten no pedido!";
         if (!tipoPagamento) erros.tipoPagamento = "Insira um tipo de Pagamento.";
         if (!tipoFrete) erros.tipoFrete = "Insira o Frete!";
+        if (!cidade) erros.cidade = "Insira a cidade de destino!";
+        if (!cep) erros.cep = "Insira o cep da cidade";
 
         setErros(erros);
 
@@ -144,11 +149,30 @@ function EmissaoPedidos() {
         e.preventDefault();
 
         setTentouEnviar(true);
+        setLoading(false);
 
         if (!validaEnvio()) {
             return;
         }
-        ;
+        const vendendorSelecionado = vendedores.find((v) =>
+            v.value === vendedor);
+        const vendedorName = vendendorSelecionado.label;
+
+        let silk = "";
+        if (frente === "frente" && verso === "verso") {
+            silk = "Frente e Verso";
+        }
+        if (verso === "verso") {
+            silk = "Verso";
+        }
+        if (frente === "frente") {
+            silk = "Frente";
+        }
+        const statusSelecionado = StatusPedido.find((v) =>
+            v.value === status);
+        const statusLabel = statusSelecionado.label;
+
+        const usuario = localStorage.getItem("usuario");
 
         const pedido = {
             cliente,
@@ -157,16 +181,20 @@ function EmissaoPedidos() {
             tipoPedido,
             valvula,
             promotor,
-            silk: {
-                frente: frente === "frente", verso: verso === "verso"
-            },
+            silk: silk,
             quantidadeBatidas: qtd,
             estoque,
             arte,
-            vendedor: vendedor,
-            status,
+            vendedor: vendedorName,
+            status: statusLabel,
             comissao: qtdComissao,
+            tipoPagamento:tipoPagamento,
+            tipoFrete,
+            cidade: "Tres Pontas",
+            cep: "37190000",
             totalGeral,
+            usuario,
+            ulimaAlteracao: dataEmissao,
             itens: itens.map(item => ({
                 descricao: item.descricao,
                 preco: item.preco,
@@ -175,7 +203,43 @@ function EmissaoPedidos() {
                 total: calcularTotalItem(item)
             }))
         };
-        console.log("Payload enviado:", pedido);
+        try{
+            const token =localStorage.getItem("token");
+
+            await axios.post(
+                "https://fenix-api-gkyb.onrender.com/Pedidos",
+                pedido,
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            )
+            alert("Pedido enviado com sucesso!");
+
+            setCliente("");
+            setTipoPedido("novo");
+            setValula("sim");
+            setPromotor("nao");
+            setFrente("");
+            setVerso("");
+            setQtd(0);
+            setEstoque("fenix");
+            setArte("");
+            setVendedor("");
+            setQtdComissao(0);
+            setStatus("");
+            setTipoPagamento("");
+            setTipoFrete("");
+            setCidade("");
+            setCep("");
+            setItens([]);
+            setLoading(true);
+
+
+        }catch (e) {
+            console.error("Erro ao enviar pedido:", e);
+        }
     };
 
     const removerItem = (index) => {
@@ -306,24 +370,24 @@ function EmissaoPedidos() {
                                 type="radio"
                                 label="Repetição sem alteração"
                                 name="tipoPedido"
-                                value={"sim"}
-                                checked={tipoPedido === "sim"}
+                                value={"semAlteracao"}
+                                checked={tipoPedido === "semAlteracao"}
                                 onChange={(e) => setTipoPedido(e.target.value)}
                             />
                             <Form.Check
                                 type="radio"
                                 label="Repetição com alteração"
                                 name="tipoPedido"
-                                value={"nao"}
-                                checked={tipoPedido === "sim"}
+                                value={"comAlteracao"}
+                                checked={tipoPedido === "comAlteracao"}
                                 onChange={(e) => setTipoPedido(e.target.value)}
                             />
                             <Form.Check
                                 type="radio"
                                 label="Pedido Novo"
                                 name="tipoPedido"
-                                value={"nao"}
-                                checked={tipoPedido === "sim"}
+                                value={"novo"}
+                                checked={tipoPedido === "novo"}
                                 onChange={(e) => setTipoPedido(e.target.value)}
                             />
                         </FormGroup>
@@ -600,6 +664,38 @@ function EmissaoPedidos() {
                             </Form.Control.Feedback>
                         </FormGroup>
                     </Col>
+                    <Col md={2}>
+                        <FormGroup>
+                            <FormLabel className={styles.formControl}>
+                                Cidade:
+                            </FormLabel>
+                            <FormControl
+                                type={"text"}
+                                value={cidade}
+                                onChange={(e) => setCidade(e.target.value)}
+                                isInvalid={tentouEnviar && !!erros.cidade}
+                            />
+                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                {erros.cidade}
+                            </Form.Control.Feedback>
+                        </FormGroup>
+                    </Col>
+                    <Col md={2}>
+                        <FormGroup>
+                            <FormLabel className={styles.formControl}>
+                                Cep:
+                            </FormLabel>
+                            <FormControl
+                                type={"text"}
+                                value={cep}
+                                onChange={(e) => setCep(e.target.value)}
+                                isInvalid={tentouEnviar && !!erros.cep}
+                            />
+                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                {erros.cep}
+                            </Form.Control.Feedback>
+                        </FormGroup>
+                    </Col>
                 </Row>
 
                 <div className={styles.divSub}>
@@ -740,7 +836,10 @@ function EmissaoPedidos() {
                     </Col>
                 </Row>
 
-                <Button type={"submit"}>Enviar</Button>
+                <Button type={"submit"}
+                disabled={!loading}>
+                    {loading ? "Enviar" : "Carregando..."}
+                </Button>
 
             </Form>
         </Container>
