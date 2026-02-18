@@ -34,6 +34,7 @@ function EmissaoPedidos() {
     const [promotor, setPromotor] = useState("nao");
     const [frente, setFrente] = useState("");
     const [verso, setVerso] = useState("");
+    const [liso, setLiso] = useState("");
     const [estoque, setEstoque] = useState("fenix");
     const [arte, setArte] = useState("");
     const [vendedor, setVendedor] = useState("");
@@ -124,8 +125,8 @@ function EmissaoPedidos() {
         const erros = {};
 
         if (!cliente) erros.cliente = "Cliente  obrigatório";
-        if (!frente && !verso) {
-            erros.silk = "Obrigatório marcar Frente ou Verso";
+        if (!frente && !verso && !liso) {
+            erros.silk = "Obrigatório marcar Frente, Verso ou Liso";
         }
         if (!qtd) erros.qtdBatidas = "Inserir quantidade de batidas!";
         if (!arte) erros.arte = "Insira os dados da arte!";
@@ -162,11 +163,17 @@ function EmissaoPedidos() {
         if (frente === "frente" && verso === "verso") {
             silk = "Frente e Verso";
         }
+        if (frente === "frente" && verso === "verso" && liso ==="liso") {
+            silk = "Liso";
+        }
         if (verso === "verso") {
             silk = "Verso";
         }
         if (frente === "frente") {
             silk = "Frente";
+        }
+        if (liso === "liso") {
+            silk = "Liso";
         }
         const statusSelecionado = StatusPedido.find((v) =>
             v.value === status);
@@ -462,6 +469,14 @@ function EmissaoPedidos() {
                                 isInvalid={tentouEnviar && !!erros.silk}
                                 checked={verso === "verso"}
                                 onChange={(e) => setVerso(e.target.checked ? "verso" : "")}
+                            />
+                            <Form.Check
+                                inline
+                                type="checkbox"
+                                label="Liso"
+                                isInvalid={tentouEnviar && !!erros.silk}
+                                checked={liso=== "liso"}
+                                onChange={(e) => setLiso(e.target.checked ? "liso" : "")}
                             />
                             <Form.Control.Feedback type="invalid" className="d-block">
                                 {erros.silk}
@@ -784,13 +799,14 @@ function EmissaoPedidos() {
                                 <th>Descrição</th>
                                 <th>Preço</th>
                                 <th>Quantidade</th>
+                                <th> Tipo Unidade</th>
                                 <th>Total</th>
-                                <th>Ações</th>
+                                <th  className="text-center">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
                             {itens.length === 0 && (<tr>
-                                <td colSpan={5} className="text-center">
+                                <td colSpan={6} className="text-center">
                                     Nenhum item adicionado
                                 </td>
                             </tr>)}
@@ -798,8 +814,9 @@ function EmissaoPedidos() {
                                 <td>{item.descricao}</td>
                                 <td>{item.preco}</td>
                                 <td>{item.quantidade}</td>
+                                <td>{TipoUnidade.find( t => t.value === item.tipoUnidade)?.label || "—"}</td>
                                 <td>{formatarMoeda(calcularTotalItem(item))}</td>
-                                <td>
+                                <td  className="text-center">
                                     <Button
                                         size="sm"
                                         variant="info"
