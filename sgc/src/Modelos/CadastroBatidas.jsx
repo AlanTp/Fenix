@@ -1,5 +1,4 @@
-import {Navbar} from "react-bootstrap";
-import logo from "../imagens/logo.png";
+import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import styles from "../Estilos/CadastroBatidas.module.css";
 import Row from "react-bootstrap/Row";
 import {Form} from "reactstrap";
@@ -7,10 +6,11 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import axios from "axios";
 import Container from "react-bootstrap/Container";
+import {LinkContainer} from "react-router-bootstrap";
 
 function CadastroBatidas() {
 
@@ -40,7 +40,7 @@ function CadastroBatidas() {
         const token = localStorage.getItem("token");
 
         const dados = {
-            data,                // cuidado: no banco pode esperar YYYY-MM-DD, talvez precise formatar
+            data,
             colaborador,
             batida_normal: Number(batida_normal) - Number(perdas) || 0,
             batida_extra: Number(batida_extra) || 0,
@@ -72,7 +72,7 @@ function CadastroBatidas() {
             if (error.response && (error.response.status === 401 || error.response.status === 403)) {
                 alert("Sessão expirada. Faça login novamente.");
                 localStorage.removeItem("token");
-                navigate("/Login");
+                navigate("/");
             } else {
                 alert("Erro ao salvar batida. Contate o administrador.");
             }
@@ -91,13 +91,55 @@ function CadastroBatidas() {
 
     return (
         <div>
-            <Navbar className='justify-content-center'>
-                <Navbar.Brand>
-                    <img src={logo} alt='logotipo fenix' height={100} width={100}/>
-                </Navbar.Brand>
-                <Navbar.Brand>
-                    <b className={styles.titulo}>Fênix Soluções em Embalagens</b>
-                </Navbar.Brand>
+            <Navbar className={`${styles.navbar} justify-content-left`}>
+                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
+                <Navbar.Toggle aria-controls="menu-principal"/>
+
+                <Navbar.Collapse id="menu-principal">
+                    <Nav>
+                        <LinkContainer to="/Home" className="me-3">
+                            <Nav.Link>Home</Nav.Link>
+                        </LinkContainer>
+
+
+                        <NavDropdown title='Vendas' id='vendas' className="me-3">
+                            <LinkContainer to='/VendaComPromotor'>
+                                <NavDropdown.Item>Vendas com promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+                            <LinkContainer to='/VendaSemPromotor'>
+                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Batidas' id='batidas' className="me-3">
+                            <LinkContainer to='/CadastroBatidas'>
+                                <NavDropdown.Item>Cadastrar Batidas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Batidas'>
+                                <NavDropdown.Item>Relatorio Batidas</NavDropdown.Item>
+                            </LinkContainer>
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
+                            <LinkContainer to='/CadastroValvulas'>
+                                <NavDropdown.Item>Cadastro Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Valvulas'>
+                                <NavDropdown.Item>Relatorio Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/EmissaoPedidos'>
+                                <NavDropdown.Item>Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
 
             <div className={styles.subtitulo}>

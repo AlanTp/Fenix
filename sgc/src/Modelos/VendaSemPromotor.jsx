@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Button, Navbar } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -11,7 +11,7 @@ import Linhas from '../Modelos/Linhas.jsx';
 import Linhas1500a10000 from '../Modelos/Linhas1500a10000.jsx';
 import Quantidade100a1000 from '../Modelos/Quantidade100a1000.jsx';
 import Quantidade1500a10000 from '../Modelos/Quantidade1500a10000.jsx';
-import logo from '../imagens/logo.png';
+import {LinkContainer} from "react-router-bootstrap";
 
 function VendaSemPromotor() {
     let linhas1 = Linhas();
@@ -31,9 +31,57 @@ function VendaSemPromotor() {
 
     return (
         <div>
-            <Navbar className='justify-content-center' >
-                <Navbar.Brand><img src={logo} alt='logotipo fenix' height={100} width={100}/></Navbar.Brand>
+            <Navbar className={`${styles.navbar} justify-content-left`} >
                 <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
+                <Navbar.Toggle aria-controls="menu-principal" />
+
+                <Navbar.Collapse id="menu-principal">
+                    <Nav >
+                        <LinkContainer  to="/Home" className="me-3">
+                            <Nav.Link>Home</Nav.Link>
+                        </LinkContainer>
+
+
+                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
+                            <LinkContainer to='/VendaComPromotor'>
+                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+                            <LinkContainer to='/VendaSemPromotor'>
+                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Batidas' id='batidas' className="me-3">
+                            <LinkContainer to='/CadastroBatidas'>
+                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Batidas'>
+                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
+                            </LinkContainer>
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
+                            <LinkContainer to='/CadastroValvulas'>
+                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Valvulas'>
+                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/EmissaoPedidos'>
+                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
 
             <Container>

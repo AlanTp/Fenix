@@ -1,15 +1,16 @@
-import {useEffect, useState} from 'react';
-import {Button, Navbar} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
-import logo from '../imagens/logo.png';
 import styles from "../Estilos/Batidas.module.css";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {ValorBatidas, ValorBatidasExtras} from '../Calculos/ValorBatidas.jsx';
+import { ValorBatidas, ValorBatidasExtras } from '../Calculos/ValorBatidas.jsx';
+import { useNavigate } from "react-router-dom";
+import {LinkContainer} from "react-router-bootstrap";
 
 function Batidas() {
     const hoje = new Date();
@@ -87,7 +88,7 @@ function Batidas() {
                 if (err.response && (err.response.status === 401 || err.response.status === 403)) {
                     alert("Sessão expirada! Faça login novamente.");
                     localStorage.removeItem("token");
-                    navigate("/Login");
+                    navigate("/");
                 }
             }
         };
@@ -100,13 +101,56 @@ function Batidas() {
 
     return (
         <div>
-            <Navbar className='justify-content-center'>
-                <Navbar.Brand>
-                    <img src={logo} alt='logotipo fenix' height={100} width={100}/>
-                </Navbar.Brand>
-                <Navbar.Brand>
-                    <b className={styles.titulo}>Fênix Soluções em Embalagens</b>
-                </Navbar.Brand>
+            <Navbar className={`${styles.navbar} justify-content-left`}>
+                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
+                <Navbar.Toggle aria-controls="menu-principal" />
+
+                <Navbar.Collapse id="menu-principal">
+                    <Nav >
+                        <LinkContainer  to="/Home" className="me-3">
+                            <Nav.Link>Home</Nav.Link>
+                        </LinkContainer>
+
+
+                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
+                            <LinkContainer to='/VendaComPromotor'>
+                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+                            <LinkContainer to='/VendaSemPromotor'>
+                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Batidas' id='batidas' className="me-3">
+                            <LinkContainer to='/CadastroBatidas'>
+                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Batidas'>
+                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
+                            </LinkContainer>
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
+                            <LinkContainer to='/CadastroValvulas'>
+                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Valvulas'>
+                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/EmissaoPedidos'>
+                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
 
 

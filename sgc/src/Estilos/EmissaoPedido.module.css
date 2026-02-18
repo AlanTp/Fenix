@@ -1,0 +1,61 @@
+
+.titulo {
+    color: black;
+    font-family: 'sans-serif';
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 120px;
+    margin-right: 150px;
+    margin-left: 50px;
+}
+
+.navbar {
+    background-color: rgb(5, 90, 213);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+.navbar {
+    background-color: rgb(5, 90, 213);
+}
+
+.page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    color: white;
+}
+
+.divSub {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.formControl {
+    margin: 5px;
+}
+
+.dataEmissao {
+    margin: 5px;
+    width: 250px;
+}
+
+.tipoPedido {
+    margin: 5px;
+    margin-right: 25px;
+}
+
+.QTDbatidas {
+    width: 150px;
+}
+
+.itensPedido {
+    margin: 15px;
+}
+
+.tableStyle {
+    margin-top: 25px;
+}

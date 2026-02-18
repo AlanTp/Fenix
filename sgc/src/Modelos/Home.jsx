@@ -1,103 +1,72 @@
 import React from "react";
-import { Navbar } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
+import {Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 import styles from '../Estilos/Home.module.css';
-import logo from '../imagens/logo.png';
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 
-function Home (){
-    const navigate = useNavigate();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            navigate("/Login");
-        }
-    }, [navigate]);
-    return(
-        <div >
-            <Navbar className='justify-content-center' >
-            <Navbar.Brand><img src={logo} alt='logotipo fenix' height={100} width={100}/></Navbar.Brand>
-            <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
+function Home() {
+
+
+    return (
+        <div className={styles.page}>
+            <Navbar className={`${styles.navbar} justify-content-left`}>
+
+                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
+                <Navbar.Toggle aria-controls="menu-principal"/>
+
+                <Navbar.Collapse id="menu-principal">
+                    <Nav>
+                        <LinkContainer to="/Home" className="me-3">
+                            <Nav.Link>Home</Nav.Link>
+                        </LinkContainer>
+
+
+                        <NavDropdown title='Vendas' id='vendas' className="me-3">
+                            <LinkContainer to='/VendaComPromotor'>
+                                <NavDropdown.Item>Vendas com promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+                            <LinkContainer to='/VendaSemPromotor'>
+                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Batidas' id='batidas' className="me-3">
+                            <LinkContainer to='/CadastroBatidas'>
+                                <NavDropdown.Item>Cadastrar Batidas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Batidas'>
+                                <NavDropdown.Item>Relatorio Batidas</NavDropdown.Item>
+                            </LinkContainer>
+
+
+                        </NavDropdown>
+                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
+                            <LinkContainer to='/CadastroValvulas'>
+                                <NavDropdown.Item>Cadastro Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to='/Valvulas'>
+                                <NavDropdown.Item>Relatorio Batidas Valvulas</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
+                            <LinkContainer to='/EmissaoPedidos'>
+                                <NavDropdown.Item>Pedidos</NavDropdown.Item>
+                            </LinkContainer>
+
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+
             </Navbar>
 
-        <Container>
-            <div className={styles.imagem_central}>
-            <img src={logo} alt='Imagem inicial' height={300} width={300}/>
-            </div>
-        </Container>
-            <Container className={styles.botoes_alinhamento}>
-                <Row>
-                    <Col><Button variant="outline-primary"
-                     className={styles.Botao}
-                     as={Link}
-                     to ='/VendaComPromotor'>Venda Com Promotor</Button>
-                    </Col>
-                    <Col><Button variant="outline-primary"
-                     className={styles.Botao}
-                     as={Link}
-                     to ='/VendaSemPromotor'>Venda Sem Promotor</Button>
-                    </Col>
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/Batidas'>Batidas</Button>
-                    </Col>
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/CadastroBatidas'>Cadastrar Batidas</Button>
-                    </Col>
 
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/Valvulas'>Valvulas</Button>
-                    </Col>
-
-
-                </Row>
-
-                
-            </Container>
-            <Container className={styles.botoes_alinhamento}>
-                <Row>
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/CadastroValvulas'>Cadastro de Valvulas</Button>
-                    </Col>
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/Promotor'>Batidas Promotor</Button>
-                    </Col>
-
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/CadastroPromotor'>Cadastro B. Promotor</Button>
-                    </Col>
-                </Row>
-            </Container>
-            <Container className={styles.botoes_alinhamento}>
-                <Row>
-                    <Col><Button variant="outline-primary"
-                                 className={styles.Botao}
-                                 as={Link}
-                                 to ='/ReceitasTintas'>Receitas Tintas</Button>
-                    </Col>
-                </Row>
-
-            </Container>
+            <div className={styles.content}/>
 
         </div>
-        
+
     )
 
 }
