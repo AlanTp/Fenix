@@ -3,7 +3,7 @@ import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import styles from "../Estilos/Batidas.module.css";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
@@ -24,7 +24,8 @@ function Batidas() {
     const opcoes = {
         a: 'Aquiles',
         b: 'Rodrigo',
-        c: 'Tunico'
+        c: 'Tunico',
+        d: 'Dyogo'
     };
 
     /*totais por colaborador*/
@@ -55,7 +56,7 @@ function Batidas() {
             try {
                 const token = localStorage.getItem("token");
 
-                if(!token){
+                if (!token) {
                     navigate("/Login");
                 }
 
@@ -65,7 +66,8 @@ function Batidas() {
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", { params,
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Batidas", {
+                    params,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -93,8 +95,6 @@ function Batidas() {
 
         fetchBatidas();
     }, [colaborador, inicio, fim, navigate]);
-
-
 
 
     if (loading) return <h2>Carregando...</h2>;
@@ -186,7 +186,7 @@ function Batidas() {
                             </div>
                         </Col>
 
-                        <Col md={3}  xl={3} >
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
                                 selected={inicio}
@@ -196,7 +196,7 @@ function Batidas() {
                                 maxDate={fim}
                             />
                         </Col>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Final</label>
                             <DatePicker
                                 selected={fim}
@@ -239,7 +239,8 @@ function Batidas() {
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link}
+                            to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>
@@ -273,11 +274,17 @@ function Batidas() {
                                 <td>{new Intl.NumberFormat("pt-BR").format(t.batida_normal + t.batida_extra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(t.perdas)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(t.amostra)}</td>
-                                <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidas(t.batida_normal))}</td>
-                                <td>  {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(ValorBatidasExtras(t.batida_extra))}</td>
+                                <td>  {new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(ValorBatidas(t.batida_normal))}</td>
+                                <td>  {new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(ValorBatidasExtras(t.batida_extra))}</td>
                                 <td>
                                     {
-                                        new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' })
+                                        new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'})
                                             .format(
                                                 ValorBatidas(t.batida_normal) + ValorBatidasExtras(t.batida_extra)
                                             )

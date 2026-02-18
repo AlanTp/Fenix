@@ -12,7 +12,7 @@ import valorValvulas from "../Calculos/ValorValvulas";
 import {LinkContainer} from "react-router-bootstrap";
 
 
-function Valvulas () {
+function Valvulas() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -25,7 +25,9 @@ function Valvulas () {
 
     const opcoes = {
         a: 'Geisiane',
-        b: 'Mailon'
+        b: 'Mailon',
+        C: 'Aquiles',
+        D: 'Gabriela'
     };
 
     useEffect(() => {
@@ -33,7 +35,7 @@ function Valvulas () {
             try {
                 const token = localStorage.getItem("token");
 
-                if(!token){
+                if (!token) {
                     navigate("/Login");
                 }
 
@@ -43,7 +45,8 @@ function Valvulas () {
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", { params,
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", {
+                    params,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -158,7 +161,7 @@ function Valvulas () {
                     </Col>
 
                     <Row>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Colaborador</label>
                             <select
                                 className={styles.entradaDados}
@@ -173,7 +176,7 @@ function Valvulas () {
                                 ))}
                             </select>
                         </Col>
-                        <Col md={3}  xl={3} >
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
                                 selected={inicio}
@@ -183,7 +186,7 @@ function Valvulas () {
                                 maxDate={fim}
                             />
                         </Col>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Final</label>
                             <DatePicker
                                 selected={fim}
@@ -207,22 +210,23 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
-                        {valvulas.map((v, index) =>(
-                            <tr key={v.valvulas_id ?? index} >
+                        {valvulas.map((v, index) => (
+                            <tr key={v.valvulas_id ?? index}>
 
-                                    <td>{v.colaborador}</td>
-                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
-                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
-                                    <td>{v.data}</td>
+                                <td>{v.colaborador}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
+                                <td>{v.data}</td>
                             </tr>
-                            ))}
+                        ))}
 
                         </tbody>
 
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link}
+                            to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>
@@ -245,14 +249,20 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
-                        {totaisArray.map((v, i)=>(
+                        {totaisArray.map((v, i) => (
                             <tr key={i}>
                                 <td>{v.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal + v.valvula_extra)}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(valorValvulas(v.valvula_extra))}</td>
 
 
                             </tr>

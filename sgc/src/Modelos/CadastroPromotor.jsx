@@ -11,7 +11,7 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import {LinkContainer} from "react-router-bootstrap";
 
-function CadastroPromotor (){
+function CadastroPromotor() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -23,7 +23,8 @@ function CadastroPromotor (){
     const navigate = useNavigate();
 
     const opcoes = {
-        a: 'Gabriela'
+        a: 'Gabriela',
+        b: "Dyogo"
     };
 
     const handleSubmit = async (e) => {
@@ -74,7 +75,7 @@ function CadastroPromotor (){
         setData(new Date());
     };
 
-    return(
+    return (
         <div>
             <Navbar className={`${styles.navbar} justify-content-left`}>
 
@@ -136,7 +137,7 @@ function CadastroPromotor (){
             <div>
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Colaborador</label>
@@ -159,7 +160,7 @@ function CadastroPromotor (){
                                 <input
                                     required
                                     type={"text"}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     value={promotor_normal}
                                     onChange={(e) => setPromotorNormais(e.target.value)}
                                 />
@@ -170,14 +171,14 @@ function CadastroPromotor (){
                                     required
                                     type={"text"}
                                     value={promotor_extra}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     onChange={(e) => setPromotorExtras(e.target.value)}
                                 />
                             </Col>
                             <Col md={3}></Col>
 
                         </Row>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2}></Col>
                             <Col md={2} className={styles.colForm}>
@@ -193,11 +194,14 @@ function CadastroPromotor (){
                             </Col>
 
                         </Row>
-                        <Row  style={{ margin: 0 }}>
+                        <Row style={{margin: 0}}>
                             <Container className={styles.containerBotoes}>
-                                <Button variant="outline-primary" className={styles.buttonForm} onClick={handleClear}> Limpar </Button>
-                                <Button variant="outline-primary" type="submit" className={styles.buttonForm}> Salvar </Button>
-                                <Button variant="outline-primary"  className={styles.buttonForm} as={Link} to='/Home'> Voltar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm}
+                                        onClick={handleClear}> Limpar </Button>
+                                <Button variant="outline-primary" type="submit"
+                                        className={styles.buttonForm}> Salvar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm} as={Link}
+                                        to='/Home'> Voltar </Button>
                             </Container>
 
                         </Row>

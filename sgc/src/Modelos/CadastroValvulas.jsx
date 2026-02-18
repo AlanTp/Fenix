@@ -11,7 +11,7 @@ import DatePicker from "react-datepicker";
 import axios from "axios";
 import {LinkContainer} from "react-router-bootstrap";
 
-function CadastroValvulas (){
+function CadastroValvulas() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -24,7 +24,10 @@ function CadastroValvulas (){
 
     const opcoes = {
         a: 'Geisiane',
-        b: 'Mailon'
+        b: 'Mailon',
+        c: 'Aquiles',
+        d: 'Leticia',
+        e: 'Gabriela'
     };
 
     const handleSubmit = async (e) => {
@@ -43,10 +46,10 @@ function CadastroValvulas (){
         try {
             const response = await axios.post("https://fenix-api-gkyb.onrender.com/Valvulas", dados,
                 {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-            });
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
             console.log("Salvo com sucesso!", response.data);
             alert("Valvula salva com sucesso!");
@@ -75,7 +78,7 @@ function CadastroValvulas (){
         setData(new Date());
     };
 
-    return(
+    return (
         <div>
             <Navbar className={`${styles.navbar} justify-content-left`}>
 
@@ -137,7 +140,7 @@ function CadastroValvulas (){
             <div>
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Colaborador</label>
@@ -160,7 +163,7 @@ function CadastroValvulas (){
                                 <input
                                     required
                                     type={"text"}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     value={valvula_normal}
                                     onChange={(e) => setValvulasNormais(e.target.value)}
                                 />
@@ -171,14 +174,14 @@ function CadastroValvulas (){
                                     required
                                     type={"text"}
                                     value={valvula_extra}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     onChange={(e) => setValvulasExtras(e.target.value)}
                                 />
                             </Col>
                             <Col md={3}></Col>
 
                         </Row>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2}></Col>
                             <Col md={2} className={styles.colForm}>
@@ -194,11 +197,14 @@ function CadastroValvulas (){
                             </Col>
 
                         </Row>
-                        <Row  style={{ margin: 0 }}>
+                        <Row style={{margin: 0}}>
                             <Container className={styles.containerBotoes}>
-                                <Button variant="outline-primary" className={styles.buttonForm} onClick={handleClear}> Limpar </Button>
-                                <Button variant="outline-primary" type="submit" className={styles.buttonForm}> Salvar </Button>
-                                <Button variant="outline-primary"  className={styles.buttonForm} as={Link} to='/Home'> Voltar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm}
+                                        onClick={handleClear}> Limpar </Button>
+                                <Button variant="outline-primary" type="submit"
+                                        className={styles.buttonForm}> Salvar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm} as={Link}
+                                        to='/Home'> Voltar </Button>
                             </Container>
 
                         </Row>

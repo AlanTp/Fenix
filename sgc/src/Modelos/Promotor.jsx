@@ -9,7 +9,7 @@ import DatePicker from "react-datepicker";
 import {Link, useNavigate} from "react-router-dom";
 import {LinkContainer} from "react-router-bootstrap";
 
-function Promotor () {
+function Promotor() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -21,7 +21,8 @@ function Promotor () {
     const navigate = useNavigate();
 
     const opcoes = {
-        a: 'Gabriela'
+        a: 'Gabriela',
+        b: 'Dyogo'
     };
 
     useEffect(() => {
@@ -29,7 +30,7 @@ function Promotor () {
             try {
                 const token = localStorage.getItem("token");
 
-                if(!token){
+                if (!token) {
                     navigate("/Login");
                 }
 
@@ -39,7 +40,8 @@ function Promotor () {
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Promotor", { params,
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Promotor", {
+                    params,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -154,7 +156,7 @@ function Promotor () {
                     </Col>
 
                     <Row>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Colaborador</label>
                             <select
                                 className={styles.entradaDados}
@@ -169,7 +171,7 @@ function Promotor () {
                                 ))}
                             </select>
                         </Col>
-                        <Col md={3}  xl={3} >
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
                                 selected={inicio}
@@ -179,7 +181,7 @@ function Promotor () {
                                 maxDate={fim}
                             />
                         </Col>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Final</label>
                             <DatePicker
                                 selected={fim}
@@ -204,7 +206,7 @@ function Promotor () {
                         </thead>
                         <tbody>
                         {promotor.map((P, index) => (
-                            <tr key ={P.promotor_id ?? index}>
+                            <tr key={P.promotor_id ?? index}>
 
                                 <td>{P.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(P.promotor_normal)}</td>
@@ -217,7 +219,8 @@ function Promotor () {
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link}
+                            to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>
@@ -240,7 +243,7 @@ function Promotor () {
                         </tr>
                         </thead>
                         <tbody>
-                        {totaisArray.map((v, i)=>(
+                        {totaisArray.map((v, i) => (
                             <tr key={i}>
                                 <td>{v.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.promotor_normal)}</td>
