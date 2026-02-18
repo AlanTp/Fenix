@@ -3,7 +3,7 @@ import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import styles from "../Estilos/Batidas.module.css";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
