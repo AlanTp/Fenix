@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Button} from 'react-bootstrap';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import {Link, useNavigate} from "react-router-dom";
@@ -9,10 +9,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import styles from "../Estilos/Batidas.module.css";
 import valorValvulas from "../Calculos/ValorValvulas";
-import {LinkContainer} from "react-router-bootstrap";
+import NavBar from '../Modelos/NavBar';
 
 
-function Valvulas () {
+function Valvulas() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -33,7 +33,7 @@ function Valvulas () {
             try {
                 const token = localStorage.getItem("token");
 
-                if(!token){
+                if (!token) {
                     navigate("/Login");
                 }
 
@@ -43,7 +43,8 @@ function Valvulas () {
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", { params,
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Valvulas", {
+                    params,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -91,60 +92,7 @@ function Valvulas () {
 
     return (
         <div>
-            <Navbar className={`${styles.navbar} justify-content-left`}>
-
-                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
-                <Navbar.Toggle aria-controls="menu-principal" />
-
-                <Navbar.Collapse id="menu-principal">
-                    <Nav >
-                        <LinkContainer  to="/Home" className="me-3">
-                            <Nav.Link>Home</Nav.Link>
-                        </LinkContainer>
-
-
-                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
-                            <LinkContainer to='/VendaComPromotor'>
-                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-                            <LinkContainer to='/VendaSemPromotor'>
-                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Batidas' id='batidas' className="me-3">
-                            <LinkContainer to='/CadastroBatidas'>
-                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Batidas'>
-                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
-                            </LinkContainer>
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
-                            <LinkContainer to='/CadastroValvulas'>
-                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Valvulas'>
-                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
-                            <LinkContainer to='/EmissaoPedidos'>
-                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-
-            </Navbar>
-
+            <NavBar/>
 
             <Container fluid className={styles.containerFluid}>
                 <div className={styles.subtitulo}>
@@ -158,7 +106,7 @@ function Valvulas () {
                     </Col>
 
                     <Row>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Colaborador</label>
                             <select
                                 className={styles.entradaDados}
@@ -173,7 +121,7 @@ function Valvulas () {
                                 ))}
                             </select>
                         </Col>
-                        <Col md={3}  xl={3} >
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
                                 selected={inicio}
@@ -183,7 +131,7 @@ function Valvulas () {
                                 maxDate={fim}
                             />
                         </Col>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Final</label>
                             <DatePicker
                                 selected={fim}
@@ -207,22 +155,23 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
-                        {valvulas.map((v, index) =>(
-                            <tr key={v.valvulas_id ?? index} >
+                        {valvulas.map((v, index) => (
+                            <tr key={v.valvulas_id ?? index}>
 
-                                    <td>{v.colaborador}</td>
-                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
-                                    <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
-                                    <td>{v.data}</td>
+                                <td>{v.colaborador}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
+                                <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
+                                <td>{v.data}</td>
                             </tr>
-                            ))}
+                        ))}
 
                         </tbody>
 
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link}
+                            to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>
@@ -245,14 +194,20 @@ function Valvulas () {
                         </tr>
                         </thead>
                         <tbody>
-                        {totaisArray.map((v, i)=>(
+                        {totaisArray.map((v, i) => (
                             <tr key={i}>
                                 <td>{v.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_extra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.valvula_normal + v.valvula_extra)}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
-                                <td>{new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(valorValvulas(v.valvula_extra))}</td>
+                                <td>{new Intl.NumberFormat('pt-BR', {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }).format(valorValvulas(v.valvula_extra))}</td>
 
 
                             </tr>

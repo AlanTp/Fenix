@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter } from 'react-router-dom';
+import {createBrowserRouter} from 'react-router-dom';
 import VendaComPromotor from '../Modelos/VendaComPromotor.jsx';
 import Home from '../Modelos/Home.jsx';
 import VendaSemPromotor from '../Modelos/VendaSemPromotor.jsx';
@@ -14,17 +14,18 @@ import RotaProtegida from "./RotasProtegidas";
 import ReceitasTintas from "../Modelos/ReceitasTintas.jsx";
 import CadastroReceitas from "../Modelos/CadastroReceitas.jsx";
 import EmissaoPedidos from "../Modelos/EmissaoPedidos.jsx";
+import ListagemPedidos from "../Modelos/ListagemPedidos";
 
 const Rotas = createBrowserRouter([
     {
         path: '/',
-        element: <Login />,
+        element: <Login/>,
     },
     {
         path: '/Home',
         element: (
             <RotaProtegida>
-                <Home />
+                <Home/>
             </RotaProtegida>
         ),
     },
@@ -32,7 +33,7 @@ const Rotas = createBrowserRouter([
         path: '/VendaComPromotor',
         element: (
             <RotaProtegida>
-                <VendaComPromotor />
+                <VendaComPromotor/>
             </RotaProtegida>
         ),
     },
@@ -40,7 +41,7 @@ const Rotas = createBrowserRouter([
         path: '/VendaSemPromotor',
         element: (
             <RotaProtegida>
-                <VendaSemPromotor />
+                <VendaSemPromotor/>
             </RotaProtegida>
         ),
     },
@@ -48,7 +49,7 @@ const Rotas = createBrowserRouter([
         path: '/Batidas',
         element: (
             <RotaProtegida>
-                <Batidas />
+                <Batidas/>
             </RotaProtegida>
         ),
     },
@@ -56,7 +57,7 @@ const Rotas = createBrowserRouter([
         path: '/CadastroBatidas',
         element: (
             <RotaProtegida>
-                <CadastroBatidas />
+                <CadastroBatidas/>
             </RotaProtegida>
         ),
     },
@@ -64,7 +65,7 @@ const Rotas = createBrowserRouter([
         path: '/Valvulas',
         element: (
             <RotaProtegida>
-                <Valvulas />
+                <Valvulas/>
             </RotaProtegida>
         ),
     },
@@ -72,7 +73,7 @@ const Rotas = createBrowserRouter([
         path: '/CadastroValvulas',
         element: (
             <RotaProtegida>
-                <CadastroValvulas />
+                <CadastroValvulas/>
             </RotaProtegida>
         ),
     },
@@ -80,7 +81,7 @@ const Rotas = createBrowserRouter([
         path: '/Promotor',
         element: (
             <RotaProtegida>
-                <Promotor />
+                <Promotor/>
             </RotaProtegida>
         ),
     },
@@ -88,7 +89,7 @@ const Rotas = createBrowserRouter([
         path: '/CadastroPromotor',
         element: (
             <RotaProtegida>
-                <CadastroPromotor />
+                <CadastroPromotor/>
             </RotaProtegida>
         ),
     },
@@ -96,7 +97,7 @@ const Rotas = createBrowserRouter([
         path: '/ReceitasTintas',
         element: (
             <RotaProtegida>
-                <ReceitasTintas />
+                <ReceitasTintas/>
             </RotaProtegida>
         ),
     },
@@ -104,7 +105,7 @@ const Rotas = createBrowserRouter([
         path: '/CadastroReceitas',
         element: (
             <RotaProtegida>
-                <CadastroReceitas />
+                <CadastroReceitas/>
             </RotaProtegida>
         ),
     },
@@ -112,11 +113,18 @@ const Rotas = createBrowserRouter([
         path: '/EmissaoPedidos',
         element: (
             <RotaProtegida>
-                <EmissaoPedidos />
+                <EmissaoPedidos/>
             </RotaProtegida>
         ),
     },
-
+    {
+        path: '/ListagemPedidos',
+        element: (
+            <RotaProtegida>
+                <ListagemPedidos/>
+            </RotaProtegida>
+        ),
+    },
 
 
 ]);

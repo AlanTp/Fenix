@@ -1,4 +1,3 @@
-import {Nav, Navbar, NavDropdown} from "react-bootstrap";
 import styles from "../Estilos/CadastroValvulas.module.css";
 import {Form} from "reactstrap";
 import Col from "react-bootstrap/Col";
@@ -9,9 +8,9 @@ import Button from "react-bootstrap/Button";
 import {Link, useNavigate} from "react-router-dom";
 import DatePicker from "react-datepicker";
 import axios from "axios";
-import {LinkContainer} from "react-router-bootstrap";
+import NavBar from '../Modelos/NavBar';
 
-function CadastroValvulas (){
+function CadastroValvulas() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -43,10 +42,10 @@ function CadastroValvulas (){
         try {
             const response = await axios.post("https://fenix-api-gkyb.onrender.com/Valvulas", dados,
                 {
-                headers: {
-                Authorization: `Bearer ${token}`,
-                },
-            });
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
             console.log("Salvo com sucesso!", response.data);
             alert("Valvula salva com sucesso!");
@@ -75,61 +74,9 @@ function CadastroValvulas (){
         setData(new Date());
     };
 
-    return(
+    return (
         <div>
-            <Navbar className={`${styles.navbar} justify-content-left`}>
-
-                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
-                <Navbar.Toggle aria-controls="menu-principal" />
-
-                <Navbar.Collapse id="menu-principal">
-                    <Nav >
-                        <LinkContainer  to="/Home" className="me-3">
-                            <Nav.Link>Home</Nav.Link>
-                        </LinkContainer>
-
-
-                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
-                            <LinkContainer to='/VendaComPromotor'>
-                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-                            <LinkContainer to='/VendaSemPromotor'>
-                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Batidas' id='batidas' className="me-3">
-                            <LinkContainer to='/CadastroBatidas'>
-                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Batidas'>
-                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
-                            </LinkContainer>
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
-                            <LinkContainer to='/CadastroValvulas'>
-                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Valvulas'>
-                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
-                            <LinkContainer to='/EmissaoPedidos'>
-                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-
-            </Navbar>
+            <NavBar/>
 
             <div className={styles.subtitulo}>
                 <h3>Cadastro de Valvulas</h3>
@@ -137,7 +84,7 @@ function CadastroValvulas (){
             <div>
                 <Form onSubmit={handleSubmit}>
                     <div>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Colaborador</label>
@@ -160,7 +107,7 @@ function CadastroValvulas (){
                                 <input
                                     required
                                     type={"text"}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     value={valvula_normal}
                                     onChange={(e) => setValvulasNormais(e.target.value)}
                                 />
@@ -171,14 +118,14 @@ function CadastroValvulas (){
                                     required
                                     type={"text"}
                                     value={valvula_extra}
-                                    className= {`form-control ${styles.formInput}`}
+                                    className={`form-control ${styles.formInput}`}
                                     onChange={(e) => setValvulasExtras(e.target.value)}
                                 />
                             </Col>
                             <Col md={3}></Col>
 
                         </Row>
-                        <Row className={styles.rowForm} style={{ margin: 0 }}>
+                        <Row className={styles.rowForm} style={{margin: 0}}>
                             <Col md={3}></Col>
                             <Col md={2}></Col>
                             <Col md={2} className={styles.colForm}>
@@ -194,11 +141,14 @@ function CadastroValvulas (){
                             </Col>
 
                         </Row>
-                        <Row  style={{ margin: 0 }}>
+                        <Row style={{margin: 0}}>
                             <Container className={styles.containerBotoes}>
-                                <Button variant="outline-primary" className={styles.buttonForm} onClick={handleClear}> Limpar </Button>
-                                <Button variant="outline-primary" type="submit" className={styles.buttonForm}> Salvar </Button>
-                                <Button variant="outline-primary"  className={styles.buttonForm} as={Link} to='/Home'> Voltar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm}
+                                        onClick={handleClear}> Limpar </Button>
+                                <Button variant="outline-primary" type="submit"
+                                        className={styles.buttonForm}> Salvar </Button>
+                                <Button variant="outline-primary" className={styles.buttonForm} as={Link}
+                                        to='/Home'> Voltar </Button>
                             </Container>
 
                         </Row>

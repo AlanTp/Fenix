@@ -1,0 +1,16 @@
+.titulo {
+    color: black;
+    font-family: 'sans-serif';
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 120px;
+    margin-right: 150px;
+    margin-left: 50px;
+}
+
+.navbar {
+    background-color: rgb(5, 90, 213);
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}

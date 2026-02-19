@@ -1,15 +1,15 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Button, Nav, Navbar, NavDropdown} from "react-bootstrap";
+import {Button} from "react-bootstrap";
 import styles from "../Estilos/Promotor.module.css";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import DatePicker from "react-datepicker";
 import {Link, useNavigate} from "react-router-dom";
-import {LinkContainer} from "react-router-bootstrap";
+import NavBar from '../Modelos/NavBar';
 
-function Promotor () {
+function Promotor() {
 
     const hoje = new Date();
     hoje.setHours(0, 0, 0, 0);
@@ -29,7 +29,7 @@ function Promotor () {
             try {
                 const token = localStorage.getItem("token");
 
-                if(!token){
+                if (!token) {
                     navigate("/Login");
                 }
 
@@ -39,7 +39,8 @@ function Promotor () {
                     fim: fim ? fim : undefined
                 };
 
-                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Promotor", { params,
+                const res = await axios.get("https://fenix-api-gkyb.onrender.com/Promotor", {
+                    params,
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
@@ -87,60 +88,7 @@ function Promotor () {
 
     return (
         <div>
-            <Navbar className={`${styles.navbar} justify-content-left`}>
-
-                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
-                <Navbar.Toggle aria-controls="menu-principal" />
-
-                <Navbar.Collapse id="menu-principal">
-                    <Nav >
-                        <LinkContainer  to="/Home" className="me-3">
-                            <Nav.Link>Home</Nav.Link>
-                        </LinkContainer>
-
-
-                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
-                            <LinkContainer to='/VendaComPromotor'>
-                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-                            <LinkContainer to='/VendaSemPromotor'>
-                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Batidas' id='batidas' className="me-3">
-                            <LinkContainer to='/CadastroBatidas'>
-                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Batidas'>
-                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
-                            </LinkContainer>
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
-                            <LinkContainer to='/CadastroValvulas'>
-                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Valvulas'>
-                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
-                            <LinkContainer to='/PedidosEmissao'>
-                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-
-            </Navbar>
-
+            <NavBar/>
 
             <Container fluid className={styles.containerFluid}>
                 <div className={styles.subtitulo}>
@@ -154,7 +102,7 @@ function Promotor () {
                     </Col>
 
                     <Row>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Colaborador</label>
                             <select
                                 className={styles.entradaDados}
@@ -169,7 +117,7 @@ function Promotor () {
                                 ))}
                             </select>
                         </Col>
-                        <Col md={3}  xl={3} >
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Inicial</label>
                             <DatePicker
                                 selected={inicio}
@@ -179,7 +127,7 @@ function Promotor () {
                                 maxDate={fim}
                             />
                         </Col>
-                        <Col md={3}  xl={3}>
+                        <Col md={3} xl={3}>
                             <label className={styles.labelFiltro}>Data Final</label>
                             <DatePicker
                                 selected={fim}
@@ -204,7 +152,7 @@ function Promotor () {
                         </thead>
                         <tbody>
                         {promotor.map((P, index) => (
-                            <tr key ={P.promotor_id ?? index}>
+                            <tr key={P.promotor_id ?? index}>
 
                                 <td>{P.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(P.promotor_normal)}</td>
@@ -217,7 +165,8 @@ function Promotor () {
                     </table>
                 </div>
                 <div className={styles.rodapeBotao}>
-                    <Button variant="outline-primary" className={styles.link_voltar} as={Link} to='/Home'> Home </Button>
+                    <Button variant="outline-primary" className={styles.link_voltar} as={Link}
+                            to='/Home'> Home </Button>
                 </div>
                 <Col className="d-flex justify-content-between align-items-center">
                     <label className={styles.filtro}>Totais</label>
@@ -240,7 +189,7 @@ function Promotor () {
                         </tr>
                         </thead>
                         <tbody>
-                        {totaisArray.map((v, i)=>(
+                        {totaisArray.map((v, i) => (
                             <tr key={i}>
                                 <td>{v.colaborador}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(v.promotor_normal)}</td>

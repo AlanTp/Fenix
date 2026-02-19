@@ -1,22 +1,10 @@
-*{margin: 0; padding: 0;}
-.titulo{
-    color:  black;
-    font-family: 'sans-serif';
-    font-size: 25px;
-    font-weight:bold;
-    margin-top: 120px;
-    margin-right: 150px;
-    margin-left: 50px;
+* {
+    margin: 0;
+    padding: 0;
 }
 
-body{
+body {
     background-color: #060a5e;
-}
-.navbar{
-    background-color: rgb(5, 90, 213);
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
 }
 
 .page {
@@ -28,7 +16,7 @@ body{
 .content {
     flex: 1;
     background-image: url('../imagens/LogoFenix.png');
-    background-size: cover;   /* não corta */
+    background-size: cover; /* não corta */
     background-repeat: no-repeat;
     background-position: center;
 }

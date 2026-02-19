@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import {Button, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import React, {useEffect, useState} from 'react';
+import {Button} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Calculo from '../Calculos/Calculo.jsx';
 import CalculoSemPromotor from '../Calculos/CalculoSemPromotor.jsx';
 import styles from '../Estilos/App.module.css';
@@ -11,7 +11,7 @@ import Linhas from '../Modelos/Linhas.jsx';
 import Linhas1500a10000 from '../Modelos/Linhas1500a10000.jsx';
 import Quantidade100a1000 from '../Modelos/Quantidade100a1000.jsx';
 import Quantidade1500a10000 from '../Modelos/Quantidade1500a10000.jsx';
-import {LinkContainer} from "react-router-bootstrap";
+import NavBar from '../Modelos/NavBar';
 
 function VendaSemPromotor() {
     let linhas1 = Linhas();
@@ -24,65 +24,14 @@ function VendaSemPromotor() {
     const [arte, setArte] = useState(0);
     const [margemSilk, setMargemSilk] = useState(1)
 
-    useEffect(()=> {
+    useEffect(() => {
 
     }, []);
 
 
     return (
         <div>
-            <Navbar className={`${styles.navbar} justify-content-left`} >
-                <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
-                <Navbar.Toggle aria-controls="menu-principal" />
-
-                <Navbar.Collapse id="menu-principal">
-                    <Nav >
-                        <LinkContainer  to="/Home" className="me-3">
-                            <Nav.Link>Home</Nav.Link>
-                        </LinkContainer>
-
-
-                        <NavDropdown  title='Vendas' id='vendas' className="me-3">
-                            <LinkContainer to='/VendaComPromotor'>
-                                <NavDropdown.Item >Vendas com promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-                            <LinkContainer to='/VendaSemPromotor'>
-                                <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
-                            </LinkContainer>
-
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Batidas' id='batidas' className="me-3">
-                            <LinkContainer to='/CadastroBatidas'>
-                                <NavDropdown.Item >Cadastrar Batidas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Batidas'>
-                                <NavDropdown.Item >Relatorio Batidas</NavDropdown.Item>
-                            </LinkContainer>
-
-
-                        </NavDropdown>
-                        <NavDropdown title='Valvulas' id='valvulas' className="me-3">
-                            <LinkContainer to='/CadastroValvulas'>
-                                <NavDropdown.Item >Cadastro Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-                            <LinkContainer to='/Valvulas'>
-                                <NavDropdown.Item >Relatorio Batidas Valvulas</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-
-                        <NavDropdown title='Pedidos' id='pedidos' className="me-3">
-                            <LinkContainer to='/EmissaoPedidos'>
-                                <NavDropdown.Item >Pedidos</NavDropdown.Item>
-                            </LinkContainer>
-
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+            <NavBar/>
 
             <Container>
                 <div className={styles.subtitulo}>
@@ -182,12 +131,12 @@ function VendaSemPromotor() {
                     <Row key={linha} className={styles.linhas}>
                         <Col>Emb Personalizado</Col>
                         <Col>{qtd[linha]}</Col>
-                        <Col>R$ {Calculo(qtd[linha],CalculoSemPromotor(1,qtd[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd[linha],CalculoSemPromotor(2,qtd[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd[linha],CalculoSemPromotor(3,qtd[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd[linha],CalculoSemPromotor(4,qtd[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd[linha],CalculoSemPromotor(5,qtd[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd[linha],CalculoSemPromotor(6,qtd[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd[linha], CalculoSemPromotor(1, qtd[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd[linha], CalculoSemPromotor(2, qtd[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd[linha], CalculoSemPromotor(3, qtd[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd[linha], CalculoSemPromotor(4, qtd[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd[linha], CalculoSemPromotor(5, qtd[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd[linha], CalculoSemPromotor(6, qtd[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
                     </Row>
                 ))}
                 <Row className={styles.custoM}>
@@ -207,12 +156,12 @@ function VendaSemPromotor() {
                     <Row key={linha} className={styles.linhas}>
                         <Col>Emb Personalizado</Col>
                         <Col>{qtd2[linha]}</Col>
-                        <Col>R$ {Calculo(qtd2[linha],CalculoSemPromotor(1,qtd2[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd2[linha],CalculoSemPromotor(2,qtd2[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd2[linha],CalculoSemPromotor(3,qtd2[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd2[linha],CalculoSemPromotor(4,qtd2[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd2[linha],CalculoSemPromotor(5,qtd2[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
-                        <Col>R$ {Calculo(qtd2[linha],CalculoSemPromotor(6,qtd2[linha]),margem,valvula,PrcEmb,arte,margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd2[linha], CalculoSemPromotor(1, qtd2[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd2[linha], CalculoSemPromotor(2, qtd2[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd2[linha], CalculoSemPromotor(3, qtd2[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd2[linha], CalculoSemPromotor(4, qtd2[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd2[linha], CalculoSemPromotor(5, qtd2[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
+                        <Col>R$ {Calculo(qtd2[linha], CalculoSemPromotor(6, qtd2[linha]), margem, valvula, PrcEmb, arte, margemSilk)}</Col>
                     </Row>
                 ))}
             </Container>
@@ -220,7 +169,7 @@ function VendaSemPromotor() {
                 <Button variant="outline-primary"
                         className={styles.link_voltar}
                         as={Link}
-                        to ='/Home'>
+                        to='/Home'>
                     Home
                 </Button>
             </div>
