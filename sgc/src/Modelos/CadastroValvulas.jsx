@@ -24,8 +24,8 @@ function CadastroValvulas() {
     const opcoes = {
         a: 'Geisiane',
         b: 'Mailon',
-        c: 'Leticia',
-        d: 'Aquiles',
+        c: 'Aquiles',
+        d: 'Leticia',
         e: 'Gabriela'
     };
 

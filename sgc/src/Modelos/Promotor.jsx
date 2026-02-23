@@ -21,7 +21,8 @@ function Promotor() {
     const navigate = useNavigate();
 
     const opcoes = {
-        a: 'Gabriela'
+        a: 'Gabriela',
+        b: 'Dyogo'
     };
 
     useEffect(() => {

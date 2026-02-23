@@ -22,7 +22,8 @@ function CadastroPromotor() {
     const navigate = useNavigate();
 
     const opcoes = {
-        a: 'Gabriela'
+        a: 'Gabriela',
+        b: "Dyogo"
     };
 
     const handleSubmit = async (e) => {

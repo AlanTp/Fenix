@@ -28,7 +28,8 @@ function CadastroBatidas() {
     const opcoes = {
         a: 'Aquiles',
         b: 'Rodrigo',
-        c: 'Tunico'
+        c: 'Tunico',
+        d: 'Dyogo'
     };
 
 
