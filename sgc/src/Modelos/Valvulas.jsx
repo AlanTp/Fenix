@@ -25,7 +25,10 @@ function Valvulas() {
 
     const opcoes = {
         a: 'Geisiane',
-        b: 'Mailon'
+        b: 'Mailon',
+        c: 'Leticia',
+        d: 'Aquiles',
+        e: 'Gabriela'
     };
 
     useEffect(() => {

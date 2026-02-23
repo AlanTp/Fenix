@@ -49,12 +49,24 @@ function NavBar() {
                             </LinkContainer>
 
                         </NavDropdown>
+                        <NavDropdown title='Promotor' id='promotor' className="me-3">
+                            <LinkContainer to='/Promotor'>
+                                <NavDropdown.Item>Listagem Promotor</NavDropdown.Item>
+                            </LinkContainer>
+
+                            <LinkContainer to='/CadastroPromotor'>
+                                <NavDropdown.Item>Cadastrar Batidas Promotor</NavDropdown.Item>
+                            </LinkContainer>
+                        </NavDropdown>
                         <NavDropdown title='Pedidos' id='pedidos' className="me-3">
                             <LinkContainer to='/EmissaoPedidos'>
                                 <NavDropdown.Item>Pedidos</NavDropdown.Item>
                             </LinkContainer>
-
+                            <LinkContainer to='/ListagemPedidos'>
+                                <NavDropdown.Item>Listagem de Pedidos</NavDropdown.Item>
+                            </LinkContainer>
                         </NavDropdown>
+
                     </Nav>
                 </Navbar.Collapse>
 
