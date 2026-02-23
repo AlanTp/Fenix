@@ -1,8 +1,6 @@
-import React from "react";
 import NavBar from '../Modelos/NavBar';
 
-function CadastroReceitas() {
-
+function ListagemPedidos() {
 
     return (
         <div>
@@ -11,4 +9,4 @@ function CadastroReceitas() {
     )
 }
 
-export default CadastroReceitas;
+export default ListagemPedidos;

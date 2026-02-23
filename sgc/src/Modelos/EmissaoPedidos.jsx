@@ -1,18 +1,5 @@
 import styles from "../Estilos/EmissaoPedido.module.css";
-import {
-    Button,
-    Form,
-    FormControl,
-    FormGroup,
-    FormLabel,
-    FormSelect,
-    InputGroup,
-    Nav,
-    Navbar,
-    NavDropdown,
-    Table
-} from "react-bootstrap";
-import {LinkContainer} from "react-router-bootstrap";
+import {Button, Form, FormControl, FormGroup, FormLabel, FormSelect, InputGroup, Table} from "react-bootstrap";
 import React, {useState} from "react";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -22,6 +9,7 @@ import vendedores from "../Enum/Vendedores";
 import StatusPedido from "../Enum/StatusPedido";
 import TipoUnidade from "../Enum/TipoUnidade";
 import axios from "axios";
+import NavBar from '../Modelos/NavBar';
 
 function EmissaoPedidos() {
     const hoje = new Date().toISOString().split("T")[0];
@@ -34,6 +22,7 @@ function EmissaoPedidos() {
     const [promotor, setPromotor] = useState("nao");
     const [frente, setFrente] = useState("");
     const [verso, setVerso] = useState("");
+    const [liso, setLiso] = useState("");
     const [estoque, setEstoque] = useState("fenix");
     const [arte, setArte] = useState("");
     const [vendedor, setVendedor] = useState("");
@@ -114,7 +103,7 @@ function EmissaoPedidos() {
 
         // 2 = Milheiro
         if (tipoUnidade === "2") {
-            return(q / 1000) * p;
+            return (q / 1000) * p;
         }
 
         return 0;
@@ -124,8 +113,8 @@ function EmissaoPedidos() {
         const erros = {};
 
         if (!cliente) erros.cliente = "Cliente  obrigatório";
-        if (!frente && !verso) {
-            erros.silk = "Obrigatório marcar Frente ou Verso";
+        if (!frente && !verso && !liso) {
+            erros.silk = "Obrigatório marcar Frente, Verso ou Liso";
         }
         if (!qtd) erros.qtdBatidas = "Inserir quantidade de batidas!";
         if (!arte) erros.arte = "Insira os dados da arte!";
@@ -162,11 +151,17 @@ function EmissaoPedidos() {
         if (frente === "frente" && verso === "verso") {
             silk = "Frente e Verso";
         }
+        if (frente === "frente" && verso === "verso" && liso === "liso") {
+            silk = "Liso";
+        }
         if (verso === "verso") {
             silk = "Verso";
         }
         if (frente === "frente") {
             silk = "Frente";
+        }
+        if (liso === "liso") {
+            silk = "Liso";
         }
         const statusSelecionado = StatusPedido.find((v) =>
             v.value === status);
@@ -188,7 +183,7 @@ function EmissaoPedidos() {
             vendedor: vendedorName,
             status: statusLabel,
             comissao: qtdComissao,
-            tipoPagamento:tipoPagamento,
+            tipoPagamento: tipoPagamento,
             tipoFrete,
             cidade: "Tres Pontas",
             cep: "37190000",
@@ -203,14 +198,14 @@ function EmissaoPedidos() {
                 total: calcularTotalItem(item)
             }))
         };
-        try{
-            const token =localStorage.getItem("token");
+        try {
+            const token = localStorage.getItem("token");
 
             await axios.post(
                 "https://fenix-api-gkyb.onrender.com/Pedidos",
                 pedido,
                 {
-                    headers:{
+                    headers: {
                         Authorization: `Bearer ${token}`
                     }
                 }
@@ -237,7 +232,7 @@ function EmissaoPedidos() {
             setLoading(true);
 
 
-        }catch (e) {
+        } catch (e) {
             console.error("Erro ao enviar pedido:", e);
         }
     };
@@ -257,593 +252,552 @@ function EmissaoPedidos() {
         setIndiceEditando(index);
     };
 
-    return (<div className={styles.page}>
-        <Navbar className={`${styles.navbar} justify-content-left`}>
+    return (
+        <div className={styles.page}>
+            <NavBar/>
 
-            <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
-            <Navbar.Toggle aria-controls="menu-principal"/>
-
-            <Navbar.Collapse id="menu-principal">
-                <Nav>
-                    <LinkContainer to="/Home" className="me-3">
-                        <Nav.Link>Home</Nav.Link>
-                    </LinkContainer>
-
-
-                    <NavDropdown title='Vendas' id='vendas' className="me-3">
-                        <LinkContainer to='/VendaComPromotor'>
-                            <NavDropdown.Item>Vendas com promotor</NavDropdown.Item>
-                        </LinkContainer>
-
-                        <LinkContainer to='/VendaSemPromotor'>
-                            <NavDropdown.Item>Vendas sem promotor</NavDropdown.Item>
-                        </LinkContainer>
-
-
-                    </NavDropdown>
-                    <NavDropdown title='Batidas' id='batidas' className="me-3">
-                        <LinkContainer to='/CadastroBatidas'>
-                            <NavDropdown.Item>Cadastrar Batidas</NavDropdown.Item>
-                        </LinkContainer>
-                        <LinkContainer to='/Batidas'>
-                            <NavDropdown.Item>Relatorio Batidas</NavDropdown.Item>
-                        </LinkContainer>
-
-
-                    </NavDropdown>
-                    <NavDropdown title='Valvulas' id='valvulas' className="me-3">
-                        <LinkContainer to='/CadastroValvulas'>
-                            <NavDropdown.Item>Cadastro Batidas Valvulas</NavDropdown.Item>
-                        </LinkContainer>
-                        <LinkContainer to='/Valvulas'>
-                            <NavDropdown.Item>Relatorio Batidas Valvulas</NavDropdown.Item>
-                        </LinkContainer>
-
-                    </NavDropdown>
-                    <NavDropdown title='Pedidos' id='pedidos' className="me-3">
-                        <LinkContainer to='/EmissaoPedidos'>
-                            <NavDropdown.Item>Pedidos</NavDropdown.Item>
-                        </LinkContainer>
-
-                    </NavDropdown>
-                </Nav>
-            </Navbar.Collapse>
-
-        </Navbar>
-
-
-        <Container fluid className="mt-3">
-
-            <div className={styles.divSub}>
-                <h3>Emissão de Pedidos</h3>
-            </div>
-            <Form onSubmit={Enviar}>
-                <Row>
-                    <Col md={8}>
-                        <FormGroup>
-                            <FormLabel>Cliente:</FormLabel>
-                            <FormControl
-                                type="text"
-                                placeholder="Nome do cliente"
-                                value={cliente}
-                                className={styles.formControl}
-                                isInvalid={tentouEnviar && !!erros.cliente}
-                                onChange={(e) => setCliente(e.target.value)}
-                            />
-                            <Form.Control.Feedback type="invalid">
-                                {erros.cliente}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel>Data Emissão Pedido:</FormLabel>
-                            <FormControl
-                                type="date"
-                                required
-                                className={styles.dataEmissao}
-                                value={dataEmissao}
-                                onChange={(e) => setDataEmissao(e.target.value)}
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel>Data Entrega Pedido:</FormLabel>
-                            <FormControl
-                                type="date"
-                                required
-                                className={styles.dataEmissao}
-                                value={dataEntrega}
-                                onChange={(e) => setDataEntrega(e.target.value)}
-                            />
-                        </FormGroup>
-                    </Col>
-                </Row>
-
-                <Row>
-                    <Col md={4}>
-                        <FormGroup>
-                            <FormLabel className={styles.tipoPedido}>Tipo do Pedido:</FormLabel>
-
-                            <Form.Check
-                                type="radio"
-                                label="Repetição sem alteração"
-                                name="tipoPedido"
-                                value={"semAlteracao"}
-                                checked={tipoPedido === "semAlteracao"}
-                                onChange={(e) => setTipoPedido(e.target.value)}
-                            />
-                            <Form.Check
-                                type="radio"
-                                label="Repetição com alteração"
-                                name="tipoPedido"
-                                value={"comAlteracao"}
-                                checked={tipoPedido === "comAlteracao"}
-                                onChange={(e) => setTipoPedido(e.target.value)}
-                            />
-                            <Form.Check
-                                type="radio"
-                                label="Pedido Novo"
-                                name="tipoPedido"
-                                value={"novo"}
-                                checked={tipoPedido === "novo"}
-                                onChange={(e) => setTipoPedido(e.target.value)}
-                            />
-                        </FormGroup>
-                    </Col>
-
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Valvula</FormLabel>
-                        </FormGroup>
-                        <Form.Check
-                            inline
-                            type={"radio"}
-                            label={"Não"}
-                            name="valvula"
-                            value={"sim"}
-                            checked={valvula === "sim"}
-                            onChange={(e) => setValula(e.target.value)}
-                        />
-                        <Form.Check
-                            inline
-                            type={"radio"}
-                            label={"Sim"}
-                            name="valvula"
-                            value={"nao"}
-                            checked={valvula === "nao"}
-                            onChange={(e) => setValula(e.target.value)}
-
-                        />
-                    </Col>
-
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Promotor</FormLabel>
-                        </FormGroup>
-                        <Form.Check
-                            inline
-                            type={"radio"}
-                            label={"Não"}
-                            name={"promotor"}
-                            value={"nao"}
-                            checked={promotor === "nao"}
-                            onChange={(e) => setPromotor(e.target.value)}
-                        />
-                        <Form.Check
-                            inline
-                            type={"radio"}
-                            label={"Sim"}
-                            name={"promotor"}
-                            value={"sim"}
-                            checked={promotor === "sim"}
-                            onChange={(e) => setPromotor(e.target.value)}
-                        />
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}> Silk</FormLabel>
-                        </FormGroup>
-                        <FormGroup>
-                            <Form.Check
-                                inline
-                                type="checkbox"
-                                label="Frente"
-                                isInvalid={tentouEnviar && !!erros.silk}
-                                checked={frente === "frente"}
-                                onChange={(e) => setFrente(e.target.checked ? "frente" : "")}
-                            />
-
-                            <Form.Check
-                                inline
-                                type="checkbox"
-                                label="Verso"
-                                isInvalid={tentouEnviar && !!erros.silk}
-                                checked={verso === "verso"}
-                                onChange={(e) => setVerso(e.target.checked ? "verso" : "")}
-                            />
-                            <Form.Control.Feedback type="invalid" className="d-block">
-                                {erros.silk}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>
-                                Quantidade Batidas
-                            </FormLabel>
-
-                            <InputGroup className={styles.QTDbatidas}>
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={() => setQtd(prev => Math.max(0, prev - 1))}
-                                >
-                                    −
-                                </Button>
-
-                                <FormControl
-                                    value={qtd}
-                                    readOnly
-                                    className={"text-center"}
-                                    isInvalid={tentouEnviar && !!erros.qtdBatidas}
-
-                                />
-
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={() => setQtd(prev => prev + 1)}
-                                >
-                                    +
-                                </Button>
-                            </InputGroup>
-                            <Form.Control.Feedback type={"invalid"} className="d-block">
-                                {erros.qtdBatidas}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md={3}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Estoque</FormLabel>
-                        </FormGroup>
-                        <Form.Check
-                            inline
-                            type="radio"
-                            label="Fenix"
-                            value={"fenix"}
-                            checked={estoque === "fenix"}
-                            onChange={(e) => setEstoque(e.target.value)}
-                        />
-                        <Form.Check
-                            inline
-                            type="radio"
-                            label="MakPlast"
-                            value={"makplast"}
-                            checked={estoque === "makplast"}
-                            onChange={(e) => setEstoque(e.target.value)}
-                        />
-
-                        <Form.Check
-                            inline
-                            type="radio"
-                            label="MP"
-                            value={"mp"}
-                            checked={estoque === "mp"}
-                            onChange={(e) => setEstoque(e.target.value)}
-                        />
-                        <Form.Check
-                            inline
-                            type="radio"
-                            label="ArtVac"
-                            value={"artvac"}
-                            checked={estoque === "artvac"}
-                            onChange={(e) => setEstoque(e.target.value)}
-                        />
-                    </Col>
-
-                    <Col md={3}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Arte</FormLabel>
-                            <FormControl
-                                type={"text"}
-                                value={arte}
-                                onChange={(e) => setArte(e.target.value)}
-                                isInvalid={tentouEnviar && !!erros.arte}
-                            />
-                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                {erros.arte}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-
-
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Vendedor</FormLabel>
-                            <Form.Select value={vendedor}
-                                         onChange={(e) => setVendedor(e.target.value)}
-                                         isInvalid={tentouEnviar && !!erros.vendedor}>
-                                <option value="">Selecione</option>
-                                {Vendedores.map((v) => (<option key={v.value} value={v.value}>
-                                    {v.label}
-                                </option>))}
-
-                            </Form.Select>
-                            <Form.Control.Feedback type={"invalid"} className={"d-bloc"}>
-                                {erros.vendedor}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Status do Pedido</FormLabel>
-                            <Form.Select value={status}
-                                         onChange={(e) => setStatus(e.target.value)}
-                                         isInvalid={tentouEnviar && !!erros.status}>
-                                <option value="">Selecione</option>
-                                {StatusPedido.map((v) => (<option key={v.value} value={v.value}>
-                                    {v.label}
-                                </option>))}
-                            </Form.Select>
-                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                {erros.status}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>
-                                Comissão %
-                            </FormLabel>
-
-                            <InputGroup className={styles.QTDbatidas}>
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={() => setQtdComissao(prev => Math.max(0, prev - 1))}
-                                >
-                                    −
-                                </Button>
-
-                                <FormControl
-                                    value={qtdComissao}
-                                    readOnly
-                                    className="text-center"
-                                    isInvalid={tentouEnviar && !!erros.qtdComissao}
-
-                                />
-
-                                <Button
-                                    variant="outline-secondary"
-                                    onClick={() => setQtdComissao(prev => prev + 1)}
-                                >
-                                    +
-                                </Button>
-                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                    {erros.qtdComissao}
-                                </Form.Control.Feedback>
-                            </InputGroup>
-                        </FormGroup>
-
-                    </Col>
-
-                </Row>
-                <Row>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>
-                                Tipo Pagamento:
-                            </FormLabel>
-                            <FormControl
-                                type={"text"}
-                                value={tipoPagamento}
-                                onChange={(e) => setTipoPagamento(e.target.value)}
-                                isInvalid={tentouEnviar && !!erros.tipoPagamento}
-                            />
-                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                {erros.tipoPagamento}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>
-                                Tipo Frete:
-                            </FormLabel>
-                            <FormControl
-                                type={"text"}
-                                value={tipoFrete}
-                                onChange={(e) => setTipoFrete(e.target.value)}
-                                isInvalid={tentouEnviar && !!erros.tipoFrete}
-                            />
-                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                {erros.tipoPagamento}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>
-                                Cidade:
-                            </FormLabel>
-                            <FormControl
-                                type={"text"}
-                                value={cidade}
-                                onChange={(e) => setCidade(e.target.value)}
-                                isInvalid={tentouEnviar && !!erros.cidade}
-                            />
-                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                {erros.cidade}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                    <Col md={2}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>
-                                Cep:
-                            </FormLabel>
-                            <FormControl
-                                type={"text"}
-                                value={cep}
-                                onChange={(e) => setCep(e.target.value)}
-                                isInvalid={tentouEnviar && !!erros.cep}
-                            />
-                            <Form.Control.Feedback type={"invalid"} className={"d-block"}>
-                                {erros.cep}
-                            </Form.Control.Feedback>
-                        </FormGroup>
-                    </Col>
-                </Row>
+            <Container fluid className="mt-3">
 
                 <div className={styles.divSub}>
-                    <h4 className={styles.itensPedido}>Itens do Pedido</h4>
+                    <h3>Emissão de Pedidos</h3>
                 </div>
-                <Row>
-                    <Col md={7}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Descrição</FormLabel>
-                            <FormControl
-                                type={"text"}
-                                value={descricao}
-                                onChange={(e) => setDescricao(e.target.value)}
-                                className="w-250"
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col md={1}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Preço</FormLabel>
-                            <FormControl
-                                type={"Number"}
-                                value={preco}
-                                onChange={(e) => setPreco(e.target.value)}
-                                className="w-100"
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col md={1}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Tipo Unidade</FormLabel>
-                            <FormSelect value={tipoUnidade} onChange={(e) => setTipoUnidae(e.target.value)}
-                                        className="w-100">
-                                <option value="">Selecione</option>
-                                {TipoUnidade.map((v) => (<option key={v.value} value={v.value}>
-                                    {v.label}
-                                </option>))}
-                            </FormSelect>
-                        </FormGroup>
-                    </Col>
-                    <Col md={1}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Quantidade</FormLabel>
-                            <FormControl
-                                type={"Number"}
-                                value={quantidade}
-                                onChange={(e) => setQuantidade(e.target.value)}
-                                className="w-100"
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col md={1}>
-                        <FormGroup>
-                            <FormLabel className={styles.formControl}>Valor Total</FormLabel>
-                            <FormControl
-                                type={"text"}
-                                readOnly
-                                value={formatarMoeda(calcularTotalItemAtual())}
-                                className="w-100"
-                            />
-                        </FormGroup>
-                    </Col>
-                    <Col md={1} className="d-flex align-items-end">
-                        <FormGroup className="w-100">
-                            <FormLabel className={styles.formControl}>
-                                &nbsp;
-                            </FormLabel>
+                <Form onSubmit={Enviar}>
+                    <Row>
+                        <Col md={8}>
+                            <FormGroup>
+                                <FormLabel>Cliente:</FormLabel>
+                                <FormControl
+                                    type="text"
+                                    placeholder="Nome do cliente"
+                                    value={cliente}
+                                    className={styles.formControl}
+                                    isInvalid={tentouEnviar && !!erros.cliente}
+                                    onChange={(e) => setCliente(e.target.value)}
+                                />
+                                <Form.Control.Feedback type="invalid">
+                                    {erros.cliente}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel>Data Emissão Pedido:</FormLabel>
+                                <FormControl
+                                    type="date"
+                                    required
+                                    className={styles.dataEmissao}
+                                    value={dataEmissao}
+                                    onChange={(e) => setDataEmissao(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel>Data Entrega Pedido:</FormLabel>
+                                <FormControl
+                                    type="date"
+                                    required
+                                    className={styles.dataEmissao}
+                                    value={dataEntrega}
+                                    onChange={(e) => setDataEntrega(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+                    </Row>
 
-                            <Button
-                                variant={indiceEditando !== null ? "warning" : "primary"}
-                                className="w-100"
-                                type="button"
-                                onClick={handleAdicionar}
-                            >
-                                {indiceEditando !== null ? "Salvar" : "Adicionar"}
-                            </Button>
-                        </FormGroup>
-                    </Col>
-                </Row>
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <FormLabel className={styles.tipoPedido}>Tipo do Pedido:</FormLabel>
 
-                <Row>
-                    <div className={styles.tableStyle}>
-                        <Table striped bordered hover>
-                            <thead>
-                            <tr>
-                                <th>Descrição</th>
-                                <th>Preço</th>
-                                <th>Quantidade</th>
-                                <th>Total</th>
-                                <th>Ações</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {itens.length === 0 && (<tr>
-                                <td colSpan={5} className="text-center">
-                                    Nenhum item adicionado
-                                </td>
-                            </tr>)}
-                            {itens.map((item, index) => (<tr key={index}>
-                                <td>{item.descricao}</td>
-                                <td>{item.preco}</td>
-                                <td>{item.quantidade}</td>
-                                <td>{formatarMoeda(calcularTotalItem(item))}</td>
-                                <td>
+                                <Form.Check
+                                    type="radio"
+                                    label="Repetição sem alteração"
+                                    name="tipoPedido"
+                                    value={"semAlteracao"}
+                                    checked={tipoPedido === "semAlteracao"}
+                                    onChange={(e) => setTipoPedido(e.target.value)}
+                                />
+                                <Form.Check
+                                    type="radio"
+                                    label="Repetição com alteração"
+                                    name="tipoPedido"
+                                    value={"comAlteracao"}
+                                    checked={tipoPedido === "comAlteracao"}
+                                    onChange={(e) => setTipoPedido(e.target.value)}
+                                />
+                                <Form.Check
+                                    type="radio"
+                                    label="Pedido Novo"
+                                    name="tipoPedido"
+                                    value={"novo"}
+                                    checked={tipoPedido === "novo"}
+                                    onChange={(e) => setTipoPedido(e.target.value)}
+                                />
+                            </FormGroup>
+                        </Col>
+
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Valvula</FormLabel>
+                            </FormGroup>
+                            <Form.Check
+                                inline
+                                type={"radio"}
+                                label={"Não"}
+                                name="valvula"
+                                value={"sim"}
+                                checked={valvula === "sim"}
+                                onChange={(e) => setValula(e.target.value)}
+                            />
+                            <Form.Check
+                                inline
+                                type={"radio"}
+                                label={"Sim"}
+                                name="valvula"
+                                value={"nao"}
+                                checked={valvula === "nao"}
+                                onChange={(e) => setValula(e.target.value)}
+
+                            />
+                        </Col>
+
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Promotor</FormLabel>
+                            </FormGroup>
+                            <Form.Check
+                                inline
+                                type={"radio"}
+                                label={"Não"}
+                                name={"promotor"}
+                                value={"nao"}
+                                checked={promotor === "nao"}
+                                onChange={(e) => setPromotor(e.target.value)}
+                            />
+                            <Form.Check
+                                inline
+                                type={"radio"}
+                                label={"Sim"}
+                                name={"promotor"}
+                                value={"sim"}
+                                checked={promotor === "sim"}
+                                onChange={(e) => setPromotor(e.target.value)}
+                            />
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}> Silk</FormLabel>
+                            </FormGroup>
+                            <FormGroup>
+                                <Form.Check
+                                    inline
+                                    type="checkbox"
+                                    label="Frente"
+                                    isInvalid={tentouEnviar && !!erros.silk}
+                                    checked={frente === "frente"}
+                                    onChange={(e) => setFrente(e.target.checked ? "frente" : "")}
+                                />
+
+                                <Form.Check
+                                    inline
+                                    type="checkbox"
+                                    label="Verso"
+                                    isInvalid={tentouEnviar && !!erros.silk}
+                                    checked={verso === "verso"}
+                                    onChange={(e) => setVerso(e.target.checked ? "verso" : "")}
+                                />
+                                <Form.Check
+                                    inline
+                                    type="checkbox"
+                                    label="Liso"
+                                    isInvalid={tentouEnviar && !!erros.silk}
+                                    checked={liso === "liso"}
+                                    onChange={(e) => setLiso(e.target.checked ? "liso" : "")}
+                                />
+                                <Form.Control.Feedback type="invalid" className="d-block">
+                                    {erros.silk}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Quantidade Batidas
+                                </FormLabel>
+
+                                <InputGroup className={styles.QTDbatidas}>
                                     <Button
-                                        size="sm"
-                                        variant="info"
-                                        className="me-2"
-                                        onClick={() => editarItem(index)}
+                                        variant="outline-secondary"
+                                        onClick={() => setQtd(prev => Math.max(0, prev - 1))}
                                     >
-                                        Editar
+                                        −
                                     </Button>
 
-                                    <Button
-                                        size="sm"
-                                        variant="danger"
-                                        onClick={() => removerItem(index)}
-                                    >
-                                        Excluir
-                                    </Button>
-                                </td>
-                            </tr>))}
-                            </tbody>
+                                    <FormControl
+                                        value={qtd}
+                                        readOnly
+                                        className={"text-center"}
+                                        isInvalid={tentouEnviar && !!erros.qtdBatidas}
 
-                        </Table>
+                                    />
+
+                                    <Button
+                                        variant="outline-secondary"
+                                        onClick={() => setQtd(prev => prev + 1)}
+                                    >
+                                        +
+                                    </Button>
+                                </InputGroup>
+                                <Form.Control.Feedback type={"invalid"} className="d-block">
+                                    {erros.qtdBatidas}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={3}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Estoque</FormLabel>
+                            </FormGroup>
+                            <Form.Check
+                                inline
+                                type="radio"
+                                label="Fenix"
+                                value={"fenix"}
+                                checked={estoque === "fenix"}
+                                onChange={(e) => setEstoque(e.target.value)}
+                            />
+                            <Form.Check
+                                inline
+                                type="radio"
+                                label="MakPlast"
+                                value={"makplast"}
+                                checked={estoque === "makplast"}
+                                onChange={(e) => setEstoque(e.target.value)}
+                            />
+
+                            <Form.Check
+                                inline
+                                type="radio"
+                                label="MP"
+                                value={"mp"}
+                                checked={estoque === "mp"}
+                                onChange={(e) => setEstoque(e.target.value)}
+                            />
+                            <Form.Check
+                                inline
+                                type="radio"
+                                label="ArtVac"
+                                value={"artvac"}
+                                checked={estoque === "artvac"}
+                                onChange={(e) => setEstoque(e.target.value)}
+                            />
+                        </Col>
+
+                        <Col md={3}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Arte</FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={arte}
+                                    onChange={(e) => setArte(e.target.value)}
+                                    isInvalid={tentouEnviar && !!erros.arte}
+                                />
+                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                    {erros.arte}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+
+
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Vendedor</FormLabel>
+                                <Form.Select value={vendedor}
+                                             onChange={(e) => setVendedor(e.target.value)}
+                                             isInvalid={tentouEnviar && !!erros.vendedor}>
+                                    <option value="">Selecione</option>
+                                    {Vendedores.map((v) => (<option key={v.value} value={v.value}>
+                                        {v.label}
+                                    </option>))}
+
+                                </Form.Select>
+                                <Form.Control.Feedback type={"invalid"} className={"d-bloc"}>
+                                    {erros.vendedor}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Status do Pedido</FormLabel>
+                                <Form.Select value={status}
+                                             onChange={(e) => setStatus(e.target.value)}
+                                             isInvalid={tentouEnviar && !!erros.status}>
+                                    <option value="">Selecione</option>
+                                    {StatusPedido.map((v) => (<option key={v.value} value={v.value}>
+                                        {v.label}
+                                    </option>))}
+                                </Form.Select>
+                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                    {erros.status}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Comissão %
+                                </FormLabel>
+
+                                <InputGroup className={styles.QTDbatidas}>
+                                    <Button
+                                        variant="outline-secondary"
+                                        onClick={() => setQtdComissao(prev => Math.max(0, prev - 1))}
+                                    >
+                                        −
+                                    </Button>
+
+                                    <FormControl
+                                        value={qtdComissao}
+                                        readOnly
+                                        className="text-center"
+                                        isInvalid={tentouEnviar && !!erros.qtdComissao}
+
+                                    />
+
+                                    <Button
+                                        variant="outline-secondary"
+                                        onClick={() => setQtdComissao(prev => prev + 1)}
+                                    >
+                                        +
+                                    </Button>
+                                    <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                        {erros.qtdComissao}
+                                    </Form.Control.Feedback>
+                                </InputGroup>
+                            </FormGroup>
+
+                        </Col>
+
+                    </Row>
+                    <Row>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Tipo Pagamento:
+                                </FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={tipoPagamento}
+                                    onChange={(e) => setTipoPagamento(e.target.value)}
+                                    isInvalid={tentouEnviar && !!erros.tipoPagamento}
+                                />
+                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                    {erros.tipoPagamento}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Tipo Frete:
+                                </FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={tipoFrete}
+                                    onChange={(e) => setTipoFrete(e.target.value)}
+                                    isInvalid={tentouEnviar && !!erros.tipoFrete}
+                                />
+                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                    {erros.tipoPagamento}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Cidade:
+                                </FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={cidade}
+                                    onChange={(e) => setCidade(e.target.value)}
+                                    isInvalid={tentouEnviar && !!erros.cidade}
+                                />
+                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                    {erros.cidade}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Cep:
+                                </FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={cep}
+                                    onChange={(e) => setCep(e.target.value)}
+                                    isInvalid={tentouEnviar && !!erros.cep}
+                                />
+                                <Form.Control.Feedback type={"invalid"} className={"d-block"}>
+                                    {erros.cep}
+                                </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+                    <div className={styles.divSub}>
+                        <h4 className={styles.itensPedido}>Itens do Pedido</h4>
                     </div>
-                    <Col md={6}>
+                    <Row>
+                        <Col md={7}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Descrição</FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={descricao}
+                                    onChange={(e) => setDescricao(e.target.value)}
+                                    className="w-250"
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md={1}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Preço</FormLabel>
+                                <FormControl
+                                    type={"Number"}
+                                    value={preco}
+                                    onChange={(e) => setPreco(e.target.value)}
+                                    className="w-100"
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md={1}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Tipo Unidade</FormLabel>
+                                <FormSelect value={tipoUnidade} onChange={(e) => setTipoUnidae(e.target.value)}
+                                            className="w-100">
+                                    <option value="">Selecione</option>
+                                    {TipoUnidade.map((v) => (<option key={v.value} value={v.value}>
+                                        {v.label}
+                                    </option>))}
+                                </FormSelect>
+                            </FormGroup>
+                        </Col>
+                        <Col md={1}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Quantidade</FormLabel>
+                                <FormControl
+                                    type={"Number"}
+                                    value={quantidade}
+                                    onChange={(e) => setQuantidade(e.target.value)}
+                                    className="w-100"
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md={1}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>Valor Total</FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    readOnly
+                                    value={formatarMoeda(calcularTotalItemAtual())}
+                                    className="w-100"
+                                />
+                            </FormGroup>
+                        </Col>
+                        <Col md={1} className="d-flex align-items-end">
+                            <FormGroup className="w-100">
+                                <FormLabel className={styles.formControl}>
+                                    &nbsp;
+                                </FormLabel>
 
-                    </Col>
-                    <Col md={4}>
+                                <Button
+                                    variant={indiceEditando !== null ? "warning" : "primary"}
+                                    className="w-100"
+                                    type="button"
+                                    onClick={handleAdicionar}
+                                >
+                                    {indiceEditando !== null ? "Salvar" : "Adicionar"}
+                                </Button>
+                            </FormGroup>
+                        </Col>
+                    </Row>
 
-                    </Col>
-                    <Col md={1}>
-                        <label>Total Geral</label>
-                    </Col>
-                    <Col md={1}>
-                        <label>{formatarMoeda(totalGeral)}</label>
-                    </Col>
-                </Row>
+                    <Row>
+                        <div className={styles.tableStyle}>
+                            <Table striped bordered hover>
+                                <thead>
+                                <tr>
+                                    <th>Descrição</th>
+                                    <th>Preço</th>
+                                    <th>Quantidade</th>
+                                    <th> Tipo Unidade</th>
+                                    <th>Total</th>
+                                    <th className="text-center">Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {itens.length === 0 && (<tr>
+                                    <td colSpan={6} className="text-center">
+                                        Nenhum item adicionado
+                                    </td>
+                                </tr>)}
+                                {itens.map((item, index) => (<tr key={index}>
+                                    <td>{item.descricao}</td>
+                                    <td>{item.preco}</td>
+                                    <td>{item.quantidade}</td>
+                                    <td>{TipoUnidade.find(t => t.value === item.tipoUnidade)?.label || "—"}</td>
+                                    <td>{formatarMoeda(calcularTotalItem(item))}</td>
+                                    <td className="text-center">
+                                        <Button
+                                            size="sm"
+                                            variant="info"
+                                            className="me-2"
+                                            onClick={() => editarItem(index)}
+                                        >
+                                            Editar
+                                        </Button>
 
-                <Button type={"submit"}
-                disabled={!loading}>
-                    {loading ? "Enviar" : "Carregando..."}
-                </Button>
+                                        <Button
+                                            size="sm"
+                                            variant="danger"
+                                            onClick={() => removerItem(index)}
+                                        >
+                                            Excluir
+                                        </Button>
+                                    </td>
+                                </tr>))}
+                                </tbody>
 
-            </Form>
-        </Container>
-    </div>)
+                            </Table>
+                        </div>
+                        <Col md={6}>
+
+                        </Col>
+                        <Col md={4}>
+
+                        </Col>
+                        <Col md={1}>
+                            <label>Total Geral</label>
+                        </Col>
+                        <Col md={1}>
+                            <label>{formatarMoeda(totalGeral)}</label>
+                        </Col>
+                    </Row>
+
+                    <Button type={"submit"}
+                            disabled={!loading}>
+                        {loading ? "Enviar" : "Carregando..."}
+                    </Button>
+
+                </Form>
+            </Container>
+        </div>)
 
 }
 

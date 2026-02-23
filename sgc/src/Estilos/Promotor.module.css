@@ -1,35 +1,25 @@
-.titulo{
-    color:  black;
-    font-family: 'sans-serif';
-    font-size: 50px;
-    font-weight:bold;
-    margin-top: 120px;
-}
-.navbar{
-    background-color: rgb(5, 90, 213);
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-}
-.subtitulo{
+.subtitulo {
     display: flex;
     width: 100%;
     justify-content: center;
-    margin:20px;
+    margin: 20px;
 
 }
-.subtitulo h3{
+
+.subtitulo h3 {
     font-size: 30px;
-    color:  rgb(5, 90, 213);
+    color: rgb(5, 90, 213);
     font-family: 'sans-serif';
-    font-weight:bold;
+    font-weight: bold;
 }
+
 /*tabela*/
 .containerFluid {
     padding-left: 25px;
     padding-right: 25px;
 
 }
+
 .tableEqual {
     width: 100%;
     table-layout: fixed;
@@ -40,7 +30,8 @@
 .tableEqual td {
     text-align: center;
 }
-h2{
+
+h2 {
     color: white;
     font-size: 30px;
     font-family: 'sans-serif';
@@ -48,18 +39,20 @@ h2{
 
 
 /*filtro*/
-.filtro{
-    color:  rgb(5, 90, 213);
+.filtro {
+    color: rgb(5, 90, 213);
     font-family: 'sans-serif';
     font-size: 30px;
 }
-.labelFiltro{
+
+.labelFiltro {
     margin: 10px;
-    color:  rgb(5, 90, 213);
+    color: rgb(5, 90, 213);
     font-family: 'sans-serif';
     font-size: 20px;
 }
-.entradaDados{
+
+.entradaDados {
     width: 180px;
     font-family: 'sans-serif';
     font-size: 20px;
@@ -74,7 +67,8 @@ h2{
     background-color: rgb(0, 0, 64)
 
 }
-.rodapeBotao{
+
+.rodapeBotao {
     display: flex;
     justify-content: center;
     margin: 20px;

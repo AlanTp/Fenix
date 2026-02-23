@@ -1,55 +1,47 @@
-.titulo{
-    color:  black;
-    font-family: 'sans-serif';
-    font-size: 50px;
-    font-weight:bold;
-    margin-top: 120px;
-}
-.navbar{
-    background-color: rgb(5, 90, 213);
-    border-style: solid;
-    border-width: 2px;
-    border-color: black;
-}
 
-.subtitulo{
+.subtitulo {
     display: flex;
     justify-content: center;
-    margin:20px;
+    margin: 20px;
 
 }
-.subtitulo h3{
+
+.subtitulo h3 {
     font-size: 30px;
-    color:  rgb(5, 90, 213);
+    color: rgb(5, 90, 213);
     font-family: 'sans-serif';
-    font-weight:bold;
+    font-weight: bold;
 }
-.labelText{
+
+.labelText {
     font-size: 20px;
-    color:  rgb(5, 90, 213);
+    color: rgb(5, 90, 213);
     font-family: 'sans-serif';
-    font-weight:bold;
+    font-weight: bold;
 }
-.rowForm{
+
+.rowForm {
     padding: 20px;
     justify-items: center;
 
 
 }
-.botaoSalvar{
+
+.botaoSalvar {
     display: flex;
     justify-content: center;
     margin: 20px;
     padding: 20px;
 }
-.formInput{
+
+.formInput {
     width: 200px;
     font-family: 'sans-serif';
     font-size: 20px;
     text-align: center;
 }
 
-.colForm{
+.colForm {
 
     display: flex;
     flex-direction: column;
@@ -57,21 +49,23 @@
     justify-content: center;
     text-align: center;
 }
-.buttonForm{
+
+.buttonForm {
     width: 200px;
     padding: 10px;
     margin: 10px;
 }
 
 
-select{
+select {
     width: 200px;
     font-family: 'sans-serif';
     font-size: 20px;
     text-align: center;
     height: 40px;
 }
-.containerBotoes{
+
+.containerBotoes {
     display: flex;
     justify-content: center;
 }
