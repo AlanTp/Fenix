@@ -8,8 +8,10 @@
 
 .divSub {
     display: flex;
-    flex-direction: row;
+    width: 100%;
     justify-content: center;
+    margin: 20px;
+    color: rgb(5, 90, 213);
 }
 
 .formControl {
