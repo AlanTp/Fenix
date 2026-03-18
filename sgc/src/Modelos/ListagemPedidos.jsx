@@ -13,7 +13,6 @@ function ListagemPedidos() {
 
 
     const hoje = new Date();
-    const [dataInicial, setDataInicial] = useState(hoje);
     const [totais, setTotais] = React.useState({
         totalFinalizados: 0,
         totalFretPag: 0,
