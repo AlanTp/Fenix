@@ -1,6 +1,6 @@
 import NavBar from '../Modelos/NavBar';
 import styles from '../Estilos/ListagemPedidos.module.css';
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -8,6 +8,49 @@ import {FaCheck, FaClipboardList, FaTruck} from "react-icons/fa";
 import {GiNotebook} from "react-icons/gi";
 import {BsClipboard2DataFill} from "react-icons/bs";
 import {Button, Form, FormControl, FormGroup, FormLabel, Table} from "react-bootstrap";
+
+const pedidosApiMock = [
+    {
+        id: 1,
+        numeroPedido: "PED-1001",
+        cliente: "Loja Alpha",
+        status: "FINALIZADO",
+        cidade: "São Paulo",
+        dataCriacao: "2026-03-01"
+    },
+    {
+        id: 2,
+        numeroPedido: "PED-1002",
+        cliente: "Mercado Beta",
+        status: "AGUARDANDO_FRETE",
+        cidade: "São Paulo",
+        dataCriacao: "2026-03-02"
+    },
+    {
+        id: 3,
+        numeroPedido: "PED-1003",
+        cliente: "Distribuidora Gama",
+        status: "AGUARDANDO_FATURAMENTO",
+        cidade: "Rio de Janeiro",
+        dataCriacao: "2026-03-02"
+    },
+    {
+        id: 4,
+        numeroPedido: "PED-1004",
+        cliente: "Atacadão Delta",
+        status: "FATURADO",
+        cidade: "Belo Horizonte",
+        dataCriacao: "2026-03-03"
+    },
+    {
+        id: 5,
+        numeroPedido: "PED-1005",
+        cliente: "Loja Ômega",
+        status: "FINALIZADO",
+        cidade: "São Paulo",
+        dataCriacao: "2026-03-03"
+    }
+];
 
 function ListagemPedidos() {
 
@@ -39,48 +82,7 @@ function ListagemPedidos() {
         setTotais(novosTotais);
     }
 
-    const pedidosApiMock = [
-        {
-            id: 1,
-            numeroPedido: "PED-1001",
-            cliente: "Loja Alpha",
-            status: "FINALIZADO",
-            cidade: "São Paulo",
-            dataCriacao: "2026-03-01"
-        },
-        {
-            id: 2,
-            numeroPedido: "PED-1002",
-            cliente: "Mercado Beta",
-            status: "AGUARDANDO_FRETE",
-            cidade: "São Paulo",
-            dataCriacao: "2026-03-02"
-        },
-        {
-            id: 3,
-            numeroPedido: "PED-1003",
-            cliente: "Distribuidora Gama",
-            status: "AGUARDANDO_FATURAMENTO",
-            cidade: "Rio de Janeiro",
-            dataCriacao: "2026-03-02"
-        },
-        {
-            id: 4,
-            numeroPedido: "PED-1004",
-            cliente: "Atacadão Delta",
-            status: "FATURADO",
-            cidade: "Belo Horizonte",
-            dataCriacao: "2026-03-03"
-        },
-        {
-            id: 5,
-            numeroPedido: "PED-1005",
-            cliente: "Loja Ômega",
-            status: "FINALIZADO",
-            cidade: "São Paulo",
-            dataCriacao: "2026-03-03"
-        }
-    ];
+
     const pedidosList = [
         {
             numeroPedido: 10231,
@@ -121,7 +123,7 @@ function ListagemPedidos() {
     ];
     useEffect(() => {
         calcularTotais(pedidosApiMock);
-    }, [pedidosApiMock]);
+    }, []);
 
     return (
         <div>
