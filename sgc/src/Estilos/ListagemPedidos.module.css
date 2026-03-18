@@ -1,0 +1,92 @@
+.titulo {
+    color: rgb(5, 90, 213);
+    text-align: center;
+    margin: 20px;
+}
+
+.subtitulo {
+    color: white;
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    justify-items: center;
+}
+
+.containerBoard {
+    border: 3px solid white;
+    margin: 3px;
+    color: white;
+    height: 200px; /* altura fixa */
+    display: flex;
+    flex-direction: column;
+}
+
+.rowBoard {
+    justify-content: center;
+    margin: 3px;
+}
+
+.tituloColuna {
+    text-align: center;
+    color: white;
+    padding: 10px;
+}
+
+.formatLi {
+    color: white;
+    background-color: rgb(5, 90, 213);
+    border-radius: 10px;
+    margin: 5px;
+}
+
+.listaPedidos {
+    list-style: none;
+    padding: 0;
+    overflow-y: auto; /* scroll vertical */
+    flex: 1;
+}
+
+.boardResumeColuna {
+    color: white;
+    border: 2px solid white;
+    margin: 10px;
+    padding: 10px;
+}
+
+.tituloColunaResume {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-items: center;
+}
+
+.valorColuna {
+    color: white;
+    background-color: blue;
+    border-radius: 50px;
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding: 5px;
+    justify-items: center;
+}
+
+.centralizarColuna {
+    text-align: center;
+    justify-items: center;
+}
+
+.botaoAcoes {
+    margin: 5px;
+}
+
+.filtroFlexRow {
+    display: flex;
+    flex-direction: column;
+}
+
+.formulario {
+    margin-bottom: 15px;
+}

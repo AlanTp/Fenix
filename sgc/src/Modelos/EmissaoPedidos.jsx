@@ -41,6 +41,7 @@ function EmissaoPedidos() {
     const [cidade, setCidade] = useState("");
     const [cep, setCep] = useState("");
     const [loading, setLoading] = useState(true);
+    const [transportadora, setTransportadora] = useState('');
 
 
     const handleAdicionar = () => {
@@ -187,6 +188,7 @@ function EmissaoPedidos() {
             tipoFrete,
             cidade: "Tres Pontas",
             cep: "37190000",
+            transportadora: transportadora,
             totalGeral,
             usuario,
             ulimaAlteracao: dataEmissao,
@@ -228,6 +230,7 @@ function EmissaoPedidos() {
             setTipoFrete("");
             setCidade("");
             setCep("");
+            setTransportadora('');
             setItens([]);
             setLoading(true);
 
@@ -614,6 +617,18 @@ function EmissaoPedidos() {
                                 <Form.Control.Feedback type={"invalid"} className={"d-block"}>
                                     {erros.tipoPagamento}
                                 </Form.Control.Feedback>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <FormLabel className={styles.formControl}>
+                                    Transportadora
+                                </FormLabel>
+                                <FormControl
+                                    type={"text"}
+                                    value={transportadora}
+                                    onChange={(e) => setTransportadora(e.target.value)}
+                                />
                             </FormGroup>
                         </Col>
                         <Col md={2}>
