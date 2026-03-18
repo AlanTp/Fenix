@@ -12,7 +12,6 @@ import {Button, Form, FormControl, FormGroup, FormLabel, Table} from "react-boot
 function ListagemPedidos() {
 
 
-    const hoje = new Date();
     const [totais, setTotais] = React.useState({
         totalFinalizados: 0,
         totalFretPag: 0,
@@ -122,7 +121,7 @@ function ListagemPedidos() {
     ];
     useEffect(() => {
         calcularTotais(pedidosApiMock);
-    }, []);
+    }, [pedidosApiMock]);
 
     return (
         <div>
