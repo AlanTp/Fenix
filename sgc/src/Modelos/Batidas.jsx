@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {ValorBatidas, ValorBatidasExtras} from '../Calculos/ValorBatidas.jsx';
+import {ValorBatidas} from '../Calculos/ValorBatidas.jsx';
 import NavBar from '../Modelos/NavBar';
 
 function Batidas() {
@@ -48,6 +48,10 @@ function Batidas() {
 
     const totaisArray = Object.values(totaisPorColaborador);
 
+    const totalGeral = totaisArray.reduce(
+        (total, t) => total + (Number(t.batida_normal) || 0),
+        0
+    );
 
     // Buscar batidas
     useEffect(() => {
@@ -168,6 +172,7 @@ function Batidas() {
                             <th>Meta</th>
                             <th>Amostra</th>
                             <th>Perdas</th>
+                            <th>N. Pedido</th>
                             <th>Data</th>
                         </tr>
                         </thead>
@@ -180,6 +185,7 @@ function Batidas() {
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.meta)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.amostra)}</td>
                                 <td>{new Intl.NumberFormat("pt-BR").format(b.perdas)}</td>
+                                <td>{b.npedido}</td>
                                 <td>{b.data}</td>
                             </tr>
                         ))}
@@ -226,16 +232,16 @@ function Batidas() {
                                 <td>  {new Intl.NumberFormat('pt-BR', {
                                     style: 'currency',
                                     currency: 'BRL'
-                                }).format(ValorBatidas(t.batida_normal))}</td>
+                                }).format(ValorBatidas(t.batida_normal, t.colaborador, totalGeral))}</td>
                                 <td>  {new Intl.NumberFormat('pt-BR', {
                                     style: 'currency',
                                     currency: 'BRL'
-                                }).format(ValorBatidasExtras(t.batida_extra))}</td>
+                                }).format(t.batida_extra)}</td>
                                 <td>
                                     {
                                         new Intl.NumberFormat('pt-BR', {style: 'currency', currency: 'BRL'})
                                             .format(
-                                                ValorBatidas(t.batida_normal) + ValorBatidasExtras(t.batida_extra)
+                                                ValorBatidas(t.batida_normal, t.colaborador, totalGeral)
                                             )
                                     }
                                 </td>

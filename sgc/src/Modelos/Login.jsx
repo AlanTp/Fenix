@@ -80,9 +80,9 @@ function Login() {
                                 <input
                                     type="password"
                                     className="form-control"
-                                    value={senha}
                                     onChange={(e) => setSenha(e.target.value)}
-                                    required/>
+                                    required
+                                />
                             </Col>
 
                         </Row>
