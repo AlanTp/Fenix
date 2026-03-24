@@ -19,11 +19,12 @@ function CadastroBatidas() {
     const [colaborador, setColaborador] = useState("");
     const [batida_normal, setBatidasNormais] = useState("");
     const [batida_extra, setBatidasExtras] = useState("");
-    const [meta, setMeta] = useState(40000);
+    const [meta, setMeta] = useState(3000);
     const [amostra, setamostra] = useState("");
     const [perdas, setPercas] = useState("");
     const [user_name] = useState("Alan");
     const navigate = useNavigate();
+    const [nPedido, setNPedido] = useState(0);
 
     const opcoes = {
         a: 'Aquiles',
@@ -46,7 +47,8 @@ function CadastroBatidas() {
             meta: Number(meta) || 0,
             amostra: Number(amostra) || 0,
             perdas: Number(perdas) || 0,
-            user_name
+            user_name,
+            nPedido: Number(nPedido) || 0
         };
 
         try {
@@ -60,10 +62,11 @@ function CadastroBatidas() {
             setColaborador("");
             setBatidasNormais("");
             setBatidasExtras("");
-            setMeta(40000);
+            setMeta(3000);
             setamostra('');
             setPercas("");
             setData(new Date());
+            setNPedido(0);
 
         } catch (error) {
             console.error("Erro ao salvar:", error);
@@ -86,6 +89,7 @@ function CadastroBatidas() {
         setamostra("");
         setPercas("");
         setData(new Date());
+        setNPedido(0);
     };
 
     return (
@@ -177,7 +181,16 @@ function CadastroBatidas() {
                         </Row>
                         <Row className={styles.rowForm}>
                             <Col md={3}></Col>
-                            <Col md={2}></Col>
+                            <Col md={2} className={styles.colForm}>
+                                <label className={styles.labelText}>Numero Pedido </label>
+                                <input
+                                    type={"Number"}
+                                    value={nPedido}
+                                    className={`form-control ${styles.formInput}`}
+                                    onChange={(e) => setNPedido(e.target.value)}
+
+                                />
+                            </Col>
                             <Col md={2} className={styles.colForm}>
                                 <label className={styles.labelText}>Data</label>
                                 <div>
