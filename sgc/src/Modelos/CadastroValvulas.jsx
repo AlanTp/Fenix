@@ -28,7 +28,8 @@ function CadastroValvulas() {
         d: 'Leticia',
         e: 'Gabriela',
         f: 'Alan',
-        g: 'Rayane'
+        g: 'Rayane',
+        h: 'kaue'
     };
 
     const handleSubmit = async (e) => {
