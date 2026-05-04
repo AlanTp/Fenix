@@ -113,7 +113,7 @@ function CadastroPromotor() {
                                 />
                             </Col>
                             <Col md={2} className={styles.colForm}>
-                                <label className={styles.labelText}>Valvulas Extras</label>
+                                <label className={styles.labelText}>Promotor Extras</label>
                                 <input
                                     required
                                     type={"text"}
