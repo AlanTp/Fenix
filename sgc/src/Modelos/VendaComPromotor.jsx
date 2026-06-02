@@ -47,7 +47,7 @@ function VendaComPromotor() {
                                 value={valvula}
                                 onChange={(e) => setValvula(Number(e.target.value))}
                             >
-                                <option value={0.495}>Sim</option>
+                                <option value={0.580}>Sim</option>
                                 <option value={0}>Não</option>
                             </select>
                         </div>
