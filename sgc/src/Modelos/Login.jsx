@@ -9,6 +9,12 @@ import {useNavigate} from "react-router-dom";
 import {Spinner} from "reactstrap";
 
 function Login() {
+
+    const [login, setLogin] = useState("");
+    const [senha, setSenha] = useState("");
+    const [erro, setErro] = useState("");
+    const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const manutencao = true;
 
     if (manutencao) {
@@ -16,11 +22,6 @@ function Login() {
             <div>error</div>
         </Container>)
     }
-    const [login, setLogin] = useState("");
-    const [senha, setSenha] = useState("");
-    const [erro, setErro] = useState("");
-    const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
 
     const handleLogin = async (e) => {
         console.log("🔥 HANDLE LOGIN DISPAROU");
