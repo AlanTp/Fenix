@@ -9,6 +9,13 @@ import {useNavigate} from "react-router-dom";
 import {Spinner} from "reactstrap";
 
 function Login() {
+    const manutencao = true;
+
+    if (manutencao) {
+        return (<Container fluid>
+            <div>error</div>
+        </Container>)
+    }
     const [login, setLogin] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
