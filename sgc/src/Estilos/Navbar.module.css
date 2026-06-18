@@ -14,3 +14,9 @@
     border-width: 2px;
     border-color: black;
 }
+
+@media print {
+    .semPrint {
+        display: none !important;
+    }
+}
