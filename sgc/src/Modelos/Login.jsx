@@ -9,11 +9,21 @@ import {useNavigate} from "react-router-dom";
 import {Spinner} from "reactstrap";
 
 function Login() {
+
     const [login, setLogin] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const manutencao = true;
+
+    if (manutencao) {
+        return (<Container fluid>
+            <div>
+                <h1 className={styles.manu}>Entre em contato do administrador</h1>
+            </div>
+        </Container>)
+    }
 
     const handleLogin = async (e) => {
         console.log("🔥 HANDLE LOGIN DISPAROU");
