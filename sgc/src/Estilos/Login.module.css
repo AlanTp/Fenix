@@ -1,9 +1,13 @@
-*{margin: 0; padding: 0;}
-.titulo{
-    color:  black;
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.titulo {
+    color: black;
     font-family: 'sans-serif';
     font-size: 50px;
-    font-weight:bold;
+    font-weight: bold;
     margin-top: 120px;
 }
 
@@ -24,17 +28,25 @@
     width: 100%;
     max-width: 400px;
 }
-.labelLogin{
+
+.labelLogin {
     font-family: 'Arial Black';
     font-size: 20px;
-    color:  rgb(5, 90, 213);
+    color: rgb(5, 90, 213);
 }
-.buttonSalva{
+
+.buttonSalva {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-body{
+body {
     background-color: #060a5e;
+}
+
+.manu {
+    font-family: 'Arial Black';
+    color: white;
+    font-size: 20px;
 }

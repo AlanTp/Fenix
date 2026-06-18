@@ -20,9 +20,12 @@ function VendaSemPromotor() {
     const [arte, setArte] = useState(0);
     const [margemSilk, setMargemSilk] = useState(1)
     const manutencao = true;
+
     if (manutencao) {
         return (<Container fluid>
-            <div>error</div>
+            <div>
+                <h1 className={styles.manu}>Entre em contato do administrador</h1>
+            </div>
         </Container>)
     }
 
