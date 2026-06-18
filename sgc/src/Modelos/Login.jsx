@@ -20,7 +20,7 @@ function Login() {
     if (manutencao) {
         return (<Container fluid>
             <div>
-                <h1 className={styles.manu}>Entre em contato do administrador</h1>
+                <h1 className={styles.manu}>erro</h1>
             </div>
         </Container>)
     }
