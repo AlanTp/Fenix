@@ -24,7 +24,7 @@ function VendaSemPromotor() {
     if (manutencao) {
         return (<Container fluid>
             <div>
-                <h1 className={styles.manu}>Entre em contato do administrador</h1>
+                <h1 className={styles.manu}>Entre em contato com o administrador</h1>
             </div>
         </Container>)
     }
