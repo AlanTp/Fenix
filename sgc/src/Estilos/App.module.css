@@ -7,21 +7,6 @@ body {
     background-color: #060a5e;
 }
 
-
-.titulo_cont {
-    text-align: center;
-}
-
-/* Cabeçalho da tabela */
-.cabecalho {
-    margin: 8px;
-    font-family: 'sans-serif';
-    font-size: 20px;
-    text-align: center;
-    color: white;
-    font-weight: bold;
-}
-
 .subtitulo {
     display: flex;
     width: 100%;
@@ -37,25 +22,6 @@ body {
     font-weight: bold;
 }
 
-/* Linhas da tabela */
-.linhas {
-    margin: 8px;
-    border: 2px solid rgb(5, 90, 213);
-    font-family: 'sans-serif';
-    font-size: 15px;
-    text-align: center;
-    font-weight: bold;
-    color: white;
-    background-color: rgb(5, 90, 213);
-}
-
-/* Preço médio */
-.custoM {
-    margin: 15px;
-    font-family: 'sans-serif';
-    color: white;
-    font-size: 25px;
-}
 
 /* Inputs e selects padrão */
 .entradaDados {
@@ -92,10 +58,6 @@ body {
     margin: 20px;
 }
 
-.link_voltar {
-    color: azure;
-    margin: 20px;
-}
 
 .opcoes_input {
     height: 40px;
@@ -107,4 +69,21 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+}
+
+.rowtitulo {
+    margin-bottom: 20px;
+}
+
+@media print {
+    .noPrint {
+        display: none !important;
+
+    }
+
+    .imprimir {
+        font-weight: bold;
+        color: black !important;
+    }
+
 }

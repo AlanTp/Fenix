@@ -6,7 +6,7 @@ import React from "react";
 function NavBar() {
 
     return (
-        <div>
+        <div className={styles.semPrint}>
             <Navbar className={`${styles.navbar} justify-content-left`}>
 
                 <Navbar.Brand><b className={styles.titulo}>Fênix Soluções em Embalagens</b></Navbar.Brand>
