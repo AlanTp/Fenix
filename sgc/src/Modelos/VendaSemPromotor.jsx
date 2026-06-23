@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button, Table} from 'react-bootstrap';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import Calculo from '../Calculos/Calculo.jsx';
 import CalculoSemPromotor from '../Calculos/CalculoSemPromotor.jsx';
 import styles from '../Estilos/App.module.css';
@@ -19,8 +19,15 @@ function VendaSemPromotor() {
     const [margem, setMargem] = useState(1);
     const [arte, setArte] = useState(0);
     const [margemSilk, setMargemSilk] = useState(1)
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        const token = localStorage.getItem("token");
 
+        if (!token) {
+            navigate("/Login");
+        }
+    }, [navigate]);
     return (
         <div>
             <NavBar/>
