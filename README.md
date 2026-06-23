@@ -63,37 +63,32 @@ Mais do que um sistema de gestão, este projeto representa minha evolução como
 
 Cada funcionalidade implementada representou uma oportunidade de estudar, testar soluções, corrigir erros e adquirir experiência real no desenvolvimento de software.
 
-Links:
-https://github.com/AlanTp/Fenix -- Front
-https://github.com/AlanTp/Fenix-API --BackEnd
+Links: Front - https://github.com/AlanTp/Fenix || BackEnd - https://github.com/AlanTp/Fenix-API 
 
 
 Algumas telas para exemplificar o sistema:
+Path: /src/Docs/Prints
 
 | Login | Página Inicial |
-|--------|--------|
-| ![](src/Docs/Prints/login.png) | ![](src/Docs/Prints/login1.png) |
-
-| Seguranca | Token expirado |
-|--------|--------|
-| ![](src/Docs/Prints/JWTExpirado.png) |
+<img width="1047" height="563" alt="image" src="https://github.com/user-attachments/assets/24c5fa8d-21dd-4d22-90eb-df151eb50325" />
+<img width="1145" height="556" alt="image" src="https://github.com/user-attachments/assets/3dd26b01-d49d-4fb6-8bbc-2176f72e1c40" />
 
 | Vendas | Tela de Vendas com e sem Promotor|
-|--------|--------|
-| ![](src/Docs/Prints/TelaVendasSemPromotor.png) | ![](src/Docs/Prints/TelaVendasComPromotor.png) |
+<img width="1264" height="541" alt="image" src="https://github.com/user-attachments/assets/d8bde878-4aa4-4066-929c-f9fd5d0bc721" />
+<img width="1025" height="543" alt="image" src="https://github.com/user-attachments/assets/9061c760-9f13-4f11-94e2-fe6db1463101" />
 
 | Serigrafia | Controle de Batidas |
-|--------|--------|
-| ![](src/Docs/Prints/CadastroBatidas.png) | ![](src/Docs/Prints/RelatorioBatidas.png) |
-
+<img width="1484" height="593" alt="image" src="https://github.com/user-attachments/assets/d6ab0348-008b-48a8-a4f4-2a47402626d4" />
+<img width="1904" height="657" alt="image" src="https://github.com/user-attachments/assets/19a456b3-4318-4b29-9c90-f1f56c302fa5" />
 
 | Valvulas| Controle de Valvulas|
-|--------|--------|
-| ![](src/Docs/Prints/CadastroValvulas.png) | ![](src/Docs/Prints/RelatorioValvulas.png) |
+<img width="1479" height="508" alt="image" src="https://github.com/user-attachments/assets/0fcf29bf-c042-4909-a15a-9c133e3ad1c3" />
+<img width="1893" height="799" alt="image" src="https://github.com/user-attachments/assets/3e7921ce-1423-466e-9b27-0bbc6941f083" />
 
 | Pedidos | Controle de Pedidos |
-|--------|--------|
-| ![](src/Docs/Prints/Pedidos.png) | ![](src/Docs/Prints/ListagemPedidos.png) |
+<img width="1907" height="867" alt="image" src="https://github.com/user-attachments/assets/d3745d56-8db9-45c3-936d-509a96ea5ed8" />
+<img width="1890" height="903" alt="image" src="https://github.com/user-attachments/assets/3cf050ad-42c3-48cc-a0b6-888687bf267c" />
+
 
 
 
