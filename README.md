@@ -1,10 +1,18 @@
 Sobre o projeto
 
-Esse projeto foi criado para praticar o desenvolvimento utilizando automacao que serolvessem  pequenos problemas em uma empresa de embalagens real. Trabalhei durante 10 meses nessa empresa onde pude testar problemas reais, a medida que trabalhava nela desenvolvia esse projeto para poder negociar com eles em algum momento, por isso o projeto foi criado inteiramento por mim mas utilizando um cenario real.
+Projeto Full Stack desenvolvido para automatizar processos de uma empresa de embalagens, servindo também como laboratório de aprendizado em React, Node.js, PostgreSQL, APIs REST, autenticação JWT e deploy em ambiente cloud.
 
 Principais aprendizados
 
 Ao longo do projeto pude aprender e aplicar conceitos como:
+
+Arquitetura
+
+Frontend (React)
+      ↓
+API REST (Node.js + Express)
+      ↓
+Banco de Dados (PostgreSQL)
 
 Infraestrutura e Deploy:
 Como publicar uma aplicação na internet.
@@ -65,6 +73,19 @@ Cada funcionalidade implementada representou uma oportunidade de estudar, testar
 
 Links: Front - https://github.com/AlanTp/Fenix || BackEnd - https://github.com/AlanTp/Fenix-API 
 
+## Tecnologias
+
+- React
+- JavaScript
+- React-Bootstrap
+- Node.js
+- Express
+- PostgreSQL
+- JWT
+- Git
+- GitHub
+- Vercel
+- Render
 
 Algumas telas para exemplificar o sistema:
 Path: /src/Docs/Prints
