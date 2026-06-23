@@ -20,6 +20,7 @@ function VendaSemPromotor() {
     const [arte, setArte] = useState(0);
     const [margemSilk, setMargemSilk] = useState(1)
     const navigate = useNavigate();
+    localStorage.removeItem("token");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
