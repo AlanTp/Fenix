@@ -18,8 +18,7 @@ function VendaComPromotor() {
     const [valvula, setValvula] = useState(0);
     const [margem, setMargem] = useState(1);
     const [arte, setArte] = useState(0);
-    const [margemSilk, setMargemSilk] = useState(1)
-    const manutencao = true;
+    const [margemSilk, setMargemSilk] = useState(1);
 
     return (
         <div>
