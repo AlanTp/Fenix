@@ -1,9 +1,6 @@
-Fênix Soluções em Embalagens
 Sobre o projeto
 
-Este projeto não foi criado apenas para desenvolver um sistema web, mas principalmente para me proporcionar experiência prática em desenvolvimento Full Stack e compreender todo o ciclo de vida de uma aplicação moderna.
-
-Durante o desenvolvimento da Fênix Soluções em Embalagens, tive a oportunidade de aplicar na prática conhecimentos adquiridos na graduação em Análise e Desenvolvimento de Sistemas, enfrentando desafios reais encontrados no mercado de trabalho.
+Esse projeto foi criado para praticar o desenvolvimento utilizando automacao que serolvessem  pequenos problemas em uma empresa de embalagens real. Trabalhei durante 10 meses nessa empresa onde pude testar problemas reais, a medida que trabalhava nela desenvolvia esse projeto para poder negociar com eles em algum momento, por isso o projeto foi criado inteiramento por mim mas utilizando um cenario real.
 
 Principais aprendizados
 
@@ -66,11 +63,37 @@ Mais do que um sistema de gestão, este projeto representa minha evolução como
 
 Cada funcionalidade implementada representou uma oportunidade de estudar, testar soluções, corrigir erros e adquirir experiência real no desenvolvimento de software.
 
-Telas do Sistema:
+Links:
+https://github.com/AlanTp/Fenix -- Front
+https://github.com/AlanTp/Fenix-API --BackEnd
 
-![print] src/Docs/Login.png e src/Docs/Login1.png
+
+Algumas telas para exemplificar o sistema:
+
+| Login | Página Inicial |
+|--------|--------|
+| ![](src/Docs/Prints/login.png) | ![](src/Docs/Prints/login1.png) |
+
+| Seguranca | Token expirado |
+|--------|--------|
+| ![](src/Docs/Prints/JWTExpirado.png) |
+
+| Vendas | Tela de Vendas com e sem Promotor|
+|--------|--------|
+| ![](src/Docs/Prints/TelaVendasSemPromotor.png) | ![](src/Docs/Prints/TelaVendasComPromotor.png) |
+
+| Serigrafia | Controle de Batidas |
+|--------|--------|
+| ![](src/Docs/Prints/CadastroBatidas.png) | ![](src/Docs/Prints/RelatorioBatidas.png) |
 
 
+| Valvulas| Controle de Valvulas|
+|--------|--------|
+| ![](src/Docs/Prints/CadastroValvulas.png) | ![](src/Docs/Prints/RelatorioValvulas.png) |
+
+| Pedidos | Controle de Pedidos |
+|--------|--------|
+| ![](src/Docs/Prints/Pedidos.png) | ![](src/Docs/Prints/ListagemPedidos.png) |
 
 
 
