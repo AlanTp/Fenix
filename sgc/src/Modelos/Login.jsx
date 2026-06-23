@@ -15,18 +15,9 @@ function Login() {
     const [erro, setErro] = useState("");
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const manutencao = true;
-
-    if (manutencao) {
-        return (<Container fluid>
-            <div>
-                <h1 className={styles.manu}>erro</h1>
-            </div>
-        </Container>)
-    }
 
     const handleLogin = async (e) => {
-        console.log("🔥 HANDLE LOGIN DISPAROU");
+
         e.preventDefault();
         setErro("");
 
